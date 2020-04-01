@@ -68,4 +68,10 @@ class CustomerAccountActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.customer_acct_fragment_container, fragment, tag).addToBackStack("").commit()
     }
+
+    fun resetCustomer(){
+        lateinit var currentCustomer: Customer
+    }
+
+
 }

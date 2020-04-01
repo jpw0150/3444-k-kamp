@@ -14,6 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 import com.example.myapplication.fragments.menuDrinksFragments.MenuDrinksFragment
 import com.example.myapplication.fragments.menuEntreeFragments.MenuEntreeMeatFragment
+import com.example.myapplication.fragments.menuPaymentFragments.MenuPaymentMethodFragment
 import com.example.myapplication.fragments.menuSidesFragments.MenuSidesFragment
 
 
@@ -34,8 +35,9 @@ class MainMenuFragment : Fragment() {
 
 
         val helpButtonMain = view.findViewById<ImageButton>(R.id.button_help_image_main_menu)
-        val cartButton = view.findViewById<ImageButton>(R.id.button_cart_main_menu)
         val refillButtonMain = view.findViewById<ImageButton>(R.id.button_refill_image_main_menu)
+        val cartButton = view.findViewById<ImageButton>(R.id.button_cart_main_menu)
+        val paymentButton = view.findViewById<ImageButton>(R.id.button_payment_main_menu)
 
         /* Set up button actions to go to respective page */
 
@@ -45,7 +47,7 @@ class MainMenuFragment : Fragment() {
         drinksButton.setOnClickListener{(activity as MenuActivity).replaceFragment(MenuDrinksFragment(),"") }
         specialsButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuSpecialsFragment(),"") }
         gamesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(),"") }
-        kidsMenuButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuKidsMealsFragment(),"")}
+        kidsMenuButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuKidsMealsFragment(),"") }
 
 
         helpButtonMain.setOnClickListener{
@@ -55,8 +57,18 @@ class MainMenuFragment : Fragment() {
         refillButtonMain.setOnClickListener{
             Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
         }
+        cartButton.setOnClickListener {
+            (activity as MenuActivity).replaceFragment(MenuViewCartFragment(), "")
+        }
 
-        //TODO: Implement View Cart
+        paymentButton.setOnClickListener {
+            if ((activity as MenuActivity).getNumOrders() < 1){
+                Toast.makeText((activity as MenuActivity).applicationContext,
+                    "Please place an order first in order to make payment", Toast.LENGTH_LONG).show()
+            } else {
+                (activity as MenuActivity).replaceFragment(MenuPaymentMethodFragment(), "")
+            }
+        }
 
         return view
     }

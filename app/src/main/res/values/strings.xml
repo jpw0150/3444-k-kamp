@@ -111,6 +111,11 @@
     <string name="water_is_complimentary">Water is complimentary!</string>
     <string name="add_a_note_to_the_chef_optional">Add a note to the chef (optional)</string>
     <string name="add_drink_to_cart">Add drink to cart!</string>
+    <string name="orders">Orders</string>
+    <string name="order_total">Order Total</string>
+    <string name="orders_may_not_be_altered_once_submitted_are_you_ready_to_place_your_order">Orders may not be altered once submitted. Are you ready to place your order?</string>
+    <string name="yes_place_my_order">Yes, place my order!</string>
+    <string name="no_i_d_like_to_add_more">No, I\'d like to add more</string>
 
 
 </resources>

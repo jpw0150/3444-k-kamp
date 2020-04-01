@@ -1,4 +1,4 @@
-package com.example.myapplication.fragments.menuDrinksFragments
+package com.example.myapplication.fragments.menuPaymentFragments
 
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
@@ -15,23 +15,33 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 
-class MenuDrinksWaterFragment : Fragment() {
+class MenuCashCheckFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_menu_drinks_water, container, false)
+        val view = inflater.inflate(R.layout.fragment_menu_cash_check, container, false)
         runGraidentAnimation(view)
 
-        /* Initialize help and refill buttons */
-        val helpButtonDrink = view.findViewById<ImageButton>(R.id.button_help_image_drinks_water)
-        val refillButtonDrink = view.findViewById<ImageButton>(R.id.button_refill_image_drinks_water)
+        /* Create a TextView in the XML and put a logo or something at top */
 
-        /* Listeners to address Help and Refill requests */
-        helpButtonDrink.setOnClickListener{
+        /* Get and display the new order total giving a 15%, 20%, and 25% tip by implementing a method in the MenuActivity class */
+
+        /* Create a "Pay" button */
+
+        /* Initialize payButton and setOnClickListener() */
+
+            /* [in listener] display toast that waiter is coming to collect bill */
+            /* go to MenuAddRewardsFragment() */
+
+
+        /* Intialialize and set up help and refill button actions */
+        val helpButtonMain = view.findViewById<ImageButton>(R.id.button_help_image_payment_cash_check)
+        val refillButtonMain = view.findViewById<ImageButton>(R.id.button_refill_image_payment_cash_check)
+        helpButtonMain.setOnClickListener{
             Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
         }
 
-        refillButtonDrink.setOnClickListener{
+        refillButtonMain.setOnClickListener{
             Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
         }
 
@@ -39,7 +49,7 @@ class MenuDrinksWaterFragment : Fragment() {
     }
 
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.menu_drink_water)
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.menu_payment_cash_check)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)

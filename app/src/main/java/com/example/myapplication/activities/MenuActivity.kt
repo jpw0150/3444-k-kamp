@@ -50,13 +50,15 @@ class MenuActivity : AppCompatActivity() {
 
     lateinit var drink: Drink
 
+    /* Set up Order() that stores list of entrees, sides, and drinks */
+    lateinit var order: Order
+    lateinit var orderTotal: String
+
     /* Setting up arrays to store all the entrees, sides, and drinks in a session */
     val entreeList = arrayListOf<Entree>()
     val sideList = arrayListOf<Side>()
     val drinkList = arrayListOf<Drink>()
-
-    /* Set up Order() that stores list of entrees, sides, and drinks */
-    lateinit var orders: Order
+    val orderList = arrayListOf<Order>()
 
     /* Constants */
     val MIN_NUM_WINGS = 3
@@ -104,6 +106,9 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
+    /* Get number of entrees per single order */
+    fun getNumEntrees():Int{ return entreeList.size }
+
     fun addSide(){ sideList.add(side) }
 
     fun resetSide(){
@@ -115,6 +120,8 @@ class MenuActivity : AppCompatActivity() {
         lateinit var side: Side
     }
 
+    fun getNumSides(): Int { return sideList.size}
+
     fun addDrink() { drinkList.add(drink) }
 
     fun resetDrink(){
@@ -124,4 +131,35 @@ class MenuActivity : AppCompatActivity() {
         var drinkPrice = 0.0
     }
 
+    fun getNumDrinks(): Int{ return drinkList.size}
+
+    fun createOrder(){
+        order = Order(entreeList, sideList, drinkList, orderTotal)
+    }
+
+    fun addOrder() { orderList.add(order) }
+
+    fun getNumOrders():Int {return orderList.size}
+
+    fun resetOrder(){
+        lateinit var order: Order
+    }
+
+    fun getOrderTotal(): Double {
+        var totalPrice = 0.0
+        for (order in orderList){
+            totalPrice += order.orderTotal.toDouble()
+        }
+        return totalPrice
+        }
+
+
+    //TODO: Implement tip calculator function (user getOrderTotal() )
+
+    /** Method calculates the tip based off of percentage and order total
+     * @return new total with added tip
+     */
+    /* fun calculateTip(percentage: Double): Double {
+    }
+     */
 }
