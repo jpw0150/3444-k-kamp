@@ -34,7 +34,7 @@ class MenuExitFragment : Fragment() {
              val intent = Intent (activity, MainActivity::class.java)
                 activity?.startActivity(intent)
              */
-        
+
 
         /* Intialialize and set up help and refill button actions */
         val helpButtonMain = view.findViewById<ImageButton>(R.id.button_help_image_payment_exit)

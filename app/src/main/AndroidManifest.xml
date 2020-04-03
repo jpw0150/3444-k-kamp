@@ -22,6 +22,9 @@
         <activity android:name=".activities.EmployeeLoginActivity" />
         <activity android:name=".activities.MenuActivity" />
         <activity android:name=".activities.CustomerAccountActivity" />
+        <activity android:name=".activities.ManagerActivity" />
+        <activity android:name=".activities.WaiterActivity" />
+        <activity android:name=".activities.ChefActivity" />
     </application>
 
 </manifest>

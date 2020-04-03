@@ -36,8 +36,6 @@ class MenuViewCartFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu_view_cart, container, false)
 
-        /* Create Order() with most up to date entree, side, and drink information */
-        (activity as MenuActivity).createOrder()
 
         /* Initialize price totals */
         var entreePriceTotal = 0.0
@@ -62,6 +60,10 @@ class MenuViewCartFragment : Fragment() {
         val orderTotal = (activity as MenuActivity).orderTotal
         displayTitleText(layout, "$$orderTotal")
 
+        /* Create Order() with most up to date entree, side, and drink information */
+        (activity as MenuActivity).createOrder()
+
+
 
         val nextButton = Button(activity as MenuActivity)
         nextButton.text = getString(R.string.next)
@@ -72,6 +74,7 @@ class MenuViewCartFragment : Fragment() {
         nextButton.setOnClickListener {
             (activity as MenuActivity).replaceFragment(MenuPlaceOrderFragment(), "")
         }
+
 
         return view
     }

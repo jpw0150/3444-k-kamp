@@ -1,5 +1,6 @@
 package com.example.myapplication.activities
 
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,13 +37,32 @@ class EmployeeLoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             /* Take user input */
             val u = findViewById<EditText>(R.id.employee_username)
+
+            // username is the ID
             val username = u.getText().toString()
             val p = findViewById<EditText>(R.id.employee_password)
             val password = p.getText().toString()
 
             /* Verify password */
             if (verifyLogin(username, password)) {
-                //TODO: reroute to kitchen staff, mananger, or waiter
+
+                /*Reroute to kitchen staff, mananger, or waiter */
+                val employeePos = employee_db.getEmployeePosisition(username)
+
+                if (employeePos == "Manager"){
+                    val intent = Intent (activity, ManagerActivity::class.java)
+                    activity.startActivity(intent)
+                }
+
+                if (employeePos == "Waiter"){
+                    val intent = Intent (activity, WaiterActivity::class.java)
+                    activity.startActivity(intent)
+                }
+
+                if (employeePos == "Chef"){
+                    val intent = Intent (activity, ChefActivity::class.java)
+                    activity.startActivity(intent)
+                }
             }
         }
     }
