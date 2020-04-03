@@ -9,31 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import android.widget.Button
 
 import com.example.myapplication.R
-import com.example.myapplication.activities.WaiterActivity
 
 
-class WaiterMenuFragment : Fragment() {
+class WaiterTableAlertFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_waiter_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_waiter_table_alert, container, false)
         runGraidentAnimation(view)
 
-        return view
 
+
+
+        return view
     }
 
-
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.waiter_menu)
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.waiter_table_alert)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
     }
-
-
 }
