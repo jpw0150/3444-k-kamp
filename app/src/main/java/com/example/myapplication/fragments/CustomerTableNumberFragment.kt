@@ -8,38 +8,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.widget.Button
+import android.content.Intent
+import android.widget.Toast
+import com.example.myapplication.activities.CustomerAccountActivity
 
 import com.example.myapplication.R
-import com.example.myapplication.activities.WaiterActivity
+import com.example.myapplication.activities.MainActivity
+import com.example.myapplication.activities.MenuActivity
 
+class CustomerTableNumberFragment : Fragment() {
 
-class WaiterMenuFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_waiter_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_customer_table_number, container, false)
         runGraidentAnimation(view)
 
-        /* Create button on XML for all the options and name them approipately */
+        val nextButtonTable = view.findViewById<Button>(R.id.button_next_table_num)
 
-        /* Initialize buttons : val buttonOption = view.findViewByID<Button>(R.id.NAME_OF_YOUR_BUTTON) */
+        nextButtonTable.setOnClickListener {
+            val tableNumber = view.findViewById<EditText>(R.id.table_number).text.toString()
+            (activity as MenuActivity).table.tableNum = tableNumber.toInt()
+            (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
+        }
 
-        /* Set onClickListener() -- buttonOption.setOnClickListener {} */
-
-        /* In onClickListner , go to new fragment (ex. (activity as WaiterActivity).replaceFragment(WaiterTableAlertFragment(), "") */
         return view
     }
 
-
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.waiter_menu)
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.customer_table_number)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
     }
-
 
 }

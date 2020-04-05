@@ -116,6 +116,14 @@
     <string name="orders_may_not_be_altered_once_submitted_are_you_ready_to_place_your_order">Orders may not be altered once submitted. Are you ready to place your order?</string>
     <string name="yes_place_my_order">Yes, place my order!</string>
     <string name="no_i_d_like_to_add_more">No, I\'d like to add more</string>
+    <string name="manager_main_menu">Manager Main Menu</string>
+    <string name="apply_discount">Apply Discount</string>
+    <string name="table_status">Table Status</string>
+    <string name="order_history">Order History</string>
+    <string name="edit_menu">Edit Menu</string>
+    <string name="employees">Employees</string>
+    <string name="inventory">Inventory</string>
+    <string name="please_enter_table_number">Please enter table number</string>
 
 
 </resources>

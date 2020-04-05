@@ -16,12 +16,17 @@ import com.example.myapplication.fragments.MainMenuFragment
 import com.example.myapplication.data_structs.Entree
 import com.example.myapplication.data_structs.Side
 import com.example.myapplication.data_structs.Order
+import com.example.myapplication.data_structs.Table
+import com.example.myapplication.fragments.CustomerTableNumberFragment
 
 /** This activity deals with menu operations */
 
 class MenuActivity : AppCompatActivity() {
 
     val activity = this@MenuActivity
+
+    /* Store current table information */
+    var table = Table(0, "None", 0.0)
 
     /* Setting up variables that are part of Entree() */
     lateinit var meatType: String
@@ -74,11 +79,14 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val transaction = supportFragmentManager.beginTransaction()
+        /*val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(
             R.id.menu_fragment_container,
             MainMenuFragment()
-        )
+
+         */
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.menu_fragment_container, CustomerTableNumberFragment())
         transaction.commit()
 
         supportActionBar!!.hide()

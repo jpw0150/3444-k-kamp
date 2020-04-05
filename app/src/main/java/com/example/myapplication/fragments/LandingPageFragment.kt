@@ -27,17 +27,15 @@ class LandingPageFragment : Fragment() {
 
 
         customerLoginButton.setOnClickListener{
-            //val f = CustomerAcctSelectFragment()
-            //(activity as MainActivity).replaceFragment(f,"")
             val intent = Intent (activity, CustomerAccountActivity::class.java)
             activity?.startActivity(intent)
+            //(activity as MainActivity).replaceFragment(CustomerTableNumberFragment(), "")
         }
         staffLoginButton.setOnClickListener{
             val intent = Intent (activity, EmployeeLoginActivity::class.java)
             activity?.startActivity(intent)
         }
 
-        //TODO: IMPLEMENT CUSTOMER SIDE
 
         return view
     }

@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 
 import com.example.myapplication.*
 import com.example.myapplication.fragments.ChefMenuFragment
-import com.example.myapplication.fragments.ManagerMenuFragment
 
 
 class ChefActivity : AppCompatActivity() {
