@@ -22,8 +22,14 @@ class WaiterMenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_waiter_menu, container, false)
         runGraidentAnimation(view)
 
-        return view
+        /* Create button on XML for all the options and table them appripately */
 
+        /* Initialize buttons : val buttonOption = view.findViewByID<Button>(R.id.NAME_OF_YOUR_BUTTON) */
+
+        /* Set onClickListener() -- buttonOption.setOnClickListener {} */
+
+        /* In onClickListner , go to new fragment (ex. (activity as WaiterActivity).replaceFragment(WaiterTableAlertFragment(), "") */
+        return view
     }
 
 

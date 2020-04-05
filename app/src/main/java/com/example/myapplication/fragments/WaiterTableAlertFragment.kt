@@ -21,8 +21,6 @@ class WaiterTableAlertFragment : Fragment() {
         runGraidentAnimation(view)
 
 
-
-
         return view
     }
 

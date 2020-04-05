@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 
 import com.example.myapplication.*
 import com.example.myapplication.fragments.ManagerMenuFragment
+import com.example.myapplication.fragments.WaiterMenuFragment
 
 
 class WaiterActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class WaiterActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(
             R.id.waiter_fragment_container,
-            ManagerMenuFragment()
+            WaiterMenuFragment()
         )
         transaction.commit()
     }

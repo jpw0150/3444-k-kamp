@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 import com.example.myapplication.*
+import com.example.myapplication.fragments.ChefMenuFragment
 import com.example.myapplication.fragments.ManagerMenuFragment
 
 
@@ -21,7 +22,7 @@ class ChefActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(
             R.id.chef_fragment_container,
-            ManagerMenuFragment()
+            ChefMenuFragment()
         )
         transaction.commit()
     }
