@@ -1,0 +1,45 @@
+package com.example.myapplication.fragments
+
+import android.content.Context
+import android.graphics.drawable.AnimationDrawable
+import android.net.Uri
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.Button
+
+import com.example.myapplication.R
+import com.example.myapplication.activities.WaiterActivity
+
+
+class WaiterMenuFragment : Fragment() {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_waiter_menu, container, false)
+        runGraidentAnimation(view)
+
+        /* Create button on XML for all the options and name them approipately */
+
+        /* Initialize buttons : val buttonOption = view.findViewByID<Button>(R.id.NAME_OF_YOUR_BUTTON) */
+
+        /* Set onClickListener() -- buttonOption.setOnClickListener {} */
+
+        /* In onClickListner , go to new fragment (ex. (activity as WaiterActivity).replaceFragment(WaiterTableAlertFragment(), "") */
+        return view
+    }
+
+
+    private fun runGraidentAnimation(v: View) {
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.waiter_menu)
+        val animationDrawable = constraintLayout?.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+    }
+
+
+}
