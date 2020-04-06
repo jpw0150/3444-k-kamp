@@ -16,6 +16,7 @@ import com.example.myapplication.fragments.menuDrinksFragments.MenuDrinksFragmen
 import com.example.myapplication.fragments.menuEntreeFragments.MenuEntreeMeatFragment
 import com.example.myapplication.fragments.menuPaymentFragments.MenuPaymentMethodFragment
 import com.example.myapplication.fragments.menuSidesFragments.MenuSidesFragment
+import com.example.myapplication.fragments.gameFragments.KidsModeLoginFragment
 
 
 class MainMenuFragment : Fragment() {
@@ -46,7 +47,7 @@ class MainMenuFragment : Fragment() {
         sidesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuSidesFragment(),"") }
         drinksButton.setOnClickListener{(activity as MenuActivity).replaceFragment(MenuDrinksFragment(),"") }
         specialsButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuSpecialsFragment(),"") }
-        gamesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(),"") }
+        gamesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(KidsModeLoginFragment(),"") }
         kidsMenuButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuKidsMealsFragment(),"") }
 
 
