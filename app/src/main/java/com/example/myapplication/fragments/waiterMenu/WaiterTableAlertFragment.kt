@@ -12,6 +12,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 
+/*TO DO:
+*-create for-loop for alerts every time there is a customer who needs help
+*-alerts will come up on waiter "table alerts" as a stack of alerts that need to be completed, then removed after completed
+*/
 
 class WaiterTableAlertFragment : Fragment() {
 
