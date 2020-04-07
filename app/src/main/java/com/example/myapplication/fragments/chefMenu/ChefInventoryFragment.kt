@@ -1,8 +1,6 @@
-package com.example.myapplication.fragments
+package com.example.myapplication.fragments.chefMenu
 
-import android.content.Context
 import android.graphics.drawable.AnimationDrawable
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,23 +10,23 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 
-
-class ChefMenuFragment : Fragment() {
-
+class ChefInventoryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_chef_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_chef_inventory, container, false)
         runGraidentAnimation(view)
+
+
+
         return view
     }
 
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.chef_menu)
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.chef_inventory)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
     }
-
 }

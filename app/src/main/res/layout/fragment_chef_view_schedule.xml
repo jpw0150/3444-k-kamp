@@ -4,26 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/waiter_table_alert"
+    android:id="@+id/chef_view_schedule"
     android:background="@drawable/gradient_list"
-    tools:context=".fragments.waiterMenu.WaiterTableAlertFragment">
+    tools:context=".fragments.chefMenu.ChefViewScheduleFragment">
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="189dp"
-        android:layout_height="44dp"
+        android:layout_width="145dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="68dp"
         android:layout_marginRight="68dp"
         android:layout_marginBottom="592dp"
-        android:text="Table Alerts"
+        android:text="Schedule"
         android:textColor="@android:color/black"
         android:textSize="32dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.702"
+        app:layout_constraintHorizontal_bias="0.658"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
