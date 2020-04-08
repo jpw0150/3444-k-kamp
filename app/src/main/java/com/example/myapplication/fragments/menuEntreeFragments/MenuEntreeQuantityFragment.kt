@@ -23,6 +23,9 @@ class MenuEntreeQuantityFragment : Fragment() {
         runGraidentAnimation(view)
 
         /* Display price per wing depending on meat type */
+        if ((activity as MenuActivity).getCurrentDay() == getString(R.string.wednesday)) {
+            view.findViewById<TextView>(R.id.text_wing_price).text = getString(R.string.sixty_cent_wings)
+        }
 
         val meatType = (activity as MenuActivity).meatType
         if(meatType == "Boneless"){ view.findViewById<TextView>(R.id.text_wing_price).text = getString(R.string.price_per_boneless_wing) }

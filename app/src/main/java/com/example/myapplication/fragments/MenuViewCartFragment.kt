@@ -37,22 +37,23 @@ class MenuViewCartFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu_view_cart, container, false)
 
 
-        /* Initialize price totals */
+        /* Initialize price totals
         var entreePriceTotal = 0.0
         var sidePriceTotal = 0.0
         var drinkPriceTotal = 0.0
+         */
 
         /* Initialize layout variable that will be dynamically programmed on */
         val layout = view.findViewById<LinearLayout>(R.id.menu_view_cart)
 
         /* Display all the stored entrees */
-        entreePriceTotal = displayEntrees(layout)
+        val entreePriceTotal = displayEntrees(layout)
 
         /* Display all stored sides */
-        sidePriceTotal = displaySides(layout)
+        val sidePriceTotal = displaySides(layout)
 
         /* Display all stored drinks */
-        drinkPriceTotal = displayDrinks(layout)
+        val drinkPriceTotal = displayDrinks(layout)
 
         /* Display "Order Total" title and calculate total  */
         displayTitleText(layout, getString(R.string.order_total))

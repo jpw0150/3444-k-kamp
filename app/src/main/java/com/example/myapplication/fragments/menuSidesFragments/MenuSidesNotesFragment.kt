@@ -4,6 +4,7 @@ import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -78,9 +79,11 @@ class MenuSidesNotesFragment : Fragment() {
     }
 
     private fun getSidePrice(sideQuantity: Int): Double{
+        /* Thursday Deal */
+        if ((activity as MenuActivity).getCurrentDay() == getString(R.string.thursday) &&
+            (activity as MenuActivity).getNumEntrees() > 0) {
+            return 0.0
+        }
         return (activity as MenuActivity).PRICE_PER_SIDE * sideQuantity
     }
-
-
-
 }

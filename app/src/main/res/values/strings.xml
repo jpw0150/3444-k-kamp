@@ -124,6 +124,14 @@
     <string name="employees">Employees</string>
     <string name="inventory">Inventory</string>
     <string name="please_enter_table_number">Please enter table number</string>
-
+    <string name="no_specials">There are currently no specials today. Come back on Wednesday, Thursday, or Friday to see our amazing deals!</string>
+    <string name="redeem">Redeem</string>
+    <string name="wednesday_deal"> 60 Cent Wing Wednesday! Each wing is 60 cents. Get them while they are hot! </string>
+    <string name="sixty_cent_wings">60 Cent Wing Wednesday!</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Tuesday</string>
+    <string name="thursday_deal"> Free side with at least one purchase of wings set to add the perfect touch to your meal! </string>
+    <string name="friday">Friday</string>
+    <string name="friday_deal"> Special Dish of the Day: Buffalo Chicken Burgers! Ask your waiter for more details! </string>
 
 </resources>
