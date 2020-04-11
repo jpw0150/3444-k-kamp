@@ -9,4 +9,4 @@
   7. copy justBones directory into C:\xampp\htdocs
   8. open command prompt and navigate to C:\xammp\htdocs\justBones
   9. enter command "php -S localhost:8080 -t public public/index.php"
-  10. in file, change <ipaddress> to your ip address
+  10. in file, change /<ipaddress/> to your ip address
