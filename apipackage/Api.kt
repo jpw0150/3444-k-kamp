@@ -78,8 +78,8 @@ interface Api {
     fun updateItem(
         @Path("id") id:Int,
         @Field("email") name:String,
-        @Field("password") cost: Float,
-        @Field("password") descrip: String
+        @Field("cost") cost: Float,
+        @Field("descrip") descrip: String
     ):Call<ResponseItem>
 
     @FormUrlEncoded
@@ -174,4 +174,30 @@ interface Api {
     fun deleteuser(
         @Path("id") id:Int
     ):Call<ResponseBase>
+
+    @FormUrlEncoded
+    @POST("createingredient")
+    fun createingredient(
+        @Field("food") food:String,
+        @Field("amount") amount:Int
+    ):Call<ResponseBase>
+
+    @FormUrlEncoded
+    @GET("allingredients")
+    fun allingredients(
+    ):Call<ResponseIngredients>
+
+    @FormUrlEncoded
+    @PUT("updateIngredient/{id}")
+    fun updateIngredient(
+        @Path("id") id:Int,
+        @Field("name") name:String,
+        @Field("amount") amount:Int
+    ):Call<ResponseIngredient>
+
+    @FormUrlEncoded
+    @DELETE("trashfood/{id}")
+    fun trashfood(
+        @Path("id") id:Int
+    )
 }

@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private val AUTH = "Basic "+ Base64.encodeToString("3444:kkwh".toByteArray(), Base64.NO_WRAP)
-    private const val BASE_URL = "<ipaddress>:8080/"
+    private val AUTH = "Basic "+ Base64.encodeToString("BIGKEV:3444_project_kkwh".toByteArray(), Base64.NO_WRAP)
+    private const val BASE_URL = "10.0.2.2:8080/"
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
