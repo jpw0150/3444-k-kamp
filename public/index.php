@@ -11,10 +11,17 @@ require __DIR__ . '/../includes/menuOperations.php';
 require __DIR__ . '/../includes/orderOperations.php';
 require __DIR__ . '/../includes/employeeOperations.php';
 require __DIR__ . '/../includes/customerOperations.php';
-
+require __DIR__ . '/../includes/ingredientsOperations.php';
 $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, false);
+
+$app->add(new Tuupola\Middleware\HttpBasicAuthentication([
+	"secure"=>false,
+	"users"=> [
+		"BIGKEV" => "3444_project_kkwh",
+	]
+]));
 
 $app->post('/createMenuItem', function(Request $request, Response $response){
 	if(!haveEmptyParameters(array('id', 'name', 'cost', 'descrip'), $request, $response)){
@@ -822,6 +829,159 @@ $app->delete('/deleteuser/{id}', function(Request $request, Response $response, 
     ->withStatus(200);
 });
 
+$app->post('/createingredient', function(Request $request, Response $response){
+
+    if(!haveEmptyParameters(array('food', 'amount'), $request, $response)){
+
+		//$reqBody = file_get_contents('php://input');
+		//parse_str($reqBody, $request_params);
+		$request_data = $request->getParsedBody();
+
+        $food = $request_data['food'];
+        $amount = $request_data['amount'];
+
+
+        //$hash_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $db = new ingredientsOperations;
+
+        $result = $db->createFood($food, $amount);
+
+        if($result == ING_CREATE){
+
+            $message = array();
+            $message['error'] = false;
+            $message['message'] = 'Ingredient created successfully';
+
+            $response->getbody()->write(json_encode($message));
+
+            return $response
+                        ->withHeader('Content-type', 'application/json')
+                        ->withStatus(201);
+
+        }else if($result == ING_FAIL){
+
+            $message = array();
+            $message['error'] = true;
+            $message['message'] = 'Some error occurred';
+
+            $response->getbody()->write(json_encode($message));
+
+            return $response
+                        ->withHeader('Content-type', 'application/json')
+                        ->withStatus(422);
+
+        }else if($result == ING_EXIST){
+            $message = array();
+            $message['error'] = true;
+            $message['message'] = 'Ingredient Already Exists';
+
+            $response->getbody()->write(json_encode($message));
+
+            return $response
+                        ->withHeader('Content-type', 'application/json')
+                        ->withStatus(422);
+        }
+    }
+    return $response
+        ->withHeader('Content-type', 'application/json')
+		->withStatus(422);
+	
+});
+
+$app->get('/allingredients', function(Request $request, Response $response){
+
+	$db = new ingredientsOperations;
+
+	$ingts = $db->getAllIngredients();
+
+	$response_data = array();
+
+	$response_data['error'] = false;
+	$response_data['ingts'] = $ingts;
+
+	$response->getbody()->write(json_encode($response_data));
+
+	return $response
+        ->withHeader('Content-type', 'application/json')
+		->withStatus(200);
+
+});
+
+$app->put('/updateIngredient/{id}', function(Request $request, Response $response, array $args){
+
+	$id = $args['id'];
+
+	if(!haveEmptyParameters(array('food', 'amount'), $request, $response)){
+
+		$reqBody = file_get_contents('php://input');
+		parse_str($reqBody, $request_data);
+		//$request_data = $request->getParsedBody();
+		//$id = $request_data['id'];
+		$food = $request_data['food'];
+		$amount = $request_data['amount'];
+		
+		$db = new ingredientsOperations;
+
+		if($db->updateIngredients($food, $amount, $id)){
+			$response_data = array();
+			$response_data['error'] = false;
+			$response_data['message'] = 'Update Successful';
+			$ing = $db->getFoodByName($food);
+			$response_data['ing'] = $ing;
+
+			$response->getbody()->write(json_encode($response_data));
+
+			return $response
+        		->withHeader('Content-type', 'application/json')
+				->withStatus(200);
+
+		}else{
+			$response_data = array();
+			$response_data['error'] = true;
+			$response_data['message'] = 'Try Again';
+			$ing = $db->getFoodByName($food);
+			$response_data['ing'] = $ing;
+
+			$response->getbody()->write(json_encode($response_data));
+
+			return $response
+        		->withHeader('Content-type', 'application/json')
+				->withStatus(200);
+		}
+
+	}
+
+	return $response
+        ->withHeader('Content-type', 'application/json')
+		->withStatus(200);
+
+});
+
+$app->delete('/trashfood/{id}', function(Request $request, Response $response, array $args){
+	$id = $args['id'];
+
+	$db = new ingredientsOperations;
+
+	$response_data = array();
+
+	if($db->trashedFood($id)){
+		$response_data['error'] = false;
+		$response_data['message'] = 'Food Thrown Out!!';
+	}else{
+		$response_data['error'] = true;
+		$response_data['message'] = 'Error';
+	}
+
+	$response->getbody()->write(json_encode($response_data));
+
+	return $response
+        		->withHeader('Content-type', 'application/json')
+				->withStatus(200);
+
+});
+
+
 function haveEmptyParameters($required_params, $request, $response){
     $error = false; 
     $error_params = '';
@@ -843,7 +1003,6 @@ function haveEmptyParameters($required_params, $request, $response){
     }
     return $error; 
 }
-
 
 
 $app->run();

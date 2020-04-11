@@ -29,3 +29,7 @@
     define('PASSWORD_CHANGED', 601);
     define('PASSWORD_DO_NOT_MATCH', 602);
     define('PASSWORD_NOT_CHANGED', 603);
+	
+	define('ING_CREATE', 701);
+	define('ING_FAIL', 702);
+	define('ING_EXIST', 703);

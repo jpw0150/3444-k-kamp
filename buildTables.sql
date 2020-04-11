@@ -39,7 +39,7 @@ CREATE TABLE orders (
 
 CREATE TABLE ingredients (
 	id int NOT NULL AUTO_INCREMENT,
-	name text NOT NULL,
+	food text NOT NULL,
 	amount int NOT NULL,
 	CONSTRAINT ing_pk PRIMARY KEY (id)
 );
