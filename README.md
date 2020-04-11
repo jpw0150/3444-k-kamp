@@ -8,5 +8,5 @@
   6. copy file tableBuilder.sql into the text box, then click go
   7. copy justBones directory into C:\xampp\htdocs
   8. open command prompt and navigate to C:\xammp\htdocs\justBones
-  9. enter command "php -S localhost:8080 -t public public/index.php"
-  10. in file api.kt, change BASE_URL constant to your ip address
+  9. enter command "composer require tuupola/slim-basic-auth"
+  10. enter command "php -S localhost:8080 -t public public/index.php"
