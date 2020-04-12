@@ -235,4 +235,3 @@ interface Api {
         @Path("id") id:Int
     ):Call<ResponseBase>
 }
-}
