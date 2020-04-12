@@ -199,4 +199,40 @@ interface Api {
     fun trashfood(
         @Path("id") id:Int
     )
+    
+        @FormUrlEncoded
+    @POST("createTable")
+    fun createTable(
+        @Field("number") number:Int,
+        @Field("tableStatus") tableStatus:String,
+        @Field("needHelp") needHelp:Boolean,
+        @Field("needRefill") needRefill:Boolean
+    ):Call<ResponseBase>
+
+    @FormUrlEncoded
+    @GET("allTables")
+    fun allTables(
+    ):Call<ResponseTables>
+
+    @FormUrlEncoded
+    @GET("getTable/{number}")
+    fun getTable(
+        @Path("number") number:Int
+    ):Call<ResponseTable>
+
+    @FormUrlEncoded
+    @PUT("updateTable/{number}")
+    fun updateTable(
+        @Path("number") number:Int,
+        @Field("tableStatus") tableStatus:String,
+        @Field("needHelp") needHelp:Boolean,
+        @Field("needRefill") needRefill:Boolean
+    ):Call<ResponseTable>
+
+    @FormUrlEncoded
+    @DELETE("deleteTable/{number}")
+    fun deleteTable(
+        @Path("id") id:Int
+    ):Call<ResponseBase>
+}
 }
