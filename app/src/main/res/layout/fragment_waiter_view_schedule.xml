@@ -9,7 +9,7 @@
     tools:context=".fragments.waiterMenu.WaiterViewScheduleFragment">
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/chefInventoryText"
         android:layout_width="145dp"
         android:layout_height="43dp"
         android:layout_marginEnd="68dp"
