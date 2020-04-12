@@ -33,3 +33,7 @@
 	define('ING_CREATE', 701);
 	define('ING_FAIL', 702);
 	define('ING_EXIST', 703);
+	
+	define('TABLE_CREATE', 801);
+	define('TABLE_FAIL', 802);
+	define('TABLE_EXIST', 803);
