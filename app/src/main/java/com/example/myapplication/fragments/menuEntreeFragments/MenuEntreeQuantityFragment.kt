@@ -27,6 +27,7 @@ class MenuEntreeQuantityFragment : Fragment() {
             view.findViewById<TextView>(R.id.text_wing_price).text = getString(R.string.sixty_cent_wings)
         }
 
+
         val meatType = (activity as MenuActivity).meatType
         if(meatType == "Boneless"){ view.findViewById<TextView>(R.id.text_wing_price).text = getString(R.string.price_per_boneless_wing) }
         if(meatType == "Bone"){ view.findViewById<TextView>(R.id.text_wing_price).text = getString(R.string.price_per_bone_wing) }

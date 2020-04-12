@@ -33,6 +33,7 @@ class MenuSpecialsFragment : Fragment() {
         view.findViewById<TextView>(R.id.today_special_day).text = "Today's Special: $currentDay"
         val redeemButton = view.findViewById<Button>(R.id.button_redeem)
 
+
         /* Wednesday Special */
         if (currentDay == getString(R.string.wednesday)) {
             view.findViewById<TextView>(R.id.text_specials_msg).text =
@@ -69,6 +70,8 @@ class MenuSpecialsFragment : Fragment() {
                 (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
             }
         }
+
+
 
         return view
     }

@@ -163,11 +163,18 @@ class MenuActivity : AppCompatActivity() {
         }
 
     /* Method returns current weekday */
+    /*
     fun getCurrentDay(): String{
         val daysArray = arrayOf("Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
         val calendar = Calendar.getInstance()
         val dayIndex = calendar.get(Calendar.DAY_OF_WEEK)
         return daysArray[dayIndex]
+    }
+*/
+    fun getCurrentDay(): String{
+        val daysArray = arrayOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+        val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        return daysArray[currentDay - 1]
     }
 
 
