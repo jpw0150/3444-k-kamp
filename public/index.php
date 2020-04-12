@@ -981,6 +981,165 @@ $app->delete('/trashfood/{id}', function(Request $request, Response $response, a
 
 });
 
+$app->post('/createTable', function(Request $request, Response $response){
+	if(!haveEmptyParameters(array('number', 'tableStatus', 'needHelp', 'needRefill'), $request, $response)){
+		$request_data = $request->getParsedBody();
+		
+		$number = $request_data['number'];
+		$tableStatus = $request_data['tableStatus'];
+		$needHelp = $request_data['needHelp'];
+		$needRefill = $request_data['needRefill'];
+		
+		$db = new tableOperations;
+		
+		$result = $db->newTable($number, $tableStatus, $needHelp, $needRefill);
+		
+		if($result == TABLE_CREATE){
+			$message = array();
+			$message['error'] = false;
+			$message['message'] = 'success!';
+			
+			$response->getBody()->write(json_encode($message));
+			
+			return $response->withHeader('Content-type', 'application/json')->withStatus(201);
+		}
+			
+		else if($result == TABLE_FAIL){
+			$message = array();
+			$message['error'] = true;
+			$message['message'] = 'error occured';
+			
+			$response->getBody()->write(json_encode($message));
+			
+			return $response->withHeader('Content-type', 'application/json')->withStatus(422);			
+		}
+	}
+
+	return $response->withHeader('Content-type', 'application/json')->withStatus(422);
+});
+
+$app->get('/allTables', function(Request $request, Response $response){
+
+	$db = new tableOperations;
+
+	$tables = $db->allTables();
+
+	$response_data = array();
+
+	$response_data['error'] = false;
+	$response_data['tables'] = $tables;
+
+	$response->getbody()->write(json_encode($response_data));
+
+	return $response
+        ->withHeader('Content-type', 'application/json')
+		->withStatus(200);
+
+});
+
+$app->get('/getTable/{number}', function(Request $request, Response $response, array $args){
+	
+	$number = $args['number'];
+	$db = new tableOperations;
+	
+	$found = $db->tableExist($number);
+	if($found){
+		$table = $db->findtable($number);
+		$message = array();
+			
+		$message['error'] = false;
+		$message['message'] = 'found data';
+		$message['table'] = $table;
+			
+		$response->getBody()->write(json_encode($message));
+		return $response->withHeader('Content-type', 'application/json')->withStatus(201);	
+	}
+	
+	else{
+		$message = array();
+			
+		$message['error'] = true;
+		$message['message'] = 'no data found';
+			
+		$response->getBody()->write(json_encode($message));
+
+		return $response->withHeader('Content-type', 'application/json')->withStatus(422);	
+	}
+});
+
+$app->put('/updateTable/{number}', function(Request $request, Response $response, array $args){
+
+	$number = $args['number'];
+
+	if(!haveEmptyParameters(array('tableStatus', 'needHelp', 'needRefill'), $request, $response)){
+
+		$reqBody = file_get_contents('php://input');
+		parse_str($reqBody, $request_data);
+
+		$tableStatus = $request_data['tableStatus'];
+		$needHelp = $request_data['needHelp'];
+		$needRefill = $request_data['needRefill'];
+		
+		$db = new tableOperations;
+
+		if($db->updatetable($tableStatus, $needHelp, $needRefill, $number)){
+			$response_data = array();
+			$response_data['error'] = false;
+			$response_data['message'] = 'Update Successful';
+			$table = $db->findtable($number);
+			$response_data['table'] = $table;
+
+			$response->getbody()->write(json_encode($response_data));
+
+			return $response
+        		->withHeader('Content-type', 'application/json')
+				->withStatus(200);
+
+		}else{
+			$response_data = array();
+			$response_data['error'] = true;
+			$response_data['message'] = 'Try Again';
+			$table = $db->findtable($number);
+			$response_data['table'] = $table;
+
+			$response->getbody()->write(json_encode($response_data));
+
+			return $response
+        		->withHeader('Content-type', 'application/json')
+				->withStatus(200);
+		}
+
+	}
+
+	return $response
+        ->withHeader('Content-type', 'application/json')
+		->withStatus(200);
+
+});
+
+$app->delete('/deleteTable/{number}', function(Request $request, Response $response, array $args){
+	$number = $args['number'];
+
+	$db = new tableOperations;
+
+	$response_data = array();
+
+	if($db->deleteTable($number)){
+		$response_data['error'] = false;
+		$response_data['message'] = 'table successfully deleted';
+	}else{
+		$response_data['error'] = true;
+		$response_data['message'] = 'Error';
+	}
+
+	$response->getbody()->write(json_encode($response_data));
+
+	return $response
+        		->withHeader('Content-type', 'application/json')
+				->withStatus(200);
+
+});
+
 
 function haveEmptyParameters($required_params, $request, $response){
     $error = false; 
