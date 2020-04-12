@@ -129,14 +129,13 @@ interface Api {
     @FormUrlEncoded
     @POST("createcustomer")
     fun createcustomer(
-        @Field("phone") phone: String,
-        @Field("name") name: String,
-        @Field("password") password: String,
-        @Field("birthday") birthday: String,
-        @Field("visited") visited: String,
-        @Field("credits") credits: String
-    ):Call<ResponseBase>
-
+        @Field("phone") phone:String,
+        @Field("name") name:String,
+        @Field("password") password:String,
+        @Field("birthday") birthday:String,
+        @Field("visited") visited:Int,
+        @Field("credits")credits:Int
+    ): Call<DefaultResponse>
     @FormUrlEncoded
     @POST("customerlogin")
     fun customerlogin(
