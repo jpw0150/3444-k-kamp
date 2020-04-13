@@ -41,7 +41,7 @@ class ChefInventoryFragment : Fragment() {
                     view.findViewById<TextView>(R.id.chefInventoryPosition).apply{ text = "FETCH UNSUCCESSFUL" }
                 }
                 override fun onResponse(call: Call<ResponseIngredients>, response: Response<ResponseIngredients>) {
-                    chefIngs = response.body()!!.Ingredients
+                    chefIngs = response.body()!!.ingredients
                     view.findViewById<TextView>(R.id.chefInventoryPosition).apply{ text = (index+1).toString() + " OF " + chefIngs.size.toString()}
                 }
             })
