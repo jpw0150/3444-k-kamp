@@ -1,8 +1,6 @@
 package com.example.myapplication.fragments.manangerMenu
 
-import android.content.Context
 import android.graphics.drawable.AnimationDrawable
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,12 +12,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
-import com.example.myapplication.activities.ChefActivity
 import com.example.myapplication.activities.ManagerActivity
 import com.example.myapplication.apipackage.Ingredient
-import com.example.myapplication.apipackage.ResponseIngredient
+import com.example.myapplication.apipackage.ResponseIngredients
 import com.example.myapplication.apipackage.RetrofitClient
-import com.example.myapplication.fragments.chefMenu.ChefMenuFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +23,13 @@ import retrofit2.Response
 
 class ManagerInventoryFragment : Fragment() {
     var index = 0
-    var manIngs = List<Ingredient>(1) { Ingredient(0, "", 0) }
+    var manIngs = List<Ingredient>(1) {
+        Ingredient(
+            0,
+            "",
+            0
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -40,7 +42,7 @@ class ManagerInventoryFragment : Fragment() {
                     view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = "FETCH UNSUCCESSFUL" }
                 }
                 override fun onResponse(call: Call<ResponseIngredients>, response: Response<ResponseIngredients>) {
-                    manIngs = response.body()!!.Ingredients
+                    manIngs = response.body()!!.ingredients
                     view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = (index+1).toString() + " OF " + manIngs.size.toString() }
                 }
             })
@@ -125,7 +127,7 @@ class ManagerInventoryFragment : Fragment() {
 
             }
             override fun onResponse(call: Call<ResponseIngredients>, response: Response<ResponseIngredients>) {
-                manIngs = response.body()!!.Ingredients
+                manIngs = response.body()!!.ingredients
             }
         })
 
@@ -141,7 +143,7 @@ class ManagerInventoryFragment : Fragment() {
 
             }
             override fun onResponse(call: Call<ResponseIngredients>, response: Response<ResponseIngredients>) {
-                manIngs = response.body()!!.Ingredients
+                manIngs = response.body()!!.ingredients
             }
         })
 

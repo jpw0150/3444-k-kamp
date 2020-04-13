@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
 import com.example.myapplication.activities.ChefActivity
-import com.example.myapplication.apipackage.Api
 import com.example.myapplication.apipackage.Ingredient
 import com.example.myapplication.apipackage.ResponseIngredients
 import com.example.myapplication.apipackage.RetrofitClient
@@ -23,7 +22,13 @@ import retrofit2.Response
 
 class ChefInventoryFragment : Fragment() {
     var index = 0
-    var chefIngs = List<Ingredient>(1) {Ingredient(0, "", 0)}
+    var chefIngs = List<Ingredient>(1) {
+        Ingredient(
+            0,
+            "",
+            0
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

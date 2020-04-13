@@ -8,9 +8,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.CustomerAccountActivity
+import com.example.myapplication.apipackage.DefaultResponse
+import com.example.myapplication.apipackage.RetrofitClient
+import com.example.myapplication.apipackage.ResponseTables
+import com.example.myapplication.apipackage.Table
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 /*TO DO:
 *-create for-loop for alerts every time there is a customer who needs help
@@ -23,6 +34,30 @@ class WaiterTableAlertFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_waiter_table_alert, container, false)
         runGraidentAnimation(view)
+
+        /* Create empty table list */
+        var tableList: List<Table>
+
+        /* First get all the tables */
+        RetrofitClient.instance.allTables().enqueue(object: Callback<ResponseTables> {
+            override fun onFailure(call: Call<ResponseTables>, t: Throwable) {
+                Toast.makeText(
+                    activity as CustomerAccountActivity,
+                    t.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            override fun onResponse(
+                call: Call<ResponseTables>,
+                response: Response<ResponseTables>
+            ) {
+
+            }
+
+
+        })
+
 
 
         return view
