@@ -21,6 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.fragments.menuDrinksFragments.MenuDrinksFragment
 import com.example.myapplication.fragments.menuEntreeFragments.MenuEntreeMeatFragment
 
 
@@ -33,6 +34,34 @@ class MenuSpecialsFragment : Fragment() {
         view.findViewById<TextView>(R.id.today_special_day).text = "Today's Special: $currentDay"
         val redeemButton = view.findViewById<Button>(R.id.button_redeem)
 
+        /* Sunday Special */
+        if (currentDay == getString(R.string.sunday)) {
+            view.findViewById<TextView>(R.id.text_specials_msg).text =
+                getString(R.string.sunday_deal)
+            redeemButton.visibility = View.VISIBLE
+            redeemButton.setOnClickListener {
+                Toast.makeText(
+                    (activity as MenuActivity).applicationContext,
+                    "Discount is already applied",
+                    Toast.LENGTH_SHORT
+                ).show()
+                (activity as MenuActivity).replaceFragment(MenuDrinksFragment(), "")
+            }
+        }
+        /* Monday Special */
+        if (currentDay == getString(R.string.monday)) {
+            view.findViewById<TextView>(R.id.text_specials_msg).text =
+                getString(R.string.monday_deal)
+            redeemButton.visibility = View.VISIBLE
+            redeemButton.setOnClickListener {
+                Toast.makeText(
+                    (activity as MenuActivity).applicationContext,
+                    "Discount is already applied",
+                    Toast.LENGTH_SHORT
+                ).show()
+                (activity as MenuActivity).replaceFragment(MenuKidsMealsFragment(), "")
+            }
+        }
 
         /* Wednesday Special */
         if (currentDay == getString(R.string.wednesday)) {

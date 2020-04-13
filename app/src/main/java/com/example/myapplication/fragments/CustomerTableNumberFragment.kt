@@ -43,6 +43,7 @@ class CustomerTableNumberFragment : Fragment() {
             val tableNum = tableNumber.toInt()
             (activity as MenuActivity).table.number = tableNumber.toInt()
 
+
             /* Save table status to database */
             RetrofitClient.instance.updateTable(tableNum, "Ordering",
                 needHelp = false,
@@ -63,10 +64,12 @@ class CustomerTableNumberFragment : Fragment() {
                     ).show()
                         }
                     })
-                }
-
 
             (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
+        }
+
+
+
 
         return view
     }

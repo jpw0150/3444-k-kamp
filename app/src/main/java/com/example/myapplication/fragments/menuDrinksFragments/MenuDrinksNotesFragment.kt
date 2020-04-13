@@ -84,6 +84,7 @@ class MenuDrinksNotesFragment : Fragment() {
 
     /* Method calculates price of drink order */
     fun getDrinkPrice(drinkType: String, drinkQuantity: Int): Double{
+        if ((activity as MenuActivity).getCurrentDay() == getString(R.string.sunday)) { return 0.0 }
         if (drinkType == "Water"){ return 0.0 }
         else { return drinkQuantity * (activity as MenuActivity).PRICE_PER_DRINK }
     }
