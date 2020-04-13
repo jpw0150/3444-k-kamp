@@ -26,12 +26,13 @@ interface Api {
     @FormUrlEncoded
     @POST("createEmp")
     fun createEmp(
-        @Field("email") password:String,
-        @Field("entree") name: String,
-        @Field("entree") wage: Float,
-        @Field("entree") role: String,
-        @Field("password") time: Float
-    ):Call<ResponseBase>
+        @Field("id") id:Int,
+        @Field("password") password:String,
+        @Field("name") name: String,
+        @Field("wage") wage: Int,
+        @Field("role") role: String,
+        @Field("hours") hours: Int
+    ):Call<ResponseEmployee>
 
     @FormUrlEncoded
     @POST("empLogin")
@@ -136,6 +137,7 @@ interface Api {
         @Field("visited") visited:Int,
         @Field("credits")credits:Int
     ): Call<DefaultResponse>
+
     @FormUrlEncoded
     @POST("customerlogin")
     fun customerlogin(

@@ -3,7 +3,7 @@ package com.example.myapplication.apipackage
 import com.google.gson.annotations.SerializedName
 data class Item(val id: Int, val name: String, val cost: Float, val descrip: String)
 data class Customer(val id: Int, val phone: String, val name: String, val password: String, val birthday: String, val visited: Int, val credits: Int)
-data class Employee(val id: Int, val password: String, val name: String, val wage: Float, val role: String, val time: String)
+data class Employee(val id: Int, val password: String, val name: String, val wage: Int, val role: String, val hours: Int)
 data class Order(val id: Int, val tableNum: Int, val entree: String, val side: String, val drink: String, val orderTotal: Float)
 data class Ingredient(var id: Int, var food: String, var amount: Int)
 data class Table(val number: Int, val tableStatus: String, val needHelp: Boolean, val needRefill: Boolean)
