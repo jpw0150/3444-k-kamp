@@ -12,12 +12,21 @@ import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.widget.Button
 import android.content.Intent
+import android.widget.TextView
 import android.widget.Toast
 import com.example.myapplication.activities.CustomerAccountActivity
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.ChefActivity
 import com.example.myapplication.activities.MainActivity
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseTables
+import com.example.myapplication.apipackage.RetrofitClient
+import kotlinx.android.synthetic.main.fragment_customer_table_number.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.example.myapplication.apipackage.ResponseTable
 
 class CustomerTableNumberFragment : Fragment() {
 
@@ -31,9 +40,33 @@ class CustomerTableNumberFragment : Fragment() {
 
         nextButtonTable.setOnClickListener {
             val tableNumber = view.findViewById<EditText>(R.id.table_number).text.toString()
-            (activity as MenuActivity).table.tableNum = tableNumber.toInt()
+            val tableNum = tableNumber.toInt()
+            (activity as MenuActivity).table.number = tableNumber.toInt()
+
+            /* Save table status to database */
+            RetrofitClient.instance.updateTable(tableNum, "Ordering",
+                needHelp = false,
+                needRefill = false
+            ).enqueue(object: Callback<ResponseTable> {
+                override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        "Assigning you your waiter",
+                        Toast.LENGTH_LONG
+                    ).show()
+                        }
+                    })
+                }
+
+
             (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
-        }
 
         return view
     }

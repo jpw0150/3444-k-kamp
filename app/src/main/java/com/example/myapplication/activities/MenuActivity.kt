@@ -16,7 +16,7 @@ import com.example.myapplication.fragments.MainMenuFragment
 import com.example.myapplication.data_structs.Entree
 import com.example.myapplication.data_structs.Side
 import com.example.myapplication.data_structs.Order
-import com.example.myapplication.data_structs.Table
+import com.example.myapplication.apipackage.Table
 import com.example.myapplication.fragments.CustomerTableNumberFragment
 import java.util.*
 
@@ -27,7 +27,7 @@ class MenuActivity : AppCompatActivity() {
     val activity = this@MenuActivity
 
     /* Store current table information */
-    var table = Table(0, "None", 0.0)
+    var table = Table(0, "None", false, false)
 
     /* Setting up variables that are part of Entree() */
     lateinit var meatType: String
