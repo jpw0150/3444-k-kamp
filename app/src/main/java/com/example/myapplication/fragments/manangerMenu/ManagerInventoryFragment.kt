@@ -17,7 +17,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.ChefActivity
 import com.example.myapplication.activities.ManagerActivity
 import com.example.myapplication.apipackage.Ingredient
-import com.example.myapplication.apipackage.ResponseIngredients
+import com.example.myapplication.apipackage.ResponseIngredient
 import com.example.myapplication.apipackage.RetrofitClient
 import com.example.myapplication.fragments.chefMenu.ChefMenuFragment
 import retrofit2.Call
