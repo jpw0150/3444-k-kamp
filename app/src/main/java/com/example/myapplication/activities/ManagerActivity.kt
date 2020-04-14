@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 import com.example.myapplication.*
-import com.example.myapplication.fragments.manangerMenu.ManagerMenuFragment
+import com.example.myapplication.fragments.managerMenu.ManagerMenuFragment
 
 
 class ManagerActivity : AppCompatActivity() {

@@ -1,7 +1,5 @@
-package com.example.myapplication.fragments.manangerMenu
+package com.example.myapplication.fragments.managerMenu
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

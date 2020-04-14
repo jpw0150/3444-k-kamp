@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/manager_view_employee"
     android:background="@drawable/gradient_list"
-    tools:context=".fragments.manangerMenu.ManagerViewEmployeeFragment">
+    tools:context=".fragments.managerMenu.ManagerViewEmployeeFragment">
 
     <TextView
         android:id="@+id/managerViewEmployeesText"

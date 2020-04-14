@@ -1,4 +1,4 @@
-package com.example.myapplication.fragments.manangerMenu
+package com.example.myapplication.fragments.managerMenu
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle

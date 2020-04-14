@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_list"
-    tools:context=".fragments.manangerMenu.ManagerInventoryFragment">
+    tools:context=".fragments.managerMenu.ManagerInventoryFragment">
 
     <TextView
         android:id="@+id/managerInventoryText"

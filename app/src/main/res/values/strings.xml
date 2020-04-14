@@ -149,5 +149,7 @@
     <string name="boneless_lemon_pepper_wing_combo">Lemon Pepper Wing Combo</string>
     <string name="_400_calories_per_serving">400 calories per serving</string>
     <string name="lemon_combo_description">Get three juicy boneless lemon pepper wings with our savory honey mustard sauce along with a side of crispy veggie sticks!</string>
-
+    <string name="modify_table_status">Modify Table Status</string>
+    <string name="help_status">Needs Help</string>
+    <string name="refill_status">Needs Refill</string>
 </resources>
