@@ -126,4 +126,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="342dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="56dp"
+        android:text="Ingredients include sweetend corn, chili flakes, and lemon juice"
+        app:layout_constraintBottom_toTopOf="@+id/button_help_image_sides_corn"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

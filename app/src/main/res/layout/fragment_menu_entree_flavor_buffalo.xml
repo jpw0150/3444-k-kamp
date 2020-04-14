@@ -59,15 +59,12 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="364dp"
-        android:layout_height="28dp"
+        android:layout_height="21dp"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="132dp"
         android:text="37 Calories (per 1 tbsp)"
         app:layout_constraintBottom_toTopOf="@+id/button_refill_image_flavors_buffalo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/button_help_image_flavors_buffalo"
@@ -102,15 +99,34 @@
         android:layout_width="253dp"
         android:layout_height="251dp"
         android:layout_marginStart="77dp"
-        android:layout_marginLeft="77dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="79dp"
-        android:layout_marginRight="79dp"
         android:layout_marginBottom="2dp"
         android:src="@drawable/buffalo_wings"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Ingredients include hot sauce, butter, garlic powder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="272dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Contains DAIRY"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

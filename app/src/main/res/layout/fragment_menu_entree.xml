@@ -50,13 +50,13 @@
 
     <ImageView
         android:id="@+id/tenders"
-        android:layout_width="250dp"
-        android:layout_height="172dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_width="239dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="51dp"
         android:src="@drawable/chicken_tender"
-        app:layout_constraintBottom_toTopOf="@+id/button_tenders"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/contains_wheat_bone"
+        app:layout_constraintTop_toBottomOf="@+id/calories_boneless" />
 
     <Button
         android:id="@+id/button_boneless"
@@ -125,26 +125,23 @@
         android:id="@+id/contains_wheat_tenders"
         android:layout_width="113dp"
         android:layout_height="18dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginRight="156dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
         android:text="@string/contains_wheat"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calories_tenders" />
 
     <Button
         android:id="@+id/button_tenders"
         android:layout_width="121dp"
         android:layout_height="42dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginStart="16dp"
         android:background="@android:color/black"
         android:text="@string/tenders"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/calories_tenders"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tenders" />
 
     <TextView
         android:id="@+id/contains_wheat_bone"
@@ -162,12 +159,11 @@
         android:id="@+id/calories_tenders"
         android:layout_width="110dp"
         android:layout_height="18dp"
-        android:layout_marginStart="145dp"
-        android:layout_marginLeft="145dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/_70_calories_ea"
-        app:layout_constraintBottom_toTopOf="@+id/contains_wheat_tenders"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_tenders" />
 
     <ImageButton
         android:id="@+id/button_help_image_meat"
@@ -196,6 +192,16 @@
         android:src="@drawable/refill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="175dp"
+        android:layout_height="99dp"
+        android:text="Ingrediants include farm fresh chicken, butter, and bread crumbs."
+        android:textSize="18sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="220dp"
+        tools:layout_editor_absoluteY="420dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
