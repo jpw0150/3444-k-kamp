@@ -1,20 +1,12 @@
 package com.example.myapplication.fragments
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.drawable.AnimationDrawable
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.Calendar
 import android.widget.Button
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +15,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 import com.example.myapplication.fragments.menuDrinksFragments.MenuDrinksFragment
 import com.example.myapplication.fragments.menuEntreeFragments.MenuEntreeMeatFragment
+import com.example.myapplication.fragments.menuKids.MenuKidsMealsFragment
 
 
 class MenuSpecialsFragment : Fragment() {
@@ -99,8 +92,6 @@ class MenuSpecialsFragment : Fragment() {
                 (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
             }
         }
-
-
 
         return view
     }

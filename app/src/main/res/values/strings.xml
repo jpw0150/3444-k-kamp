@@ -141,5 +141,13 @@
     <string name="notifications">Notifications</string>
     <string name="resolve_all">Resolve All</string>
     <string name="serviced">Serviced</string>
+    <string name="optional_add_a_note_to_our_chef">(Optional) Add a note to our chef!</string>
+    <string name="boneless_barbecue_wingcombo">Boneless Barbecue Wing Combo</string>
+    <string name="kids_barbecue_description">Our delicious barbecue wing combo comes with 3 savory boneless barbecue wings with 1 serving of ranch and a side of grilled corn.</string>
+    <string name="_500_calories_per_serving">500 calories per serving</string>
+    <string name="wheat_milk_warning">CAUTION: This contains WHEAT AND MILK</string>
+    <string name="boneless_lemon_pepper_wing_combo">Lemon Pepper Wing Combo</string>
+    <string name="_400_calories_per_serving">400 calories per serving</string>
+    <string name="lemon_combo_description">Get three juicy boneless lemon pepper wings with our savory honey mustard sauce along with a side of crispy veggie sticks!</string>
 
 </resources>

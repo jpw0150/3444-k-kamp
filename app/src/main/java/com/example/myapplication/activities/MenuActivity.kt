@@ -76,6 +76,8 @@ class MenuActivity : AppCompatActivity() {
     val PRICE_PER_SAUCE = 0.75
     val PRICE_PER_SIDE = 2.00
     val PRICE_PER_DRINK = 1.50
+    val KIDS_NUM_WINGS = 3
+    val KIDS_COMBO_PRICE = 5.00
 
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
