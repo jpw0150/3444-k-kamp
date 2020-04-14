@@ -54,8 +54,7 @@ class MainMenuFragment : Fragment() {
         drinksButton.setOnClickListener{(activity as MenuActivity).replaceFragment(MenuDrinksFragment(),"") }
         specialsButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuSpecialsFragment(),"") }
         gamesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(KidsModeLoginFragment(),"") }
-        kidsMenuButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(
-            MenuKidsMealsFragment(),"") }
+        kidsMenuButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuKidsMealsFragment(),"") }
 
 
         /* Send help notification to the waiter */

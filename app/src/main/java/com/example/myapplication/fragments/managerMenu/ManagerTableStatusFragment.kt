@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
@@ -39,9 +36,9 @@ class ManagerTableStatusFragment : Fragment() {
         /* Initialize layout variable that will be dynamically programmed on */
         val layout = view.findViewById<LinearLayout>(R.id.manager_notifications)
 
-
         /* First get all the tables */
-        RetrofitClient.instance.allTables().enqueue(object: Callback<ResponseTables> {
+
+        /* RetrofitClient.instance.allTables().enqueue(object: Callback<ResponseTables> {
             override fun onFailure(call: Call<ResponseTables>, t: Throwable) {
                 Toast.makeText(
                     activity as CustomerAccountActivity,
@@ -66,12 +63,15 @@ class ManagerTableStatusFragment : Fragment() {
                         setTextViewAttributes(textView)
                         layout.addView(textView)
                         addLineSeperator(layout)
-
                 }
             }
         })
 
+         */
+
+
         /* Create Resolve button */
+
         val modifyButton = Button(activity as ManagerActivity)
         modifyButton.text = getString(R.string.modify_table_status)
         modifyButton.setBackgroundColor(Color.BLACK)
@@ -86,7 +86,7 @@ class ManagerTableStatusFragment : Fragment() {
     }
 
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.manager_view_alerts)
+        val constraintLayout = v.findViewById<ScrollView>(R.id.manager_view_alerts)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)

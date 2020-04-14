@@ -25,7 +25,7 @@ class ManagerModifyTableStatus : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_manager_modify_table_status, container, false)
-        runGraidentAnimation(view)
+        //runGraidentAnimation(view)
 
         var __needHelp = false
         var __needRefill = false
@@ -36,8 +36,11 @@ class ManagerModifyTableStatus : Fragment() {
 
         modifyButton.setOnClickListener {
             /* Save table status to the database  */
+            /*
             if (newTableStatus == getString(R.string.help_status)) { __needHelp = true }
             if (newTableStatus == getString(R.string.refill_status)) { __needRefill = true}
+
+
 
             RetrofitClient.instance.updateTable(tableNum, newTableStatus,
                 needHelp = __needHelp,
@@ -58,6 +61,8 @@ class ManagerModifyTableStatus : Fragment() {
                     ).show()
                 }
             })
+
+             */
 
             (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")
         }
