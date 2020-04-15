@@ -25,12 +25,15 @@ class ManagerModifyTableStatus : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_manager_modify_table_status, container, false)
-        //runGraidentAnimation(view)
+        runGraidentAnimation(view)
 
+        /*
         var __needHelp = false
         var __needRefill = false
 
-        val tableNum = view.findViewById<EditText>(R.id.modify_table_number).text.toString().toInt()
+         */
+
+        val tableNum = view.findViewById<EditText>(R.id.modify_table_number).text.toString()
         val newTableStatus = view.findViewById<EditText>(R.id.modify_table_status).text.toString()
         val modifyButton = view.findViewById<Button>(R.id.button_modify_table_status_option)
 
@@ -66,6 +69,7 @@ class ManagerModifyTableStatus : Fragment() {
 
             (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")
         }
+
         return view
     }
 

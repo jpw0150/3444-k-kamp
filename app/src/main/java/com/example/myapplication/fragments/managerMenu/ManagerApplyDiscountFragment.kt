@@ -14,6 +14,7 @@ import android.widget.Toast
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.ManagerActivity
+import com.example.myapplication.activities.MenuActivity
 import com.example.myapplication.apipackage.ResponseTable
 import com.example.myapplication.apipackage.RetrofitClient
 import com.example.myapplication.apipackage.Table
@@ -25,7 +26,7 @@ import retrofit2.Response
 class ManagerApplyDiscountFragment : Fragment() {
 
     var tableTotal = 0.0
-    var table_num = 1
+    var table_num: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -34,7 +35,7 @@ class ManagerApplyDiscountFragment : Fragment() {
 
         /* Initialize buttons */
         val discountButton = view.findViewById<Button>(R.id.button_calculate_discount)
-        val updateTotalButton = view.findViewById<Button>(R.id.button_apply_discount)
+        val updateTotalButton = view.findViewById<Button>(R.id.button_update_table_total)
 
 
         discountButton.setOnClickListener {
@@ -43,7 +44,7 @@ class ManagerApplyDiscountFragment : Fragment() {
 
             /*
             /* Get original table total from database  */
-            RetrofitClient.instance.getTable(1).enqueue(object: Callback<ResponseTable> {
+            RetrofitClient.instance.getTable(table_num).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
                         activity as ManagerActivity,
@@ -73,10 +74,11 @@ class ManagerApplyDiscountFragment : Fragment() {
             view.findViewById<TextView>(R.id.text_new_total).visibility = View.VISIBLE
 
         }
-        /*
+
         updateTotalButton.setOnClickListener {
+
             /* Update new table total to database */
-            RetrofitClient.instance.updateTable(1, "Serviced",
+            RetrofitClient.instance.updateTable(table_num, "Serviced",
                 needHelp = false,
                 needRefill = false
             ).enqueue(object: Callback<ResponseTable> {
@@ -95,8 +97,8 @@ class ManagerApplyDiscountFragment : Fragment() {
                     ).show()
                 }
             })
+            (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")
         }
-         */
         return view
     }
 

@@ -6,9 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.ChefActivity
+
 
 class ChefEditMenuFragment : Fragment() {
 
@@ -17,7 +21,27 @@ class ChefEditMenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chef_edit_menu, container, false)
         runGraidentAnimation(view)
 
+        val addButton = view.findViewById<ImageButton>(R.id.imageButton_add_item_chef)
+        val changeButton = view.findViewById<ImageButton>(R.id.imageButton_change_menu_chef)
+        val removeButton = view.findViewById<ImageButton>(R.id.imageButton_remove_item_chef)
 
+        addButton.setOnClickListener {
+            Toast.makeText((activity as ChefActivity).applicationContext,
+                "Unable to do this at this time", Toast.LENGTH_SHORT).show()
+            (activity as ChefActivity).replaceFragment(ChefMenuFragment(), "")
+        }
+
+        changeButton.setOnClickListener {
+            Toast.makeText((activity as ChefActivity).applicationContext,
+                "Unable to do this at this time", Toast.LENGTH_SHORT).show()
+            (activity as ChefActivity).replaceFragment(ChefMenuFragment(), "")
+        }
+
+        removeButton.setOnClickListener {
+            Toast.makeText((activity as ChefActivity).applicationContext,
+                "Unable to do this at this time", Toast.LENGTH_SHORT).show()
+            (activity as ChefActivity).replaceFragment(ChefMenuFragment(), "")
+        }
 
         return view
     }
