@@ -165,4 +165,5 @@
     <string name="next_shift">Next Shift:</string>
     <string name="update_hours">Update Hours</string>
     <string name="tips_earned">Tips Earned:</string>
+    <string name="tip_value">Select tip value you would like to add:</string>
 </resources>

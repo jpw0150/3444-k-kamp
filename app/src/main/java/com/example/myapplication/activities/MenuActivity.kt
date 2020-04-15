@@ -179,13 +179,19 @@ class MenuActivity : AppCompatActivity() {
         return daysArray[currentDay - 1]
     }
 
-
-    //TODO: Implement tip calculator function (user getOrderTotal() )
-
     /** Method calculates the tip based off of percentage and order total
      * @return new total with added tip
      */
-    /* fun calculateTip(percentage: Double): Double {
+    fun calculateTip(percentage: Double): Double {
+        var includingTip = getOrderTotal()
+
+        if(percentage == 0.0)
+            return includingTip
+
+        includingTip += includingTip*percentage.toDouble()
+
+        includingTip = "%.2f".format(includingTip).toDouble()
+
+        return includingTip
     }
-     */
 }
