@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments.gameFragments
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
@@ -22,6 +24,7 @@ class GameYahtzeePlayFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_game_yahtzee_play, container, false)
+        runGraidentAnimation(view)
 
         view.findViewById<Button>(R.id.yahKeep1).setOnClickListener{ keepRoll(1) }
         view.findViewById<Button>(R.id.yahKeep2).setOnClickListener{ keepRoll(2) }
@@ -45,6 +48,13 @@ class GameYahtzeePlayFragment : Fragment() {
         return view
     }
 
+    private fun runGraidentAnimation(v: View) {
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.yahtzeePlayLayout)
+        val animationDrawable = constraintLayout?.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+    }
 
     fun keepRoll(die: Int) {
         keptDice[die-1] = activeDice[die-1]

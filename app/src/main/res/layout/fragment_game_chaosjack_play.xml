@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cjFrameLayout"
+    android:background="@drawable/gradient_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.gameFragments.GameChaosjackPlayFragment">
@@ -40,6 +41,8 @@
         android:layout_marginBottom="100dp"
         android:onClick="cjHit"
         android:text="Hit"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -52,6 +55,8 @@
         android:layout_marginBottom="100dp"
         android:onClick="cjStand"
         android:text="Stand"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

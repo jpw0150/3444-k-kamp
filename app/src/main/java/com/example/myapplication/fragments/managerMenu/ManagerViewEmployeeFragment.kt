@@ -22,13 +22,19 @@ import retrofit2.Response
 
 class ManagerViewEmployeeFragment : Fragment() {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_manager_view_employee, container, false)
         runGraidentAnimation(view)
 
         val addButton = view.findViewById<Button>(R.id.button_add)
+        //val removebutton
+        val editButton = view.findViewById<Button>(R.id.button_edit)
+        val viewAllButton = view.findViewById<Button>(R.id.button_view_all)
+
+        editButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerEditEmployeesFragment(), "") }
+        viewAllButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerViewAllEmployeesFragment(), "") }
+
         addButton.setOnClickListener {
             val id = Integer.parseInt(employee_id.text.toString().trim())
             val password = employee_password.text.toString().trim()

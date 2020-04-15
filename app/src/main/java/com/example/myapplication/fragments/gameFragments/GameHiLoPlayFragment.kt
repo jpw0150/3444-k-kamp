@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments.gameFragments
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
@@ -31,6 +33,7 @@ class GameHiLoPlayFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_game_hi_lo_play, container, false)
+        runGraidentAnimation(view)
         view.findViewById<Button>(R.id.hlLoButton).setOnClickListener { hlClickLo(view) }
         view.findViewById<Button>(R.id.hlHiButton).setOnClickListener { hlClickHi(view) }
         view.findViewById<Button>(R.id.hlReplayButton).setOnClickListener { hlReplay(view) }
@@ -53,6 +56,14 @@ class GameHiLoPlayFragment : Fragment() {
         //view = gamestart()
 
         return view
+    }
+
+    private fun runGraidentAnimation(v: View) {
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.frameLayout4)
+        val animationDrawable = constraintLayout?.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
     }
 
     fun hlStartGame(view: View) {

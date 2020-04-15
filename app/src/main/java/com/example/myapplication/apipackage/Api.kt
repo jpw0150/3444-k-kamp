@@ -16,7 +16,7 @@ interface Api {
     @FormUrlEncoded
     @POST("createOrder")
     fun createOrder(
-        @Field("tableNum") email:String,
+        @Field("tableNum") tableNum:String,
         @Field("entree") entree: String,
         @Field("side") side: String,
         @Field("drink") drink: String,

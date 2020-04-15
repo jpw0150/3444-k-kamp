@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
     tools:context=".fragments.gameFragments.KidsModeLoginFragment">
 
     <EditText
@@ -25,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="175dp"
         android:text="Confirm"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/kidModeLoginCancel"
         app:layout_constraintHorizontal_bias="0.5"
@@ -36,6 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="175dp"
         android:text="Cancel"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -46,6 +51,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please enter your intended password:"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/kidModeLoginEntry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
