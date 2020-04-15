@@ -36,6 +36,7 @@ class ManagerViewEmployeeFragment : Fragment() {
             val wage= Integer.parseInt(employee_wage.text.toString().trim())
             val role = employee_role.text.toString().trim()
             val hours = Integer.parseInt(employee_hours.text.toString().trim())
+            val tips = Integer.parseInt(employee_tips.text.toString().trim())
 
             /*if (id == NULL) {
                 employee_id.error = "Please enter an ID"
@@ -75,7 +76,8 @@ class ManagerViewEmployeeFragment : Fragment() {
                 name,
                 wage,
                 role,
-                hours
+                hours,
+                tips
             )
                 .enqueue(object : Callback<ResponseEmployee> {
                     override fun onFailure(call: Call<ResponseEmployee>, t: Throwable) {

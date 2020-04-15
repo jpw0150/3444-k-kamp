@@ -31,7 +31,8 @@ interface Api {
         @Field("name") name: String,
         @Field("wage") wage: Int,
         @Field("role") role: String,
-        @Field("hours") hours: Int
+        @Field("hours") hours: Int,
+        @Field("tips") tips: Int
     ):Call<ResponseEmployee>
 
     @FormUrlEncoded
