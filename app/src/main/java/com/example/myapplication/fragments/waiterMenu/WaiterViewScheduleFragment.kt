@@ -36,6 +36,8 @@ class WaiterViewScheduleFragment : Fragment() {
             // TODO: Update chef hours in database
             Toast.makeText((activity as WaiterActivity).applicationContext,
                 "Unable to update hours at this time", Toast.LENGTH_SHORT).show()
+
+
         }
 
         return view

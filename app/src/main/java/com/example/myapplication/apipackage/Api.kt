@@ -78,7 +78,7 @@ interface Api {
     @PUT("updateItem/{id}")
     fun updateItem(
         @Path("id") id:Int,
-        @Field("email") name:String,
+        @Field("name") name:String,
         @Field("cost") cost: Float,
         @Field("descrip") descrip: String
     ):Call<ResponseItem>
@@ -94,17 +94,18 @@ interface Api {
         @Field("orderTotal") orderTotal: Float
         ):Call<ResponseOrder>
 
+
     @FormUrlEncoded
     @PUT("updateEmp/{id}")
     fun updateEmp(
         @Path("id") id:Int,
-        @Field("tableNum") email:Int,
-        @Field("entree") entree: String,
-        @Field("side") side: String,
-        @Field("drink") drink: String,
-        @Field("orderTotal") orderTotal: Int
+        @Field("password") password: String,
+        @Field("name") name: String,
+        @Field("wage") wage:Int,
+        @Field("role") role: String,
+        @Field("hours") hours: Int
     ):Call<ResponseEmployee>
-
+    
     @FormUrlEncoded
     @DELETE("deleteItem/{id}")
     fun deleteItem(
