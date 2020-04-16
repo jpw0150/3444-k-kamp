@@ -95,6 +95,11 @@ class MenuEntreeExtrasFragment : Fragment() {
     /* Method calculates the price of the entree */
   private fun getEntreePrice(meatType: String, numWings: Int, sauceQuantity: Int): Double{
       val price = 0.0
+
+      /* Wednesday special */
+      if ((activity as MenuActivity).getCurrentDay() == getString(R.string.wednesday)){
+          return 0.60 * numWings + ((activity as MenuActivity).PRICE_PER_SAUCE * sauceQuantity)
+      }
       if (meatType == "Boneless"){
           return ((activity as MenuActivity).PRICE_PER_BONELESS * numWings) +
                   ((activity as MenuActivity).PRICE_PER_SAUCE * sauceQuantity)

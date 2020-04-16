@@ -25,10 +25,9 @@
 
     <TextView
         android:id="@+id/text_lemonade_title"
-        android:layout_width="187dp"
-        android:layout_height="57dp"
+        android:layout_width="171dp"
+        android:layout_height="51dp"
         android:layout_marginStart="112dp"
-        android:layout_marginLeft="112dp"
         android:layout_marginTop="22dp"
         android:text="@string/lemonade"
         android:textSize="36sp"
@@ -121,5 +120,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_lemonade_calories" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="71dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="149dp"
+        android:src="@drawable/vegetarian"
+        app:layout_constraintStart_toEndOf="@+id/text_lemonade_title"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

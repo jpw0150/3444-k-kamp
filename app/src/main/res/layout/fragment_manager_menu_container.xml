@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_list"
     android:id="@+id/fragment_manager_menu_container"
-    tools:context=".fragments.manangerMenu.ManagerMenuFragment">
+    tools:context=".fragments.managerMenu.ManagerMenuFragment">
 
 
     <include layout="@layout/fragment_manager_menu" />

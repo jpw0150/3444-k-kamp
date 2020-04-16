@@ -16,8 +16,9 @@ import com.example.myapplication.fragments.MainMenuFragment
 import com.example.myapplication.data_structs.Entree
 import com.example.myapplication.data_structs.Side
 import com.example.myapplication.data_structs.Order
-import com.example.myapplication.data_structs.Table
+import com.example.myapplication.apipackage.Table
 import com.example.myapplication.fragments.CustomerTableNumberFragment
+import java.util.*
 
 /** This activity deals with menu operations */
 
@@ -26,7 +27,9 @@ class MenuActivity : AppCompatActivity() {
     val activity = this@MenuActivity
 
     /* Store current table information */
-    var table = Table(0, "None", 0.0)
+    var table = Table(0, "None", false, false)
+    var waiterID = -1
+
 
     /* Setting up variables that are part of Entree() */
     lateinit var meatType: String
@@ -75,6 +78,8 @@ class MenuActivity : AppCompatActivity() {
     val PRICE_PER_SAUCE = 0.75
     val PRICE_PER_SIDE = 2.00
     val PRICE_PER_DRINK = 1.50
+    val KIDS_NUM_WINGS = 3
+    val KIDS_COMBO_PRICE = 5.00
 
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -161,13 +166,34 @@ class MenuActivity : AppCompatActivity() {
         return totalPrice
         }
 
-
-    //TODO: Implement tip calculator function (user getOrderTotal() )
+    /* Method returns current weekday */
+    /*
+    fun getCurrentDay(): String{
+        val daysArray = arrayOf("Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+        val calendar = Calendar.getInstance()
+        val dayIndex = calendar.get(Calendar.DAY_OF_WEEK)
+        return daysArray[dayIndex]
+    }
+*/
+    fun getCurrentDay(): String{
+        val daysArray = arrayOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+        val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        return daysArray[currentDay - 1]
+    }
 
     /** Method calculates the tip based off of percentage and order total
      * @return new total with added tip
      */
-    /* fun calculateTip(percentage: Double): Double {
+    fun calculateTip(percentage: Double): Double {
+        var includingTip = getOrderTotal()
+
+        if(percentage == 0.0)
+            return includingTip
+
+        includingTip += includingTip*percentage.toDouble()
+
+        includingTip = "%.2f".format(includingTip).toDouble()
+
+        return includingTip
     }
-     */
 }

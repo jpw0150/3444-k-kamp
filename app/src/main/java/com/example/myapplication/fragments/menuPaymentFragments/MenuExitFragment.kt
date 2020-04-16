@@ -1,6 +1,8 @@
+
 package com.example.myapplication.fragments.menuPaymentFragments
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -8,11 +10,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.CustomerAccountActivity
+import com.example.myapplication.activities.MainActivity
 import com.example.myapplication.activities.MenuActivity
 
 class MenuExitFragment : Fragment() {
@@ -26,14 +31,24 @@ class MenuExitFragment : Fragment() {
         /* Display TextView saying thank you for coming or we hope to see you again -- put an icon and make it look nice */
 
         /* Create and initialize a Reset button and set onClickListener */
+        val resetButt = view.findViewById<Button>(R.id.button_reset)
+        resetButt.setOnClickListener{
+            // (activity as CustomerAccountActivity).resetCustomer()
+            (activity as MenuActivity).resetDrink()
+            (activity as MenuActivity).resetEntree()
+            (activity as MenuActivity).resetSide()
+            (activity as MenuActivity).resetOrder()
 
-            /* [in listener] call resetCustomer() (from CustomerActivity) and reset EVERYTHING else (Orders, Entrees, Orders, Drinks, Sides)
-            anything you can think of
+            val intent = Intent(activity, MainActivity::class.java)
+            activity?.startActivity(intent)
+        }
+        /* [in listener] call resetCustomer() (from CustomerActivity) and reset EVERYTHING else (Orders, Entrees, Orders, Drinks, Sides)
+        anything you can think of
 
-            Go back and start the Main Activity:
-             val intent = Intent (activity, MainActivity::class.java)
-                activity?.startActivity(intent)
-             */
+        Go back and start the Main Activity:
+         val intent = Intent (activity, MainActivity::class.java)
+            activity?.startActivity(intent)
+         */
 
 
         /* Intialialize and set up help and refill button actions */

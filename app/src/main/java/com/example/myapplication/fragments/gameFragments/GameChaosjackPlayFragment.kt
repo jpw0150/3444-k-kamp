@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments.gameFragments
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
@@ -24,6 +26,7 @@ class GameChaosjackPlayFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_game_chaosjack_play, container, false)
+        runGraidentAnimation(view)
         view.findViewById<Button>(R.id.cjQuitButton).setOnClickListener{ (activity as MenuActivity).replaceFragment(GameBlackjackFragment(),"") }
         view.findViewById<Button>(R.id.cjHitButton).setOnClickListener{ cjHit() }
         view.findViewById<Button>(R.id.cjStandButton).setOnClickListener { cjStand() }
@@ -35,6 +38,14 @@ class GameChaosjackPlayFragment : Fragment() {
         view.findViewById<TextView>(R.id.cjDealerHand2).apply {text = cardstr(dealerHand[1])}
 
         return view
+    }
+
+    private fun runGraidentAnimation(v: View) {
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.cjFrameLayout)
+        val animationDrawable = constraintLayout?.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
     }
 
     fun cjHit() {

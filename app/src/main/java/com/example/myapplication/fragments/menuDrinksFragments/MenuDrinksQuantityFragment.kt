@@ -26,6 +26,10 @@ class MenuDrinksQuantityFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu_drinks_quantity, container, false)
         runGraidentAnimation(view)
 
+        if ((activity as MenuActivity).getCurrentDay() == getString(R.string.sunday)) {
+            view.findViewById<TextView>(R.id.text_drink_price).text = getString(R.string.free_drinks)
+        }
+
         /* If user has selected water display message that water is free */
         if((activity as MenuActivity).drinkItem == "Water"){
             view.findViewById<TextView>(R.id.text_drink_price).text = getString(R.string.water_is_complimentary)

@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments.gameFragments
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
@@ -21,6 +23,7 @@ class GameWarPlayFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_game_war_play, container, false)
+        runGraidentAnimation(view)
         view.findViewById<Button>(R.id.warEndButton).setOnClickListener{ (activity as MenuActivity).replaceFragment(GameWarFragment(),"") }
         view.findViewById<Button>(R.id.warNextButton).setOnClickListener{ warRound(view) }
 
@@ -42,6 +45,14 @@ class GameWarPlayFragment : Fragment() {
 
 
         return view
+    }
+
+    private fun runGraidentAnimation(v: View) {
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.frameLayout6)
+        val animationDrawable = constraintLayout?.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
     }
 
     fun cardstr(card: Int) : String {

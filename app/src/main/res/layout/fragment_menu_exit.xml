@@ -9,6 +9,17 @@
     tools:context=".fragments.menuPaymentFragments.MenuExitFragment">
 
 
+    <Button
+        android:id="@+id/button_reset"
+        android:layout_width="244dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="188dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="RESET"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/button_help_image_payment_exit"
@@ -24,7 +35,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView10"
+        style="@android:style/Widget.DeviceDefault.Light.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54dp"
+        android:gravity="center"
+        android:hapticFeedbackEnabled="false"
+        android:singleLine="false"
+        android:soundEffectsEnabled="false"
+        android:text="Thank you for dining at King Kevin's Wing Heaven!"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="88dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="62dp"
+        android:rotation="-20"
+        android:src="@drawable/fairytale"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="77dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:src="@drawable/sword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
