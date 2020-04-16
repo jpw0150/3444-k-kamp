@@ -78,7 +78,8 @@ class EmployeeLoginActivity : AppCompatActivity() {
             "office",
             "Manager",
             40.0,
-            40.0
+            40.0,
+            0.0
         )
         val waiter1 = Employee(
             "5678",
@@ -87,7 +88,8 @@ class EmployeeLoginActivity : AppCompatActivity() {
             "beets",
             "Waiter",
             20.0,
-            40.0
+            40.0,
+            23.15
         )
         val waiter2= Employee(
             "4321",
@@ -96,7 +98,8 @@ class EmployeeLoginActivity : AppCompatActivity() {
             "pam",
             "Waiter",
             20.0,
-            40.0
+            40.0,
+            10.25
         )
         val chef = Employee(
             "9876",
@@ -105,7 +108,8 @@ class EmployeeLoginActivity : AppCompatActivity() {
             "chilli",
             "Chef",
             40.0,
-            40.0
+            40.0,
+            0.0
         )
         employee_db.addEmployee(manager)
         employee_db.addEmployee(waiter1)

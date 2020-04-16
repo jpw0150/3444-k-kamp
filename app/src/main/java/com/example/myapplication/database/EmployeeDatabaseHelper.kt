@@ -18,7 +18,7 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_EMPLOYEE + "("
             + COLUMN_EMPLOYEE_ID + " TEXT, " + COLUMN_EMPLOYEE_NAME + " TEXT,"
             + COLUMN_EMPLOYEE_PHONE + " TEXT," + COLUMN_EMPLOYEE_PASSWORD + " TEXT, " + COLUMN_EMPLOYEE_POSISTION + "TEXT," +
-            COLUMN_EMPLOYEE_WAGE + "DOUBLE," + COLUMN_EMPLOYEE_HOURS + "DOUBLE" + ")" )
+            COLUMN_EMPLOYEE_WAGE + "DOUBLE," + COLUMN_EMPLOYEE_HOURS + "DOUBLE," + COLUMN_EMPLOYEE_TIPS + "DOUBLE"+ ")" )
 
     // drop table sql query
     private val DROP_EMPLOYEE_TABLE = "DROP TABLE IF EXISTS $TABLE_EMPLOYEE"
@@ -53,7 +53,8 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
             COLUMN_EMPLOYEE_PASSWORD,
             COLUMN_EMPLOYEE_POSISTION,
             COLUMN_EMPLOYEE_WAGE,
-            COLUMN_EMPLOYEE_HOURS
+            COLUMN_EMPLOYEE_HOURS,
+            COLUMN_EMPLOYEE_TIPS
         )
 
         // sorting orders
@@ -80,7 +81,8 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
                     password = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_PASSWORD)),
                     position = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_POSISTION)),
                     wage = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_WAGE)).toDouble(),
-                    hours = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_HOURS)).toDouble()
+                    hours = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_HOURS)).toDouble(),
+                    tips = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_TIPS)).toDouble()
                 )
 
                 employeeList.add(employee)
@@ -111,6 +113,7 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         values.put(COLUMN_EMPLOYEE_POSISTION, employee.position)
         values.put(COLUMN_EMPLOYEE_WAGE, employee.wage)
         values.put(COLUMN_EMPLOYEE_HOURS, employee.hours)
+        values.put(COLUMN_EMPLOYEE_TIPS, employee.tips)
 
 
         // Inserting Row
@@ -135,6 +138,7 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         values.put(COLUMN_EMPLOYEE_POSISTION, employee.position)
         values.put(COLUMN_EMPLOYEE_WAGE, employee.wage)
         values.put(COLUMN_EMPLOYEE_HOURS, employee.hours)
+        values.put(COLUMN_EMPLOYEE_TIPS, employee.tips)
 
         // updating row
         db.update(
@@ -311,7 +315,8 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
             password = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_PASSWORD)),
             position = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_POSISTION)),
             wage = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_WAGE)).toDouble(),
-            hours = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_HOURS)).toDouble()
+            hours = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_HOURS)).toDouble(),
+            tips = cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_TIPS)).toDouble()
         )
 
         // close the db connection
@@ -341,6 +346,7 @@ class EmployeeDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         private val COLUMN_EMPLOYEE_POSISTION = "employee_posistion"
         private val COLUMN_EMPLOYEE_WAGE = "employee_wage"
         private val COLUMN_EMPLOYEE_HOURS = "employee_hours"
+        private val COLUMN_EMPLOYEE_TIPS = "employee_tips"
 
     }
 

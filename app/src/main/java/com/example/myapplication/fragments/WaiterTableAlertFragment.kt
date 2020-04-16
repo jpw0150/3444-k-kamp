@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
@@ -25,7 +26,7 @@ class WaiterTableAlertFragment : Fragment() {
     }
 
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.waiter_table_alert)
+        val constraintLayout = v.findViewById<ScrollView>(R.id.waiter_view_alerts)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)

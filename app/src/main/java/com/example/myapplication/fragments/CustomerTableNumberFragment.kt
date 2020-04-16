@@ -53,7 +53,7 @@ class CustomerTableNumberFragment : Fragment() {
                 (activity as MenuActivity).table.number = tableNumber.toInt()
 
                 //Waiter IDs
-                if (tableNum < 11) {
+                /*if (tableNum < 11) {
                     //(activity as MenuActivity).waiterID = 1
 
                     RetrofitClient.instance.getAllEmp()
@@ -112,7 +112,7 @@ class CustomerTableNumberFragment : Fragment() {
                                 }
                             }
                         })
-                }
+                }*/
 
 
                 /* Save table status to database */
