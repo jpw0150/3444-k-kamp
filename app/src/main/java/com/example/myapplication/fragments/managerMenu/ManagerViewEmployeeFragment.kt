@@ -29,10 +29,10 @@ class ManagerViewEmployeeFragment : Fragment() {
 
         val addButton = view.findViewById<Button>(R.id.button_add)
         //val removebutton
-        val editButton = view.findViewById<Button>(R.id.button_edit)
+        //val editButton = view.findViewById<Button>(R.id.button_edit)
         val viewAllButton = view.findViewById<Button>(R.id.button_view_all)
 
-        editButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerEditEmployeesFragment(), "") }
+        //editButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerEditEmployeesFragment(), "") }
         viewAllButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerViewAllEmployeesFragment(), "") }
 
         addButton.setOnClickListener {
