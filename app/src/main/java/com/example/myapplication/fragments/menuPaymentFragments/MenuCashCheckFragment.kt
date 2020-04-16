@@ -143,12 +143,57 @@ class MenuCashCheckFragment : Fragment() {
         /* Intialialize and set up help and refill button actions */
         val helpButtonMain = view.findViewById<ImageButton>(R.id.button_help_image_payment_cash_check)
         val refillButtonMain = view.findViewById<ImageButton>(R.id.button_refill_image_payment_cash_check)
+        /* Send help notification to the waiter */
         helpButtonMain.setOnClickListener{
-            Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
+            //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
+
+            /* Save table status to the database  */
+            RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
+                needHelp = true,
+                needRefill = false
+            ).enqueue(object: Callback<ResponseTable> {
+                override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        "A waiter will help you shortly",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
         }
 
+
+        /* Send refill notification to the waiter */
         refillButtonMain.setOnClickListener{
-            Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
+            //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
+
+            /* Save table status to database */
+            RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
+                needHelp = false,
+                needRefill = true
+            ).enqueue(object: Callback<ResponseTable> {
+                override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        "A waiter will refill your drink shortly",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
         }
 
         return view

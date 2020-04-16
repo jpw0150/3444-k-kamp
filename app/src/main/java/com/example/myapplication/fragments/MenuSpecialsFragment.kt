@@ -8,14 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseTable
+import com.example.myapplication.apipackage.RetrofitClient
 import com.example.myapplication.fragments.menuDrinksFragments.MenuDrinksFragment
 import com.example.myapplication.fragments.menuEntreeFragments.MenuEntreeMeatFragment
 import com.example.myapplication.fragments.menuKids.MenuKidsMealsFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MenuSpecialsFragment : Fragment() {
@@ -26,6 +32,61 @@ class MenuSpecialsFragment : Fragment() {
         val currentDay = (activity as MenuActivity).getCurrentDay()
         view.findViewById<TextView>(R.id.today_special_day).text = "Today's Special: $currentDay"
         val redeemButton = view.findViewById<Button>(R.id.button_redeem)
+
+        //Help and refill buttons
+        val helpButtonSpecials = view.findViewById<ImageButton>(R.id.button_help_image_specials)
+        val refillButtonSpecials = view.findViewById<ImageButton>(R.id.button_refill_image_specials)
+        /* Send help notification to the waiter */
+        helpButtonSpecials.setOnClickListener{
+            //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
+
+            /* Save table status to the database  */
+            RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
+                needHelp = true,
+                needRefill = false
+            ).enqueue(object: Callback<ResponseTable> {
+                override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        "A waiter will help you shortly",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+        }
+        /* Send refill notification to the waiter */
+        refillButtonSpecials.setOnClickListener{
+            //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
+
+            /* Save table status to database */
+            RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
+                needHelp = false,
+                needRefill = true
+            ).enqueue(object: Callback<ResponseTable> {
+                override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        "A waiter will refill your drink shortly",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+        }
+
 
         /* Sunday Special */
         if (currentDay == getString(R.string.sunday)) {
