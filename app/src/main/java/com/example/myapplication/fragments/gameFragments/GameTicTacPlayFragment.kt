@@ -14,6 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 
 class GameTicTacPlayFragment : Fragment() {
+    //Definition of important variables such that they can be universally accessed in the fragmgent.
     var boardState = mutableListOf<Int>(0, 0, 0, 0, 0, 0, 0, 0, 0)
     var ttTurn = 1
 
@@ -22,6 +23,7 @@ class GameTicTacPlayFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_tic_tac_play, container, false)
         runGraidentAnimation(view)
 
+        //Setting up the... many button listeners.
         view.findViewById<Button>(R.id.ticTacQuitButton).setOnClickListener{ (activity as MenuActivity).replaceFragment(GameTicTacFragment(), "")}
         view.findViewById<Button>(R.id.ticTacReplayButton).setOnClickListener{ ticTacResetBoard() }
         view.findViewById<Button>(R.id.ticTacB11).setOnClickListener{ ticTacTurn(0) }
@@ -45,6 +47,7 @@ class GameTicTacPlayFragment : Fragment() {
         animationDrawable.start()
     }
 
+    //Hiding every token from the board and returning the buttons previously removed in the game.
     fun ticTacResetBoard() {
         view?.findViewById<Button>(R.id.ticTacReplayButton)?.apply {visibility = View.GONE}
         view?.findViewById<Button>(R.id.ticTacQuitButton)?.apply {visibility = View.GONE}
@@ -79,6 +82,7 @@ class GameTicTacPlayFragment : Fragment() {
         boardState = mutableListOf<Int>(0, 0, 0, 0, 0, 0, 0, 0, 0)
     }
 
+    //Driver code - parameter passed is the position clicked. Button is hidden and the correct symbol is displayed. Game state is then checked.
     fun ticTacTurn(pos: Int) {
         if (ttTurn == 1) {
             when (pos) {
@@ -168,6 +172,7 @@ class GameTicTacPlayFragment : Fragment() {
         }
 
         var gameState = checkRows()
+        //If an end to the game is declared, remove all remaining buttons and show the post-game text and buttons.
         if (gameState > 0) {
             view?.findViewById<Button>(R.id.ticTacB11)?.apply {visibility = View.GONE}
             view?.findViewById<Button>(R.id.ticTacB12)?.apply {visibility = View.GONE}
@@ -186,6 +191,7 @@ class GameTicTacPlayFragment : Fragment() {
         }
     }
 
+    //Code to check for rows.
     fun checkRows(): Int {
         //First row
         if (boardState[0] == boardState[3] && boardState[0] == boardState[6] && boardState[0] > 0) { return boardState[0] }

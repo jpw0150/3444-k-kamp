@@ -19,6 +19,7 @@ class GameYahtzeeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_yahtzee, container, false)
         runGraidentAnimation(view)
 
+        //Set listeners to take the player to games
         view.findViewById<Button>(R.id.yahStartButton).setOnClickListener { (activity as MenuActivity).replaceFragment(GameYahtzeePlayFragment(), "") }
         view.findViewById<Button>(R.id.yahBackToMenu).setOnClickListener { (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(), "")}
 

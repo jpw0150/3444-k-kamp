@@ -61,6 +61,7 @@ class ManagerInventoryFragment : Fragment() {
                 }
             })
         }
+        view.findViewById<Button>(R.id.managerInventoryLeave).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")}
 
         return view
     }

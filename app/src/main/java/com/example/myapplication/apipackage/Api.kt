@@ -210,12 +210,11 @@ interface Api {
         @Field("needRefill") needRefill:Boolean
     ):Call<ResponseBase>
 
-    @FormUrlEncoded
     @GET("allTables")
     fun allTables(
     ):Call<ResponseTables>
 
-    @FormUrlEncoded
+
     @GET("getTable/{number}")
     fun getTable(
         @Path("number") number:Int

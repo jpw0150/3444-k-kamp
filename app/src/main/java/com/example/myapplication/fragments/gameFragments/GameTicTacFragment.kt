@@ -19,6 +19,7 @@ class GameTicTacFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_tic_tac, container, false)
         runGraidentAnimation(view)
 
+        //Set listeners to take the player to games
         view.findViewById<Button>(R.id.ticTacQuit).setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(), "") }
         view.findViewById<Button>(R.id.ticTacStart).setOnClickListener{ (activity as MenuActivity).replaceFragment(GameTicTacPlayFragment(), "")}
 

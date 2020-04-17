@@ -19,6 +19,7 @@ class GameWarFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_war, container, false)
         runGraidentAnimation(view)
 
+        //Set listeners to take the player to games
         val playButton = view.findViewById<Button>(R.id.warStartButton)
         val exitButton = view.findViewById<Button>(R.id.warLeaveButton)
 

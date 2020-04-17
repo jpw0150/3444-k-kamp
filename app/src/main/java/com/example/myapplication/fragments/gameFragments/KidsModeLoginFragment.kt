@@ -25,6 +25,7 @@ class KidsModeLoginFragment : Fragment() {
 
         view.findViewById<Button>(R.id.kidModeLoginCancel).setOnClickListener{ (activity as MenuActivity).replaceFragment(MainMenuFragment(),"") }
         view.findViewById<Button>(R.id.kidModeLoginConfirm).setOnClickListener{
+            //Kids' Mode password becomes whatever has been entered on this screen
             kidsModePassword = view.findViewById<EditText>(R.id.kidModeLoginEntry).text.toString()
             (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(),"")
         }

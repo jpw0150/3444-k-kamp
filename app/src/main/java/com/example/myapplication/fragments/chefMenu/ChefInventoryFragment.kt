@@ -28,6 +28,8 @@ class ChefInventoryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chef_inventory, container, false)
         runGradientAnimation(view)
 
+        view.findViewById<Button>(R.id.chefInventoryLeave).setOnClickListener { (activity as ChefActivity).replaceFragment(ChefMenuFragment(), "") }
+
         view.findViewById<Button>(R.id.chefInventoryFetch).setOnClickListener{
             RetrofitClient.instance.getAllIngredients().enqueue(object: Callback<ResponseIngredients> {
                 override fun onFailure(call: Call<ResponseIngredients>, t: Throwable) {

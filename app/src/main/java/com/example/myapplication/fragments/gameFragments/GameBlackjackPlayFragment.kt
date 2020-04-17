@@ -14,9 +14,10 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 
 class GameBlackjackPlayFragment : Fragment() {
+    //Definition of important variables such that they can be universally accessed in the fragmgent.
     var deckOfCards = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52)
-    var playerHand = mutableListOf<Int>() //= mutableListOf<Int>(drawCard(deckOfCards), drawCard(deckOfCards))
-    var dealerHand = mutableListOf<Int>() //= mutableListOf<Int>(drawCard(deckOfCards), drawCard(deckOfCards))
+    var playerHand = mutableListOf<Int>()
+    var dealerHand = mutableListOf<Int>()
     var playerValue = countHand(playerHand)
     var dealerValue = countHand(dealerHand)
     var playerStand = false
@@ -31,6 +32,7 @@ class GameBlackjackPlayFragment : Fragment() {
         view.findViewById<Button>(R.id.bjHitButton).setOnClickListener{ hit() }
         view.findViewById<Button>(R.id.bjStandButton).setOnClickListener { stand() }
 
+        //Resetting of variables in case a player leaves the fragment and returns - also sets up starting hands.
         deckOfCards = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52)
         playerHand = mutableListOf<Int>(drawCard(deckOfCards), drawCard(deckOfCards))
         dealerHand = mutableListOf<Int>(drawCard(deckOfCards), drawCard(deckOfCards))
@@ -40,6 +42,7 @@ class GameBlackjackPlayFragment : Fragment() {
         dealerStand = false
         lastDealerHand = 2
 
+        //Setting GUI to game state.
         view.findViewById<TextView>(R.id.bjPlayerHand1).apply {text = cardstr(playerHand[0])}
         view.findViewById<TextView>(R.id.bjPlayerHand2).apply {text = cardstr(playerHand[1])}
         view.findViewById<TextView>(R.id.bjPlayerValue).apply {text = "VALUE: $playerValue" }
@@ -56,6 +59,7 @@ class GameBlackjackPlayFragment : Fragment() {
         animationDrawable.start()
     }
 
+    //Player hits - adds one card to player, checks if they went bust, then dealer plays.
     fun hit() {
         playerHand.add(drawCard(deckOfCards))
         playerValue = countHand(playerHand)
@@ -79,6 +83,7 @@ class GameBlackjackPlayFragment : Fragment() {
         redraw()
     }
 
+    //Player stands - total is locked in, then dealer plays.
     fun stand() {
         playerStand = true
         while (!dealerStand) {
@@ -92,6 +97,7 @@ class GameBlackjackPlayFragment : Fragment() {
         redraw()
     }
 
+    //Runs all of the textview changes to apply between actions.
     fun redraw() {
         //Draw only the latest card in the hand, since a player can't gain multiple cards between redraws
         when (playerHand.size) {
@@ -214,6 +220,7 @@ class GameBlackjackPlayFragment : Fragment() {
         }
     }
 
+    //Simple function to get a random value from the deck and then remove it.
     fun drawCard(deck: MutableList<Int>): Int {
         val pos = (1..deck.size).random() - 1
         val card = deck[pos]
@@ -221,6 +228,7 @@ class GameBlackjackPlayFragment : Fragment() {
         return card
     }
 
+    //Score tallying. Aces high unless it would cause someone to go bust, at which point aces low.
     fun countHand(cards: MutableList<Int>): Int {
         var sum = 0
         var aces = 0
@@ -254,6 +262,7 @@ class GameBlackjackPlayFragment : Fragment() {
         return sum
     }
 
+    //Card translator.
     fun cardstr(card: Int) : String {
         when (card) {
             1 -> return "ACE OF CLUBS"

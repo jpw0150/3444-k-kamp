@@ -197,11 +197,13 @@
         android:id="@+id/textView11"
         android:layout_width="175dp"
         android:layout_height="99dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="16dp"
         android:text="Ingrediants include farm fresh chicken, butter, and bread crumbs."
         android:textSize="18sp"
         android:textStyle="italic"
-        tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="420dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contains_wheat_bone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

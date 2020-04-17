@@ -15,10 +15,9 @@ import com.example.myapplication.activities.MenuActivity
 import com.example.myapplication.fragments.MenuGameOptionsFragment
 
 class GameWarPlayFragment : Fragment() {
+    //Definition of important variables such that they can be universally accessed in the fragmgent.
     var deck = mutableListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52)
     var decks = cardSplit(deck)
-    //var deck = mutableListOf<Int>()
-    //var decks = mutableListOf<MutableList<Int>>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -27,22 +26,11 @@ class GameWarPlayFragment : Fragment() {
         view.findViewById<Button>(R.id.warEndButton).setOnClickListener{ (activity as MenuActivity).replaceFragment(GameWarFragment(),"") }
         view.findViewById<Button>(R.id.warNextButton).setOnClickListener{ warRound(view) }
 
-        //deck = mutableListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52)
-        //decks = cardSplit(deck)
-
+        //War is a deterministic "game", so the first round is already played upon entry.
         warRound(view)
 
         view.findViewById<TextView>(R.id.WarPlayerDeck).apply { text = "CARDS: " + decks[0].size}
         view.findViewById<TextView>(R.id.WarEnemyDeck).apply { text = "CARDS: " + decks[1].size}
-
-        //view.findViewById<TextView>(R.id.WarPlayerCard).apply { text = cardstr(decks[0][0]) }
-        //view.findViewById<TextView>(R.id.WarEnemyCard).apply { text = cardstr(decks[1][0]) }
-        //if (((decks[0][0]+3)/4) == ((decks[1][0]+3)/4)) {
-        //    view.findViewById<TextView>(R.id.WarPlayerContest).apply { text = cardstr(decks[0][2]) }
-        //    view.findViewById<TextView>(R.id.WarEnemyContest).apply { text = cardstr(decks[1][2]) }
-        //}
-
-
 
         return view
     }
@@ -55,6 +43,7 @@ class GameWarPlayFragment : Fragment() {
         animationDrawable.start()
     }
 
+    //Card translator
     fun cardstr(card: Int) : String {
         when (card) {
             1 -> return "ACE OF CLUBS"
@@ -112,6 +101,7 @@ class GameWarPlayFragment : Fragment() {
         }
         return "ERROR"
     }
+    //Splits the deck into two half-sized player decks, guaranteed not to contain any matched cards.
     fun cardSplit(deck: MutableList<Int>) : MutableList<MutableList<Int>> {
         var position = 0
         var playerDeck = mutableListOf<Int>()
@@ -130,6 +120,7 @@ class GameWarPlayFragment : Fragment() {
         return decks
     }
 
+    //Driver code - compares the "top" of each player's deck. If those cards are matched, compare two down, etc. Winner takes all cards down to the winning set.
     fun warRound(view: View) {
         view.findViewById<TextView>(R.id.WarPlayerDeck).apply { text = "CARDS: " + decks[0].size }
         view.findViewById<TextView>(R.id.WarEnemyDeck).apply { text = "CARDS: " + decks[1].size }

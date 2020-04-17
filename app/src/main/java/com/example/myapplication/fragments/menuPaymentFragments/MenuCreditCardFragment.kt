@@ -74,11 +74,12 @@ class MenuCreditCardFragment : Fragment() {
 
 
                     //TODO: Ensure this fits with customer-side login scripts.
-                    if ((activity as CustomerAccountActivity).currentCustomer != null) {
+                    //WARNING: CURRENTCUSTOMER CANNOT BE PULLED FROM CUSTOMERACCOUNTACTIVITY - PUTTING IN CUSTOMERACCOUNTACTIVITY CAUSES A CRASH.
+                    /*if ((activity as MenuActivity).currentCustomer != null) {
                         (activity as MenuActivity).replaceFragment(MenuAddRewardsFragment(), "")
-                    } else {
+                    } else {*/
                         (activity as MenuActivity).replaceFragment(MenuFinalGameFragment(), "")
-                    }
+                    //}
                 }
                 //If the user entered an amount which is less than their total, throw an error.
                 else if (view.findViewById<EditText>(R.id.card_total).text.toString().toDouble() < total) {
@@ -121,34 +122,42 @@ class MenuCreditCardFragment : Fragment() {
 
         nobutton.setOnClickListener {
             val notip = (activity as MenuActivity).calculateTip(0.0)
-            val shownotip = view.findViewById<EditText>(R.id.card_total)
-            shownotip.setTextColor(Color.BLACK)
-            shownotip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            shownotip.hint="$$notip"
+            /*val shownotip =*/ view.findViewById<EditText>(R.id.card_total).apply {
+                hint = "$notip"
+                text.clear()
+                setTextColor(Color.BLACK)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            }
         }
 
         fifteenbutton.setOnClickListener {
             val fifteentip = (activity as MenuActivity).calculateTip(0.15)
-            val showfifteentip = view.findViewById<EditText>(R.id.card_total)
-            showfifteentip.setTextColor(Color.BLACK)
-            showfifteentip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showfifteentip.hint="$$fifteentip"
+            val showfifteentip = view.findViewById<EditText>(R.id.card_total).apply {
+                hint = "$fifteentip"
+                text.clear()
+                setTextColor(Color.BLACK)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            }
         }
 
         twentybutton.setOnClickListener {
             val twentytip = (activity as MenuActivity).calculateTip(0.20)
-            val showtwentytip = view.findViewById<EditText>(R.id.card_total)
-            showtwentytip.setTextColor(Color.BLACK)
-            showtwentytip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showtwentytip.hint="$$twentytip"
+            val showtwentytip = view.findViewById<EditText>(R.id.card_total).apply {
+                hint = "$twentytip"
+                text.clear()
+                setTextColor(Color.BLACK)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            }
         }
 
         twentyfivebutton.setOnClickListener {
             val twentyfivetip = (activity as MenuActivity).calculateTip(0.25)
-            val showtwentyfivetip = view.findViewById<EditText>(R.id.card_total)
-            showtwentyfivetip.setTextColor(Color.BLACK)
-            showtwentyfivetip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showtwentyfivetip.hint="$$twentyfivetip"
+            val showtwentyfivetip = view.findViewById<EditText>(R.id.card_total).apply {
+                hint = "$twentyfivetip"
+                text.clear()
+                setTextColor(Color.BLACK)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            }
         }
 
         /* Intialialize and set up help and refill button actions */

@@ -26,6 +26,7 @@ class GameYahtzeePlayFragment : Fragment() {
         val view= inflater.inflate(R.layout.fragment_game_yahtzee_play, container, false)
         runGraidentAnimation(view)
 
+        //Establishing of the listeners for the game
         view.findViewById<Button>(R.id.yahKeep1).setOnClickListener{ keepRoll(1) }
         view.findViewById<Button>(R.id.yahKeep2).setOnClickListener{ keepRoll(2) }
         view.findViewById<Button>(R.id.yahKeep3).setOnClickListener{ keepRoll(3) }
@@ -36,6 +37,7 @@ class GameYahtzeePlayFragment : Fragment() {
         view.findViewById<Button>(R.id.yahQuitButton).setOnClickListener{ (activity as MenuActivity).replaceFragment(GameYahtzeeFragment(), "") }
         view.findViewById<Button>(R.id.yahReplayButton).setOnClickListener{ replayGame() }
 
+        //Initial rolling of the dice and setting of display fields.
         for (i in (0..4)) {
             activeDice[i] = (1..6).random()
         }
@@ -56,6 +58,7 @@ class GameYahtzeePlayFragment : Fragment() {
         animationDrawable.start()
     }
 
+    //Parameter passed as int denotes which of the five dice is being withheld from further rerolls. Number position moves and button hides to indicate this.
     fun keepRoll(die: Int) {
         keptDice[die-1] = activeDice[die-1]
         activeDice[die-1] = 0
@@ -118,6 +121,7 @@ class GameYahtzeePlayFragment : Fragment() {
         }
     }
 
+    //Re-randomizes all dice not kept and updates display fields.
     fun reroll() {
         for (i in (0..4)) {
             if (activeDice[i] != 0) {
@@ -134,7 +138,16 @@ class GameYahtzeePlayFragment : Fragment() {
         if (rerolls == 0) endTurn()
     }
 
-    //This isn't how actual Yahtzee works - let's call this a "simple" version. For kids!
+    /*This isn't how actual Yahtzee works - let's call this a "simple" version. For kids!
+    *
+    * There's only a single round - players get 1 point for every 1, 2 points for every 2, etc. They also get points for their sum, and for:
+    * Three of a kind: The sum again
+    * Four of a kind: The sum again (for 4x the sum in total)
+    * Five of a kind (aka Yahtzee): 50 points
+    * Three of a kind and a pair (aka full house): 25 points
+    * Four in a row (small straight, for example, 1, 2, 3, and 4): 30 points
+    * Five in a row (large straight, for example, 1, 2, 3, 4, and 5): 40 points
+    * All points are cumulative.*/
     fun endTurn() {
         var sum = 0
         var ones = 0
@@ -492,8 +505,6 @@ class GameYahtzeePlayFragment : Fragment() {
 
             view?.findViewById<TextView>(R.id.yahTotal2)?.apply { text = playerTwoScore.toString() }
 
-
-            //TODO: GAME END LOGIC
             view?.findViewById<Button>(R.id.yahRerollButton)?.apply { visibility = View.INVISIBLE }
             view?.findViewById<Button>(R.id.yahTallyScore)?.apply { visibility = View.INVISIBLE }
             view?.findViewById<TextView>(R.id.yahTurnMark)?.apply { visibility = View.INVISIBLE }
@@ -526,6 +537,7 @@ class GameYahtzeePlayFragment : Fragment() {
         }
     }
 
+    //Resets all of the text, dice, and variables for a new game.
     fun replayGame() {
         playerOneScore = 0
         playerTwoScore = 0

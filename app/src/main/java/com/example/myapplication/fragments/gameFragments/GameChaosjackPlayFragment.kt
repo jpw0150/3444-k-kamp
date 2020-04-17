@@ -14,6 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 
 class GameChaosjackPlayFragment : Fragment() {
+    //Definition of important variables such that they can be universally accessed in the fragmgent.
     val deckOfCards = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52)
     var playerHand = mutableListOf<Int>(drawCard(deckOfCards), drawCard(deckOfCards))
     var dealerHand = mutableListOf<Int>(drawCard(deckOfCards), drawCard(deckOfCards))
@@ -32,6 +33,7 @@ class GameChaosjackPlayFragment : Fragment() {
         view.findViewById<Button>(R.id.cjStandButton).setOnClickListener { cjStand() }
 
 
+        //Sets initial visuals.
         view.findViewById<TextView>(R.id.cjPlayerHand1).apply {text = cardstr(playerHand[0])}
         view.findViewById<TextView>(R.id.cjPlayerHand2).apply {text = cardstr(playerHand[1])}
         view.findViewById<TextView>(R.id.cjPlayerValue).apply {text = "VALUE: $playerValue" }
@@ -48,6 +50,7 @@ class GameChaosjackPlayFragment : Fragment() {
         animationDrawable.start()
     }
 
+    //Player hits, draws a new card. Then dealer plays.
     fun cjHit() {
         playerHand.add(drawCard(deckOfCards))
         playerValue = countHand(playerHand)
@@ -71,6 +74,7 @@ class GameChaosjackPlayFragment : Fragment() {
         redraw()
     }
 
+    //Player stands, keeps total. Then dealer plays.
     fun cjStand() {
         playerStand = true
         while (!dealerStand) {
@@ -84,6 +88,7 @@ class GameChaosjackPlayFragment : Fragment() {
         redraw()
     }
 
+    //Adjust text views to match new game state.
     fun redraw() {
         //Draw only the latest card in the hand, since a player can't gain multiple cards between redraws
         when (playerHand.size) {
@@ -206,6 +211,7 @@ class GameChaosjackPlayFragment : Fragment() {
         }
     }
 
+    //Picks a random value from the deck, then removes it.
     fun drawCard(deck: MutableList<Int>): Int {
         val pos = (1..deck.size).random() - 1
         val card = deck[pos]
@@ -213,6 +219,7 @@ class GameChaosjackPlayFragment : Fragment() {
         return card
     }
 
+    //Tallies the score of each hand - because of an initial maths error, clubs are worthless, hearts are 1 or 11, diamonds are 2, and spades are 3.
     fun countHand(cards: MutableList<Int>): Int {
         var sum = 0
         var aces = 0
@@ -238,7 +245,7 @@ class GameChaosjackPlayFragment : Fragment() {
             }
         }
 
-        //Have assumed a default to high ace, but if high ace will cause the hand to go bust it will automatically become low ace.
+        //Have assumed a default to high "ace", but if high "ace" will cause the hand to go bust it will automatically become low "ace".
         while (sum > 21 && aces > 0) {
             sum -= 10
             aces--
@@ -246,6 +253,7 @@ class GameChaosjackPlayFragment : Fragment() {
         return sum
     }
 
+    //Card translator.
     fun cardstr(card: Int) : String {
         when (card) {
             1 -> return "ACE OF CLUBS"

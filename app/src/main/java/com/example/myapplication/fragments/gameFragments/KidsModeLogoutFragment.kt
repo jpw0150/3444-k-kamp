@@ -25,6 +25,7 @@ class KidsModeLogoutFragment : Fragment() {
 
         view.findViewById<Button>(R.id.kidsModeLogoutCancel).setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(),"") }
         view.findViewById<Button>(R.id.kidsModeLogoutConfirm).setOnClickListener {
+            //Exit only allowed with the password previously set or with an employee override using the code, "EMPLOYEE OVERRIDE"
             if (kidsModePassword == view.findViewById<EditText>(R.id.kidsModeLogoutEntry).text.toString() || view.findViewById<EditText>(R.id.kidsModeLogoutEntry).text.toString() == "EMPLOYEE OVERRIDE") {
                 kidsModePassword = ""
                 (activity as MenuActivity).replaceFragment(MainMenuFragment(),"")

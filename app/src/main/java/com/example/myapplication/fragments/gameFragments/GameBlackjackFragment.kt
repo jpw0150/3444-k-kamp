@@ -20,6 +20,7 @@ class GameBlackjackFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_blackjack, container, false)
         runGraidentAnimation(view)
 
+        //Set listeners to take the player to games
         val playButton = view.findViewById<Button>(R.id.startBlackjack)
         val chaosButton = view.findViewById<Button>(R.id.startChaosjack)
         val exitButton = view.findViewById<Button>(R.id.bjRootExitButton)

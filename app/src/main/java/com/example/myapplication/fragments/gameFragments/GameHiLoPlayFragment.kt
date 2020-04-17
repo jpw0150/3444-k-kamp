@@ -14,6 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
 
 class GameHiLoPlayFragment : Fragment() {
+    //Definition of important variables such that they can be universally accessed in the fragmgent.
     var firstcard = 0
     var secondcard = 0
     var hiOrLo = false
@@ -40,20 +41,13 @@ class GameHiLoPlayFragment : Fragment() {
         view.findViewById<Button>(R.id.hlStart).setOnClickListener { hlStartGame(view) }
 
         val quitButton = view.findViewById<Button>(R.id.hlQuitButton)
+        quitButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(GameHLFragment(), "")}
+
+        //Resetting of initial variables in case a player somehow leaves and rejoins to manipulate information.
         firstcard = (1..52).random()
         secondcard = (1..52).random()
         while (firstcard == secondcard) secondcard = (1..52).random()
         hiOrLo = firstcard < secondcard
-
-        //view.findViewById<TextView>(R.id.hlFirstCard)?.apply { text = cardstr(firstcard) }
-        //view.findViewById<TextView>(R.id.hlSecondCard)?.apply { text = cardstr(secondcard) }
-
-        //view.findViewById<Button>(R.id.hlStart).setOnClickListener{
-        //    val view2 = gamestart()
-        //}
-        quitButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(GameHLFragment(), "")}
-
-        //view = gamestart()
 
         return view
     }
@@ -66,24 +60,20 @@ class GameHiLoPlayFragment : Fragment() {
         animationDrawable.start()
     }
 
+    //Sets visibilities according to the initial game state and changes textviews.
     fun hlStartGame(view: View) {
-        //firstcard = (1..52).random()
-        //secondcard = (1..52).random()
-        //while (firstcard == secondcard) secondcard = (1..52).random()
-        //hiOrLo = firstcard < secondcard
-        //hiOrLo = false
-
-        getView()?.findViewById<TextView>(R.id.hlFirstLabel)?.apply { visibility = View.VISIBLE }
-        getView()?.findViewById<TextView>(R.id.hlFirstCard)?.apply {
+        view.findViewById<TextView>(R.id.hlFirstLabel).apply { visibility = View.VISIBLE }
+        view.findViewById<TextView>(R.id.hlFirstCard).apply {
             text = cardstr(firstcard)
             visibility = View.VISIBLE
         }
-        getView()?.findViewById<TextView>(R.id.hlSecondCard)?.apply { text = cardstr(secondcard) }
-        getView()?.findViewById<Button>(R.id.hlHiButton)?.apply { visibility = View.VISIBLE }
-        getView()?.findViewById<Button>(R.id.hlLoButton)?.apply { visibility = View.VISIBLE }
-        getView()?.findViewById<Button>(R.id.hlStart)?.apply { visibility = View.INVISIBLE }
+        view.findViewById<TextView>(R.id.hlSecondCard).apply { text = cardstr(secondcard) }
+        view.findViewById<Button>(R.id.hlHiButton).apply { visibility = View.VISIBLE }
+        view.findViewById<Button>(R.id.hlLoButton).apply { visibility = View.VISIBLE }
+        view.findViewById<Button>(R.id.hlStart).apply { visibility = View.INVISIBLE }
     }
 
+    //Player guesses high - hidden card is revealed.
     fun hlClickHi(view: View) {
         view.findViewById<TextView>(R.id.hlSecondLabel).apply { visibility = View.VISIBLE }
         view.findViewById<TextView>(R.id.hlSecondCard).apply { visibility = View.VISIBLE }
@@ -104,6 +94,7 @@ class GameHiLoPlayFragment : Fragment() {
         view.findViewById<Button>(R.id.hlReplayButton).apply {visibility = View.VISIBLE}
         view.findViewById<Button>(R.id.hlQuitButton).apply {visibility = View.VISIBLE}
     }
+    //Player guesses low - hidden card is revealed.
     fun hlClickLo(view: View) {
         view.findViewById<TextView>(R.id.hlSecondLabel).apply { visibility = View.VISIBLE }
         view.findViewById<TextView>(R.id.hlSecondCard).apply { visibility = View.VISIBLE }
@@ -125,6 +116,7 @@ class GameHiLoPlayFragment : Fragment() {
         view.findViewById<Button>(R.id.hlQuitButton).apply {visibility = View.VISIBLE}
     }
 
+    //Game resets - visibilities are returned to normal and new cards are drawn.
     fun hlReplay(view: View) {
         firstcard = (1..52).random()
         secondcard = (1..52).random()
@@ -144,6 +136,7 @@ class GameHiLoPlayFragment : Fragment() {
         view.findViewById<TextView>(R.id.hlResultText).apply {visibility = View.INVISIBLE }
     }
 
+    //Card translator.
     fun cardstr(card: Int) : String {
         when (card) {
             1 -> return "ACE OF CLUBS"

@@ -40,7 +40,7 @@ class MenuCashCheckFragment : Fragment() {
         val yetTipTotal = view.findViewById<TextView>(R.id.cash_order_price)
         yetTipTotal.setTextColor(Color.BLACK)
         yetTipTotal.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-        yetTipTotal.text = "$$orderTotal"
+        yetTipTotal.text = "$orderTotal"
 
         val noTipButton = view.findViewById<Button>(R.id.no_tip)//create button on xml
         val fifteenButton = view.findViewById<Button>(R.id.cash_fifteen)
@@ -52,7 +52,7 @@ class MenuCashCheckFragment : Fragment() {
             val showNoTip = view.findViewById<TextView>(R.id.cash_total_price)
             showNoTip.setTextColor(Color.BLACK)
             showNoTip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showNoTip.text="$$noTip"
+            showNoTip.text="$noTip"
         }
 
         fifteenButton.setOnClickListener {
@@ -60,7 +60,7 @@ class MenuCashCheckFragment : Fragment() {
             val showFifteenTip = view.findViewById<TextView>(R.id.cash_total_price)
             showFifteenTip.setTextColor(Color.BLACK)
             showFifteenTip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showFifteenTip.text = "$$fifteenTip"
+            showFifteenTip.text = "$fifteenTip"
         }
 
         twentyButton.setOnClickListener {
@@ -68,7 +68,7 @@ class MenuCashCheckFragment : Fragment() {
             val showTwentyTip = view.findViewById<TextView>(R.id.cash_total_price)
             showTwentyTip.setTextColor(Color.BLACK)
             showTwentyTip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showTwentyTip.text = "$$twentyTip"
+            showTwentyTip.text = "$twentyTip"
         }
 
         twentyfiveButton.setOnClickListener {
@@ -76,7 +76,7 @@ class MenuCashCheckFragment : Fragment() {
             val showTwentyfiveTip = view.findViewById<TextView>(R.id.cash_total_price)
             showTwentyfiveTip.setTextColor(Color.BLACK)
             showTwentyfiveTip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            showTwentyfiveTip.text = "$$twentyfiveTip"
+            showTwentyfiveTip.text = "$twentyfiveTip"
         }
 
 
@@ -126,11 +126,12 @@ class MenuCashCheckFragment : Fragment() {
 
 
                 //TODO: Ensure this fits with customer-side login scripts.
-                if ((activity as CustomerAccountActivity).currentCustomer != null) {
+            //TODO: Like with the credit card version, this can't point to CustomerAccountActivity.
+                /*if ((activity as CustomerAccountActivity).currentCustomer != null) {
                     (activity as MenuActivity).replaceFragment(MenuAddRewardsFragment(), "")
-                } else {
+                } else {*/
                     (activity as MenuActivity).replaceFragment(MenuFinalGameFragment(), "")
-                }
+                //}
 
             (activity as MenuActivity).replaceFragment(MenuAddRewardsFragment(),"")
         }

@@ -21,6 +21,7 @@ class GameHLFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_h_l, container, false)
         runGraidentAnimation(view)
 
+        //Set listeners to take the player to games
         val playButton = view.findViewById<Button>(R.id.startHiLo)
         val exitButton = view.findViewById<Button>(R.id.hlRootExitButton)
 
