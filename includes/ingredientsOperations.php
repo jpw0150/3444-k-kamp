@@ -10,10 +10,10 @@
             $this->con = $db->connect();
         }
 
-        public function createFood($food, $amount){
+        public function createFood($id, $food, $amount){
             if(!$this->isFoodExist($food)){
-                 $stmt = $this->con->prepare("INSERT INTO ingredients (food, amount) VALUES (?, ?)");
-                 $stmt->bind_param("si", $food, $amount);
+                 $stmt = $this->con->prepare("INSERT INTO ingredients (id, food, amount) VALUES (?, ?, ?)");
+                 $stmt->bind_param("isi",$id, $food, $amount);
                  if($stmt->execute()){
                      return ING_CREATE;
                  }else{
@@ -22,6 +22,18 @@
             }
             return ING_EXIST;
          }
+
+		public function getInfo($id){
+			$state = $this->con->prepare("SELECT food, amount FROM ingredients WHERE id = ?");
+			$state->bind_param("i", $id);
+			$state->execute();
+			$state->bind_result($food, $amount);
+			$state->fetch();
+			$returnarray = array();
+			$returnarray['food'] = $food;
+			$returnarray['amount'] = $amount;
+			return $returnarray;
+		}
 
          public function getAllIngredients(){
             $stmt = $this->con->prepare("SELECT food, amount FROM ingredients");
@@ -35,7 +47,6 @@
                 array_push($ingts, $ing);
             }
             return $ingts;
-            
         }
 
         public function getFoodByName($food){
