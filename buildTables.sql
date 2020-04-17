@@ -55,6 +55,7 @@ CREATE TABLE storeTables (
 	CONSTRAINT table_pk PRIMARY KEY (number)
 );
 
+
 INSERT INTO ingredients
 (id, food, amount)
 VALUES(
@@ -146,6 +147,14 @@ VALUES(
 INSERT INTO ingredients
 (id, food, amount)
 VALUES(
+	300,
+	'honey mustard',
+	100
+);
+
+INSERT INTO ingredients
+(id, food, amount)
+VALUES(
 	401,
 	'french fries',
 	100
@@ -191,14 +200,156 @@ VALUES(
 	100
 );
 
+INSERT INTO ingredients
+(id, food, amount)
+VALUES(
+	504,
+	'water',
+	100
+);
+
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	1,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	2,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	3,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	4,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	5,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	6,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	7,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	8,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	9,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	10,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	11,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	12,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	13,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+
+
 INSERT INTO storeTables
 (number, status, needHelp, needRefill, orderTotal)
 VALUES(
 	14,
-	'waiting',
+	'empty',
 	0,
 	0,
 	0.00
+	
 );
 
 INSERT INTO storeTables
@@ -209,6 +360,7 @@ VALUES(
 	1,
 	0,
 	0.00
+	
 );
 
 INSERT INTO storeTables
@@ -219,4 +371,99 @@ VALUES(
 	0,
 	1,
 	0.00
+	
+);
+
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	17,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	18,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	19,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	20,
+	'empty',
+	0,
+	0,
+	0.00
+	
+);
+
+
+INSERT INTO employee
+(empid, password, name, wage, role, hours, tips, compmeals)
+VALUES(
+	1234,
+	'office',
+	'Michael Scott',
+	40.0,
+	'manager',
+	16.0
+	0.0
+	0
+);
+
+INSERT INTO employee
+(empid, password, name, wage, role, hours, tips, compmeals)
+VALUES(
+	5678,
+	'beets',
+	'Dwight Schrute',
+	10.0,
+	'waiter',
+	10.0
+	0.0
+	0
+);
+
+INSERT INTO employee
+(empid, password, name, wage, role, hours, tips, compmeals)
+VALUES(
+	4321,
+	'pam',
+	'Jim Halpert',
+	10.0,
+	'waiter',
+	40.0
+	0.0
+	0
+);
+
+INSERT INTO employee
+(empid, password, name, wage, role, hours, tips, compmeals)
+VALUES(
+	9876,
+	'chilli',
+	'Kevin Malone',
+	20.0,
+	'Employee',
+	40.0
+	0.0
+	0
 );
