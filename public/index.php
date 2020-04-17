@@ -12,17 +12,18 @@ require __DIR__ . '/../includes/orderOperations.php';
 require __DIR__ . '/../includes/employeeOperations.php';
 require __DIR__ . '/../includes/customerOperations.php';
 require __DIR__ . '/../includes/ingredientsOperations.php';
+require __DIR__ . '/../includes/tableOperations.php';
 $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, false);
-
+/*
 $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
 	"secure"=>false,
 	"users"=> [
 		"BIGKEV" => "3444_project_kkwh",
 	]
 ]));
-
+*/
 $app->post('/createMenuItem', function(Request $request, Response $response){
 	if(!haveEmptyParameters(array('id', 'name', 'cost', 'descrip'), $request, $response)){
 		$request_data = $request->getParsedBody();
@@ -61,18 +62,19 @@ $app->post('/createMenuItem', function(Request $request, Response $response){
 });
 
 $app->post('/createOrder', function(Request $request, Response $response){
-	if(!haveEmptyParameters(array('tableNum', 'entree', 'side', 'drink', 'orderTotal'), $request, $response)){
+	if(!haveEmptyParameters(array('tableNum', 'entree', 'side', 'drink', 'note', 'orderTotal'), $request, $response)){
 		$request_data = $request->getParsedBody();
 		
 		$tableNum = $request_data['tableNum'];
 		$entree = $request_data['entree'];
 		$side = $request_data['side'];
 		$drink = $request_data['drink'];
+		$note = $request_data['note'];
 		$orderTotal = $request_data['orderTotal'];
 		
 		$db = new orderOperations;
 		
-		$result = $db->createOrder($tableNum, $entree, $side, $drink, $orderTotal);
+		$result = $db->createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal);
 		
 		if($result == ORDER_CREATE){
 			$message = array();
@@ -203,7 +205,6 @@ $app->post('/empLogin', function(Request $request, Response $response){
         ->withStatus(422);    
 });
 
-
 $app->get('/getItem/{id}', function(Request $request, Response $response, array $args){
 		
 	$id = $args['id'];
@@ -255,9 +256,7 @@ $app->get('/getOrder/{id}', function(Request $request, Response $response, array
 	else{
 		$message = array();
 			
-		$message['error'] = true;
-		$message['message'] = 'no data found';
-			
+		$message['error'] = true;			
 		$response->getBody()->write(json_encode($message));
 
 		return $response->withHeader('Content-type', 'application/json')->withStatus(422);	
@@ -384,7 +383,7 @@ $app->put('/updateItem/{id}', function(Request $request, Response $response, arr
 $app->put('/changeOrder/{id}', function(Request $request, Response $response, array $args){
 	$id = $args['id'];
 
-    if(!haveEmptyParameters(array('tableNum','entree','side', 'drink', 'orderTotal'), $request, $response)){
+    if(!haveEmptyParameters(array('tableNum','entree','side', 'drink', 'note', 'orderTotal'), $request, $response)){
 
 		$reqBody = file_get_contents('php://input');
         parse_str($reqBody, $request_data);
@@ -393,11 +392,12 @@ $app->put('/changeOrder/{id}', function(Request $request, Response $response, ar
         $entree = $request_data['entree'];
         $side = $request_data['side']; 
 		$drink = $request_data['drink'];
+		$note = $request_data['note'];
 		$orderTotal = $request_data['orderTotal'];
 
         $db = new orderOperations; 
 
-        if($db->updateOrder($id, $tableNum, $entree, $drink, $side, $orderTotal)){
+        if($db->updateOrder($id, $tableNum, $entree, $drink, $side, $note, $orderTotal)){
             $response_data = array(); 
             $response_data['error'] = false; 
             $response_data['message'] = 'Order Updated Successfully';
@@ -414,7 +414,7 @@ $app->put('/changeOrder/{id}', function(Request $request, Response $response, ar
             $response_data = array(); 
             $response_data['error'] = true; 
             $response_data['message'] = 'Please try again later';
-            $order = $db->findItem($id);
+            $order = $db->findOrder($id);
             $response_data['order'] = $order; 
 
             $response->getBody()->write(json_encode($response_data));
@@ -831,21 +831,19 @@ $app->delete('/deleteuser/{id}', function(Request $request, Response $response, 
 
 $app->post('/createingredient', function(Request $request, Response $response){
 
-    if(!haveEmptyParameters(array('food', 'amount'), $request, $response)){
+    if(!haveEmptyParameters(array('id', 'food', 'amount'), $request, $response)){
 
 		//$reqBody = file_get_contents('php://input');
 		//parse_str($reqBody, $request_params);
 		$request_data = $request->getParsedBody();
 
+		$id = $request_data['id'];
         $food = $request_data['food'];
         $amount = $request_data['amount'];
 
-
-        //$hash_password = password_hash($password, PASSWORD_DEFAULT);
-
         $db = new ingredientsOperations;
 
-        $result = $db->createFood($food, $amount);
+        $result = $db->createFood($id, $food, $amount);
 
         if($result == ING_CREATE){
 
@@ -982,17 +980,18 @@ $app->delete('/trashfood/{id}', function(Request $request, Response $response, a
 });
 
 $app->post('/createTable', function(Request $request, Response $response){
-	if(!haveEmptyParameters(array('number', 'tableStatus', 'needHelp', 'needRefill'), $request, $response)){
+	if(!haveEmptyParameters(array('number', 'status', 'needHelp', 'needRefill', 'orderTotal'), $request, $response)){
 		$request_data = $request->getParsedBody();
 		
 		$number = $request_data['number'];
-		$tableStatus = $request_data['tableStatus'];
+		$status = $request_data['status'];
 		$needHelp = $request_data['needHelp'];
 		$needRefill = $request_data['needRefill'];
+		$orderTotal = $request_data['orderTotal'];
 		
 		$db = new tableOperations;
 		
-		$result = $db->newTable($number, $tableStatus, $needHelp, $needRefill);
+		$result = $db->newTable($number, $status, $needHelp, $needRefill, $orderTotal);
 		
 		if($result == TABLE_CREATE){
 			$message = array();
@@ -1048,7 +1047,6 @@ $app->get('/getTable/{number}', function(Request $request, Response $response, a
 		$message = array();
 			
 		$message['error'] = false;
-		$message['message'] = 'found data';
 		$message['table'] = $table;
 			
 		$response->getBody()->write(json_encode($message));
@@ -1059,7 +1057,6 @@ $app->get('/getTable/{number}', function(Request $request, Response $response, a
 		$message = array();
 			
 		$message['error'] = true;
-		$message['message'] = 'no data found';
 			
 		$response->getBody()->write(json_encode($message));
 
@@ -1071,21 +1068,21 @@ $app->put('/updateTable/{number}', function(Request $request, Response $response
 
 	$number = $args['number'];
 
-	if(!haveEmptyParameters(array('tableStatus', 'needHelp', 'needRefill'), $request, $response)){
+	if(!haveEmptyParameters(array('status', 'needHelp', 'needRefill', 'orderTotal'), $request, $response)){
 
 		$reqBody = file_get_contents('php://input');
 		parse_str($reqBody, $request_data);
 
-		$tableStatus = $request_data['tableStatus'];
+		$status = $request_data['status'];
 		$needHelp = $request_data['needHelp'];
 		$needRefill = $request_data['needRefill'];
+		$orderTotal = $request_data['orderTotal'];
 		
 		$db = new tableOperations;
 
-		if($db->updatetable($tableStatus, $needHelp, $needRefill, $number)){
+		if($db->updatetable($number, $status, $needHelp, $needRefill, $orderTotal)){
 			$response_data = array();
 			$response_data['error'] = false;
-			$response_data['message'] = 'Update Successful';
 			$table = $db->findtable($number);
 			$response_data['table'] = $table;
 
@@ -1098,7 +1095,6 @@ $app->put('/updateTable/{number}', function(Request $request, Response $response
 		}else{
 			$response_data = array();
 			$response_data['error'] = true;
-			$response_data['message'] = 'Try Again';
 			$table = $db->findtable($number);
 			$response_data['table'] = $table;
 
@@ -1140,7 +1136,6 @@ $app->delete('/deleteTable/{number}', function(Request $request, Response $respo
 
 });
 
-
 function haveEmptyParameters($required_params, $request, $response){
     $error = false; 
     $error_params = '';
@@ -1162,7 +1157,6 @@ function haveEmptyParameters($required_params, $request, $response){
     }
     return $error; 
 }
-
 
 $app->run();
 
