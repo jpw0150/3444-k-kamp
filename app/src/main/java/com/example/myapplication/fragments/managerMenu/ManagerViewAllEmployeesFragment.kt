@@ -32,6 +32,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
             0,
             "",
             0,
+            0,
             0
         )
     }
@@ -60,6 +61,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
             view.findViewById<EditText>(R.id.employee_role).apply { hint = emps[index].role }
             view.findViewById<EditText>(R.id.employee_hours).apply { hint = emps[index].hours.toString() }
             view.findViewById<EditText>(R.id.employee_tips).apply { hint = emps[index].tips.toString() }
+            view.findViewById<EditText>(R.id.employee_compmeals).apply { hint = emps[index].compmeals.toString() }
         }
 
         view.findViewById<Button>(R.id.leave_button).setOnClickListener{ (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "") }
@@ -108,8 +110,14 @@ class ManagerViewAllEmployeesFragment : Fragment() {
             etips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toInt()
             emps[index].tips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toInt()
         }
+        var ecompmeals = 0 //compmeals
+        if (view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.isNullOrEmpty()) { ecompmeals = emps[index].compmeals }
+        else {
+            ecompmeals = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
+            emps[index].compmeals = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
+        }
         //new data
-        RetrofitClient.instance.updateEmp(empId, pass, ename, ewage, erole, ehours, etips)
+        RetrofitClient.instance.updateEmp(empId, pass, ename, ewage, erole, ehours, etips, ecompmeals)
 
     }
     fun empsPrevious() {
@@ -123,6 +131,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
         view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = emps[index].role }
         view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = emps[index].hours.toString()}
         view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = emps[index].tips.toString()}
+        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = emps[index].compmeals.toString() }
     }
     fun empsNext() {
         if (index == emps.size - 1) index = 0
@@ -135,6 +144,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
         view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = emps[index].role }
         view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = emps[index].hours.toString()}
         view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = emps[index].tips.toString()}
+        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = emps[index].compmeals.toString() }
     }
 
     private fun runGraidentAnimation(v: View) {

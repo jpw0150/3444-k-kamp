@@ -32,7 +32,8 @@ interface Api {
         @Field("wage") wage: Int,
         @Field("role") role: String,
         @Field("hours") hours: Int,
-        @Field("tips") tips: Int
+        @Field("tips") tips: Int,
+        @Field("compmeals") compmeals: Int
     ):Call<ResponseEmployee>
 
     @FormUrlEncoded
@@ -105,7 +106,8 @@ interface Api {
         @Field("wage") wage:Int,
         @Field("role") role: String,
         @Field("hours") hours: Int,
-        @Field("tips") tips: Int
+        @Field("tips") tips: Int,
+        @Field("compmeals") compmeals: Int
     ):Call<ResponseEmployee>
 
     @FormUrlEncoded
