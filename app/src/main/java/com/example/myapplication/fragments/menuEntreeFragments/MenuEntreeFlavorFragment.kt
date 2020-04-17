@@ -60,29 +60,34 @@ class MenuEntreeFlavorFragment : Fragment() {
         /* Save selected flavor type to order and proceed to step 3 */
         bbq_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Barbecue"
-            (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
-        }
-        lemon_button.setOnClickListener{
-            (activity as MenuActivity).flavorType = "Lemon Pepper"
-            (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
-        }
-        cajun_button.setOnClickListener {
-            (activity as MenuActivity).flavorType = "Cajun"
-            (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
-        }
-        garlic_parm_button.setOnClickListener {
-            (activity as MenuActivity).flavorType = "Garlic Parmesan"
+            (activity as MenuActivity).entree_ID_String = "1" + (activity as MenuActivity).entree_ID_String
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         buffalo_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Buffalo"
+            (activity as MenuActivity).entree_ID_String = "2" + (activity as MenuActivity).entree_ID_String
+            (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
+        }
+        cajun_button.setOnClickListener {
+            (activity as MenuActivity).flavorType = "Cajun"
+            (activity as MenuActivity).entree_ID_String = "3" + (activity as MenuActivity).entree_ID_String
+            (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
+        }
+        garlic_parm_button.setOnClickListener {
+            (activity as MenuActivity).flavorType = "Garlic Parmesan"
+            (activity as MenuActivity).entree_ID_String = "4" + (activity as MenuActivity).entree_ID_String
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         hawaiian_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Hawaiian"
+            (activity as MenuActivity).entree_ID_String = "5" + (activity as MenuActivity).entree_ID_String
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
-
+        lemon_button.setOnClickListener{
+            (activity as MenuActivity).flavorType = "Lemon Pepper"
+            (activity as MenuActivity).entree_ID_String = "6" + (activity as MenuActivity).entree_ID_String
+            (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
+        }
         /* Listeners to address Help and Refill requests */
         /* Send help notification to the waiter */
         helpButtonFlavors.setOnClickListener{

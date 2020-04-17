@@ -16,11 +16,11 @@ interface Api {
     @FormUrlEncoded
     @POST("createOrder")
     fun createOrder(
-        @Field("tableNum") tableNum:String,
+        @Field("tableNum") number:Int,
         @Field("entree") entree: String,
         @Field("side") side: String,
         @Field("drink") drink: String,
-        @Field("orderTotal") orderTotal: Float
+        @Field("orderTotal") orderTotal: Double
     ):Call<ResponseBase>
 
     @FormUrlEncoded

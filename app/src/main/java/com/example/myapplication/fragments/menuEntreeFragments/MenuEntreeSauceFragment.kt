@@ -42,16 +42,19 @@ class MenuEntreeSauceFragment : Fragment() {
 
         ranchButton.setOnClickListener{
             (activity as MenuActivity).sauceType = getString(R.string.ranch)
+            (activity as MenuActivity).entree_ID_String = "1" + (activity as MenuActivity).entree_ID_String
             (activity as MenuActivity).replaceFragment(MenuEntreeSauceQuantityFragment(), "")
         }
 
         bleuCheeseButton.setOnClickListener {
             (activity as MenuActivity).sauceType = getString(R.string.bleu_cheese)
+            (activity as MenuActivity).entree_ID_String = "2" + (activity as MenuActivity).entree_ID_String
             (activity as MenuActivity).replaceFragment(MenuEntreeSauceQuantityFragment(), "")
         }
 
         honeyMustardButton.setOnClickListener{
             (activity as MenuActivity).sauceType = getString(R.string.honey_mustard)
+            (activity as MenuActivity).entree_ID_String = "3" + (activity as MenuActivity).entree_ID_String
             (activity as MenuActivity).replaceFragment(MenuEntreeSauceQuantityFragment(), "")
         }
 

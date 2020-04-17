@@ -33,8 +33,9 @@ class ManagerModifyTableStatus : Fragment() {
 
          */
 
-        val tableNum = view.findViewById<EditText>(R.id.modify_table_number).text.toString()
+        val tableNum = view.findViewById<EditText>(R.id.modify_table_number).text.toString().toInt()
         val newTableStatus = view.findViewById<EditText>(R.id.modify_table_status).text.toString()
+        val newOrderTotal = view.findViewById<EditText>(R.id.modify_table_total).text.toString().toDouble()
         val modifyButton = view.findViewById<Button>(R.id.button_modify_table_status_option)
 
         modifyButton.setOnClickListener {
@@ -47,7 +48,8 @@ class ManagerModifyTableStatus : Fragment() {
 
             RetrofitClient.instance.updateTable(tableNum, newTableStatus,
                 needHelp = __needHelp,
-                needRefill = __needRefill
+                needRefill = __needRefill,
+                //newOrderTotal
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(

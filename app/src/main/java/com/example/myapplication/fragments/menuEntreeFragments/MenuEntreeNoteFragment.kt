@@ -31,6 +31,10 @@ class MenuEntreeNoteFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu_entree_note, container, false)
         runGraidentAnimation(view)
 
+        /* Add quantity to entree ID */
+        val numWings = (activity as MenuActivity).numWings
+        (activity as MenuActivity).entree_ID_String = numWings.toString() + (activity as MenuActivity).entree_ID_String + " "
+
         /* Initialize buttons */
         val addNoteButton = view.findViewById<Button>(R.id.button_add_note)
         val noNoteButton = view.findViewById<Button>(R.id.button_no_note)

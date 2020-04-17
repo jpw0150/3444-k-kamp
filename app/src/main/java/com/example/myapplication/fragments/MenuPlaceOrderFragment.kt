@@ -16,6 +16,7 @@ import android.widget.Button
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseOrder
 import com.example.myapplication.apipackage.ResponseTable
 import com.example.myapplication.apipackage.RetrofitClient
 import retrofit2.Call
@@ -36,6 +37,35 @@ class MenuPlaceOrderFragment : Fragment() {
         yesButton.setOnClickListener {
             Toast.makeText((activity as MenuActivity).applicationContext, "Order placed successfully!", Toast.LENGTH_LONG).show()
             (activity as MenuActivity).addOrder()
+
+            val entree_str = (activity as MenuActivity).entree_ID_String
+            val side_str = (activity as MenuActivity).side_ID_string
+            val drink_str = (activity as MenuActivity).drink_ID_string
+
+            /* Send order to database */
+            /*RetrofitClient.instance.createOrder((activity as MenuActivity).table.number,
+                entree_str,
+                side_str,
+                drink_str,
+                (activity as MenuActivity).orderTotal.toDouble()
+                //TODO: This Callback<ResponseOrder> call errors out.
+            ).enqueue(object: Callback<ResponseOrder> {
+                override fun onFailure(call: Call<ResponseOrder>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                override fun onResponse(call: Call<ResponseOrder>, response: Response<ResponseOrder>) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        "Order has been placed in the queue.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })*/
+
             (activity as MenuActivity).resetOrder()
             (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
         }

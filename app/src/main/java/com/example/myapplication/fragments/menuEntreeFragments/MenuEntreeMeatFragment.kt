@@ -35,18 +35,19 @@ class MenuEntreeMeatFragment : Fragment() {
 
 
         /* Save selected meat type to order and proceed to step 2 */
-        boneless_button.setOnClickListener{
-            (activity as MenuActivity).meatType = "Boneless"
-            (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
-        }
-
         bone_button.setOnClickListener{
             (activity as MenuActivity).meatType = "Bone"
+            (activity as MenuActivity).entree_ID_String = "1"
             (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
         }
-
+        boneless_button.setOnClickListener{
+            (activity as MenuActivity).meatType = "Boneless"
+            (activity as MenuActivity).entree_ID_String = "2"
+            (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
+        }
         tenders_button.setOnClickListener{
             (activity as MenuActivity).meatType = "Tenders"
+            (activity as MenuActivity).entree_ID_String = "3"
             (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
         }
 

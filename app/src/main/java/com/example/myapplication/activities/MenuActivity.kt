@@ -68,6 +68,11 @@ class MenuActivity : AppCompatActivity() {
     val drinkList = arrayListOf<Drink>()
     val orderList = arrayListOf<Order>()
 
+    /* Order string to be sent to database */
+    var entree_ID_String = ""
+    var side_ID_string = ""
+    var drink_ID_string = ""
+
     /* Constants */
     val MIN_NUM_WINGS = 3
     val MIN_NUM_SIDES = 1
