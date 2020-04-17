@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.CustomerAccountActivity
 import com.example.myapplication.activities.ManagerActivity
-import com.example.myapplication.apipackage.Employee
-import com.example.myapplication.apipackage.ResponseEmployees
-import com.example.myapplication.apipackage.RetrofitClient
+import com.example.myapplication.apipackage.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,18 +24,6 @@ import retrofit2.Retrofit
 class ManagerViewAllEmployeesFragment : Fragment() {
 
     var index = 0
-    var emps = List<Employee>(1) {
-        Employee(
-            0,
-            "",
-            "",
-            0,
-            "",
-            0,
-            0,
-            0
-        )
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -48,103 +36,197 @@ class ManagerViewAllEmployeesFragment : Fragment() {
                     view.findViewById<TextView>(R.id.employee_position).apply{ text = "UNSUCCESSFUL" }
                 }
                 override fun onResponse(call: Call<ResponseEmployees>, response: Response<ResponseEmployees>) {
-                    emps = response.body()!!.employees
-                    view.findViewById<TextView>(R.id.employee_position).apply{ text = (index+1).toString() + " OF " + emps.size.toString() }
+
+                    val output = response.body()?.employees
+
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_id).hint =
+                            output.get(index).id.toString()
+                    }
+
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_name).hint   = output.get(index).name
+                    }
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_wage).hint = output.get(index).wage.toString()
+                    }
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_role).hint = output.get(index).role
+                    }
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_hours).hint = output.get(index).hours.toString()
+                    }
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_tips).hint = output.get(index).tips.toString()
+                    }
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.employee_compmeals). hint = output.get(index).compmeals.toString()
+                    }
+
+                    view.findViewById<Button>(R.id.leave_button).setOnClickListener{ (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "") }
+                    view.findViewById<Button>(R.id.update_employee).setOnClickListener{ empsUpdate(output) }
+                    view.findViewById<Button>(R.id.previous_button).setOnClickListener{ empsPrevious(output) }
+                    view.findViewById<Button>(R.id.next_button).setOnClickListener{ empsNext(output) }
+
                 }
             })
-
-            index = 0
-            view.findViewById<EditText>(R.id.employee_id).apply { hint = emps[index].id.toString() } //int
-            view.findViewById<EditText>(R.id.employee_password).apply { hint = emps[index].password }
-            view.findViewById<EditText>(R.id.employee_name).apply { hint = emps[index].name }
-            view.findViewById<EditText>(R.id.employee_wage).apply { hint = emps[index].wage.toString() }
-            view.findViewById<EditText>(R.id.employee_role).apply { hint = emps[index].role }
-            view.findViewById<EditText>(R.id.employee_hours).apply { hint = emps[index].hours.toString() }
-            view.findViewById<EditText>(R.id.employee_tips).apply { hint = emps[index].tips.toString() }
-            view.findViewById<EditText>(R.id.employee_compmeals).apply { hint = emps[index].compmeals.toString() }
         }
-
-        view.findViewById<Button>(R.id.leave_button).setOnClickListener{ (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "") }
-        view.findViewById<Button>(R.id.update_employee).setOnClickListener{ empsUpdate() }
-        view.findViewById<Button>(R.id.previous_button).setOnClickListener{ empsPrevious() }
-        view.findViewById<Button>(R.id.next_button).setOnClickListener{ empsNext() }
 
         return view
     }
 
-    fun empsUpdate() {
-        val empId = emps[index].id
-        var pass = "" //password
-        if (view?.findViewById<EditText>(R.id.employee_password)?.hint.isNullOrEmpty()) {pass = emps[index].password}
-        else {
-            pass = view?.findViewById<EditText>(R.id.employee_password)?.hint.toString()
-            emps[index].password = view?.findViewById<EditText>(R.id.employee_password)?.hint.toString()
-        }
+  fun empsUpdate(employeeList: List<Employee>?) {
+        val empId = employeeList?.get(index)?.id
+      //val empId = 1
+       // var pass = "" //password
         var ename = "" //name
-        if (view?.findViewById<EditText>(R.id.employee_name)?.hint.isNullOrEmpty()) {ename = emps[index].name}
+        if (view?.findViewById<EditText>(R.id.employee_name)?.hint.isNullOrEmpty()) {
+            if (employeeList != null) {
+                ename = employeeList.get(index).name
+            }
+        }
         else {
             ename = view?.findViewById<EditText>(R.id.employee_name)?.hint.toString()
-            emps[index].name = view?.findViewById<EditText>(R.id.employee_name)?.hint.toString()
+            if (employeeList != null) {
+                employeeList.get(index).name = view?.findViewById<EditText>(R.id.employee_name)?.hint.toString()
+            }
         }
         var ewage = 0 //wage
-        if (view?.findViewById<EditText>(R.id.employee_wage)?.hint.isNullOrEmpty()) {ewage = emps[index].wage}
+        if (view?.findViewById<EditText>(R.id.employee_wage)?.hint.isNullOrEmpty()) {
+            if (employeeList != null) {
+                ewage = employeeList.get(index).wage
+            }
+        }
         else {
             ewage = view?.findViewById<EditText>(R.id.employee_wage)?.hint.toString().toInt()
-            emps[index].wage = view?.findViewById<EditText>(R.id.employee_wage)?.hint.toString().toInt()
+            if (employeeList != null) {
+                employeeList.get(index).wage = view?.findViewById<EditText>(R.id.employee_wage)?.hint.toString().toInt()
+            }
         }
         var erole = "" //role
-        if (view?.findViewById<EditText>(R.id.employee_role)?.hint.isNullOrEmpty()) {erole = emps[index].role}
+        if (view?.findViewById<EditText>(R.id.employee_role)?.hint.isNullOrEmpty()) {
+            if (employeeList != null) {
+                erole = employeeList.get(index).role
+            }
+        }
         else {
             erole = view?.findViewById<EditText>(R.id.employee_role)?.hint.toString()
-            emps[index].role = view?.findViewById<EditText>(R.id.employee_role)?.hint.toString()
+            if (employeeList != null) {
+                employeeList.get(index).role = view?.findViewById<EditText>(R.id.employee_role)?.hint.toString()
+            }
         }
         var ehours = 0 //hours
-        if (view?.findViewById<EditText>(R.id.employee_hours)?.hint.isNullOrEmpty()) {ehours = emps[index].hours}
+        if (view?.findViewById<EditText>(R.id.employee_hours)?.hint.isNullOrEmpty()) {
+            if (employeeList != null) {
+                ehours = employeeList.get(index).hours
+            }
+        }
         else {
             ehours = view?.findViewById<EditText>(R.id.employee_hours)?.hint.toString().toInt()
-            emps[index].hours = view?.findViewById<EditText>(R.id.employee_hours)?.hint.toString().toInt()
+            if (employeeList != null) {
+                employeeList.get(index).hours = view?.findViewById<EditText>(R.id.employee_hours)?.hint.toString().toInt()
+            }
         }
-        var etips = 0 //tips
-        if (view?.findViewById<EditText>(R.id.employee_tips)?.hint.isNullOrEmpty()) {etips = emps[index].tips}
+        var etips = 0.0 //tips
+        if (view?.findViewById<EditText>(R.id.employee_tips)?.hint.isNullOrEmpty()) {
+            if (employeeList != null) {
+                etips =
+                    employeeList.get(index).tips.toDouble()
+            }
+        }
         else {
-            etips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toInt()
-            emps[index].tips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toInt()
+            etips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toDouble()
+            if (employeeList != null) {
+                employeeList.get(index).tips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toDouble()
+            }
         }
         var ecompmeals = 0 //compmeals
-        if (view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.isNullOrEmpty()) { ecompmeals = emps[index].compmeals }
+        if (view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.isNullOrEmpty()) {
+            if (employeeList != null) {
+                ecompmeals = employeeList.get(index).compmeals
+            }
+        }
         else {
             ecompmeals = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
-            emps[index].compmeals = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
+            employeeList?.get(index)?.compmeals  = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
         }
         //new data
-        RetrofitClient.instance.updateEmp(empId, pass, ename, ewage, erole, ehours, etips, ecompmeals)
+      if (empId != null) {
+          RetrofitClient.instance.updateEmp(empId, ename, ewage, erole, ehours, etips, ecompmeals)
+              .enqueue(object : Callback<ResponseEmployee> {
+                  override fun onFailure(call: Call<ResponseEmployee>, t: Throwable) {
+                      Toast.makeText(
+                          activity as ManagerActivity,
+                          "Customer Already Exist",
+                          Toast.LENGTH_LONG
+                      ).show()
+                  }
+
+                  override fun onResponse(
+                      call: Call<ResponseEmployee>,
+                      response: Response<ResponseEmployee>
+                  ) {
+                      Toast.makeText(
+                          activity as ManagerActivity,
+                          "update sucessfull",
+                          Toast.LENGTH_LONG
+                      ).show()
+
+                  }
+
+
+              })
+
+      }
 
     }
-    fun empsPrevious() {
-        if (index == 0) { index = emps.size - 1 }
+    fun empsPrevious(employeeList: List<Employee>?) {
+        if (index == 0) {
+            if (employeeList != null) {
+                index = employeeList.size - 1
+            }
+        }
         else index -= 1
 
-        view?.findViewById<TextView>(R.id.employee_position)?.apply{ hint = (index+1).toString() + " OF " + emps.size.toString()}
-        view?.findViewById<TextView>(R.id.employee_password)?.apply { hint = emps[index].password }
-        view?.findViewById<TextView>(R.id.employee_name)?.apply { hint = emps[index].name }
-        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint = emps[index].wage.toString()}
-        view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = emps[index].role }
-        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = emps[index].hours.toString()}
-        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = emps[index].tips.toString()}
-        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = emps[index].compmeals.toString() }
-    }
-    fun empsNext() {
-        if (index == emps.size - 1) index = 0
-        else index += 1
 
-        view?.findViewById<TextView>(R.id.employee_position)?.apply{ hint = (index+1).toString() + " OF " + emps.size.toString()}
-        view?.findViewById<TextView>(R.id.employee_password)?.apply { hint = emps[index].password }
-        view?.findViewById<TextView>(R.id.employee_name)?.apply { hint = emps[index].name }
-        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint = emps[index].wage.toString()}
-        view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = emps[index].role }
-        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = emps[index].hours.toString()}
-        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = emps[index].tips.toString()}
-        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = emps[index].compmeals.toString() }
+
+      view?.findViewById<TextView>(R.id.employee_position)?.apply{
+            if (employeeList != null) {
+                hint = (index+1).toString() + " OF " + employeeList.size.toString()
+            }
+        }
+
+      view?.findViewById<TextView>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()}
+        view?.findViewById<TextView>(R.id.employee_name)?.apply { hint = employeeList?.get(index)?.name}
+        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint =
+            employeeList?.get(index)?.wage.toString()
+        }
+        view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = employeeList?.get(index)?.role }
+        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = employeeList?.get(index)?.hours.toString()}
+        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = employeeList?.get(index)?.tips.toString()}
+        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = employeeList?.get(index)?.compmeals.toString() }
+    }
+    fun empsNext(employeeList: List<Employee>?) {
+        if (employeeList != null) {
+            if (index == employeeList.size - 1) index = 0
+            else index += 1
+        }
+
+        view?.findViewById<TextView>(R.id.employee_position)?.apply{
+            if (employeeList != null) {
+                hint = (index+1).toString() + " OF " + employeeList.size.toString()
+            }
+        }
+
+        view?.findViewById<TextView>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()}
+        view?.findViewById<TextView>(R.id.employee_name)?.apply { hint = employeeList?.get(index)?.name}
+        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint =
+            employeeList?.get(index)?.wage.toString()
+        }
+        view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = employeeList?.get(index)?.role }
+        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = employeeList?.get(index)?.hours.toString()}
+        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = employeeList?.get(index)?.tips.toString()}
+        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = employeeList?.get(index)?.compmeals.toString() }
     }
 
     private fun runGraidentAnimation(v: View) {

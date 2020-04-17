@@ -66,7 +66,7 @@ class WaiterTableAlertFragment : Fragment() {
             override fun onResponse(call: Call<ResponseTables>, response: Response<ResponseTables>) {
 
                 /* Get all current status of all tables */
-                tableList = response.body()!!.tables
+               // tableList = response.body()!!.tables
 
                 for (i in 0..tableList.size) {
                     val table = tableList[i]

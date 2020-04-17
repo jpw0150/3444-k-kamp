@@ -28,7 +28,7 @@ class ManagerViewEmployeeFragment : Fragment() {
         runGraidentAnimation(view)
 
         val addButton = view.findViewById<Button>(R.id.button_add)
-        //val removebutton
+        val removebutton = view.findViewById<Button>(R.id.button_remove)
         //val editButton = view.findViewById<Button>(R.id.button_edit)
         val viewAllButton = view.findViewById<Button>(R.id.button_view_all)
 
@@ -42,7 +42,7 @@ class ManagerViewEmployeeFragment : Fragment() {
             val wage= Integer.parseInt(employee_wage.text.toString().trim())
             val role = employee_role.text.toString().trim()
             val hours = Integer.parseInt(employee_hours.text.toString().trim())
-            val tips = Integer.parseInt(employee_tips.text.toString().trim())
+            val tips = employee_tips.text.toString().toDouble()
             val cmeals = Integer.parseInt(employee_compmeals.text.toString().trim())
 
             /*if (id == NULL) {
@@ -105,6 +105,41 @@ class ManagerViewEmployeeFragment : Fragment() {
                             response.body()?.message,
                             Toast.LENGTH_LONG
                         ).show()
+                    }
+                })
+        }
+
+
+        removebutton.setOnClickListener{
+
+            val id = employee_id.text.toString().toInt()
+
+            RetrofitClient.instance.deleteEmployee(id)
+                .enqueue(object : Callback<ResponseEmployee> {
+                    override fun onFailure(call: Call<ResponseEmployee>, t: Throwable) {
+                        Toast.makeText(
+                            activity as ManagerActivity,
+                            t.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseEmployee>,
+                        response: Response<ResponseEmployee>
+                    ) {
+                        /*Toast.makeText(
+                            activity as ManagerActivity,
+                            response.body()?.message,
+                            Toast.LENGTH_LONG
+                        ).show()*/
+
+                        if(response.isSuccessful){
+                            Toast.makeText(activity as ManagerActivity, "Delete sucessful",Toast.LENGTH_LONG )
+                        }else{
+                            Toast.makeText(activity as ManagerActivity, "Delete UNsucessful",Toast.LENGTH_LONG )
+
+                        }
                     }
                 })
         }

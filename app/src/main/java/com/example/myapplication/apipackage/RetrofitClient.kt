@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     private val AUTH = "Basic "+ Base64.encodeToString("root:123456".toByteArray(), Base64.NO_WRAP)
+    private var mInstance: RetrofitClient? = null
     private const val BASE_URL = "http://10.0.2.2:8080/MyApi/public/"
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
@@ -30,6 +31,13 @@ object RetrofitClient {
             .client(okHttpClient)
             .build()
 
+        @Synchronized
+        fun getInstance(): RetrofitClient? {
+            if (RetrofitClient.mInstance == null) {
+                RetrofitClient.mInstance = RetrofitClient
+            }
+            return RetrofitClient.mInstance
+        }
         retrofit.create(Api::class.java)
     }
 }

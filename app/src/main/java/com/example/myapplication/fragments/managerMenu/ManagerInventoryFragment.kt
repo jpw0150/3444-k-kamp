@@ -9,13 +9,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.ChefActivity
+import com.example.myapplication.activities.CustomerAccountActivity
 import com.example.myapplication.activities.ManagerActivity
-import com.example.myapplication.apipackage.Ingredient
-import com.example.myapplication.apipackage.ResponseIngredients
-import com.example.myapplication.apipackage.RetrofitClient
+import com.example.myapplication.apipackage.*
+import com.example.myapplication.fragments.chefMenu.ChefMenuFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,41 +25,48 @@ import retrofit2.Response
 
 class ManagerInventoryFragment : Fragment() {
     var index = 0
-    var manIngs = List<Ingredient>(1) {
-        Ingredient(
-            0,
-            "",
-            0
-        )
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_employee_inventory, container, false)
         runGradientAnimation(view)
 
+
+
         view.findViewById<Button>(R.id.managerInventoryFetch).setOnClickListener{
-            RetrofitClient.instance.allingredients().enqueue(object: Callback<ResponseIngredients> {
+            RetrofitClient.instance.getAllIngredients().enqueue(object: Callback<ResponseIngredients> {
                 override fun onFailure(call: Call<ResponseIngredients>, t: Throwable) {
                     view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = "FETCH UNSUCCESSFUL" }
                 }
                 override fun onResponse(call: Call<ResponseIngredients>, response: Response<ResponseIngredients>) {
-                    manIngs = response.body()!!.ingredients
-                    view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = (index+1).toString() + " OF " + manIngs.size.toString() }
+
+                    val output = response.body()?.ingts
+
+                    if (output != null) {
+                        view.findViewById<TextView>(R.id.managerInventoryName).text = output.get(index).food
+                    }
+
+                    if (output != null) {
+                        view.findViewById<EditText>(R.id.managerInventoryQuantity).hint = output.get(index).foodnum.toString()
+                    }
+
+
+                    view.findViewById<Button>(R.id.managerInventoryLeave).setOnClickListener{ (activity as ManagerActivity).replaceFragment(
+                        ManagerMenuFragment(), "") }
+                    view.findViewById<Button>(R.id.managerInventoryBack).setOnClickListener{ ingsBack(output) }
+                    view.findViewById<Button>(R.id.managerInventoryUpdate).setOnClickListener{ ingsUpdate(output) }
+                    view.findViewById<Button>(R.id.managerInventoryNext).setOnClickListener{ ingsForward(output) }
+
+
+
                 }
             })
-
-            index = 0
-            view.findViewById<TextView>(R.id.managerInventoryName).apply { text = manIngs[index].food}
-            view.findViewById<EditText>(R.id.managerInventoryQuantity).apply { hint = manIngs[index].amount.toString() }
         }
 
-        view.findViewById<Button>(R.id.managerInventoryLeave).setOnClickListener{ (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "") }
-        view.findViewById<Button>(R.id.managerInventoryBack).setOnClickListener{ ingsBack() }
-        view.findViewById<Button>(R.id.managerInventoryUpdate).setOnClickListener{ ingsUpdate() }
-        view.findViewById<Button>(R.id.managerInventoryNext).setOnClickListener{ ingsForward() }
-        view.findViewById<Button>(R.id.managerInventoryAdd).setOnClickListener{ ingsAdd() }
-        view.findViewById<Button>(R.id.managerInventoryDelete).setOnClickListener{ ingsDelete() }
+
+        // view.findViewById<Button>(R.id.managerInventoryAdd).setOnClickListener{ ingsAdd() }
+        //view.findViewById<Button>(R.id.managerInventoryDelete).setOnClickListener{ ingsDelete() }
         //view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = (index+1).toString() + " OF " + manIngs.size.toString() }
 
         return view
@@ -70,43 +79,89 @@ class ManagerInventoryFragment : Fragment() {
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
     }
-
-    fun ingsBack() {
-        if (index == 0) { index = manIngs.size - 1 }
+    fun ingsBack(chefIngs:List<Ingredient>?) {
+        if (index == 0) {
+            if (chefIngs != null) {
+                index = chefIngs.size - 1
+            }
+        }
         else index -= 1
 
-        view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply{ text = (index+1).toString() + " OF " + manIngs.size.toString()}
-        view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text = manIngs[index].food }
-        view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = manIngs[index].amount.toString()}
-    }
-    fun ingsForward() {
-        if (index == manIngs.size - 1) index = 0
-        else index += 1
-
-        view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply{ text = (index+1).toString() + " OF " + manIngs.size.toString()}
-        view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text = manIngs[index].food }
-        view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = manIngs[index].amount.toString()}
-    }
-    fun ingsUpdate() {
-        val ingId = manIngs[index].id
-        var name = ""
-        if (view?.findViewById<EditText>(R.id.managerInventoryName)?.text.isNullOrEmpty()) {name = manIngs[index].food}
-        else {
-            name = view?.findViewById<EditText>(R.id.managerInventoryName)?.text.toString()
-            manIngs[index].food = view?.findViewById<EditText>(R.id.managerInventoryName)?.text.toString()
+        view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply{
+            if (chefIngs != null) {
+                text = (index+1).toString() + " OF " + chefIngs.size.toString()
+            }
         }
-        var quantity = 0
-        if (view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.isNullOrEmpty()) {quantity = manIngs[index].amount}
-        else {
-            quantity = view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.toString().toInt()
-            manIngs[index].amount = view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.toString().toInt()
+        view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text =
+            chefIngs?.get(index)?.food
+        }
+        view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = chefIngs?.get(index)?.foodnum.toString()}
+    }
+
+    fun ingsForward(chefIngs:List<Ingredient>?) {
+        if (chefIngs != null) {
+            if (index == chefIngs.size - 1) index = 0
+            else index += 1
         }
 
-        //TODO: Update the currently targeted ingredient with the new data.
-        RetrofitClient.instance.updateIngredient(ingId, name, quantity)
-
+        view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply{
+            if (chefIngs != null) {
+                text = (index+1).toString() + " OF " + chefIngs.size.toString()
+            }
+        }
+        view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text =
+            chefIngs?.get(index)?.food
+        }
+        view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = chefIngs?.get(index)?.foodnum.toString()}
     }
-    fun ingsAdd() {
+
+    fun ingsUpdate(chefIngs:List<Ingredient>?) {
+        val ingId = chefIngs?.get(index)?.id
+        val name = chefIngs?.get(index)?.food
+        var quantity = ""
+        if (view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.isNullOrEmpty()) {
+            quantity =
+                chefIngs?.get(index)?.foodnum?.toInt()!!.toString()
+        } else {
+            quantity =
+                view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.toString().toInt()
+                    .toString()
+            chefIngs?.get(index)?.foodnum =
+                view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.toString().toInt()
+                    .toString()
+        }
+        if (ingId != null) {
+            if (name != null) {
+                RetrofitClient.instance.updateIngredient(ingId, name, quantity)
+                    .enqueue(object : Callback<ResponseIngredient> {
+                        override fun onFailure(call: Call<ResponseIngredient>, t: Throwable) {
+                            Toast.makeText(
+                                activity as ManagerActivity,
+                                "Customer Already Exist",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseIngredient>,
+                            response: Response<ResponseIngredient>
+                        ) {
+                            //val output = response.body()?.ingredient
+                            Toast.makeText(
+                                activity as ManagerActivity,
+                                "Update Sucessful",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                        }
+
+
+                    })
+            }
+        }
+    }
+
+    /*    fun ingsAdd() {
         var name = ""
         if (view?.findViewById<EditText>(R.id.managerInventoryName)?.text.isNullOrEmpty()) {name = manIngs[index].food}
         else {
@@ -134,8 +189,8 @@ class ManagerInventoryFragment : Fragment() {
         index = 0
         view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text = manIngs[index].food}
         view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = manIngs[index].amount.toString() }
-    }
-    fun ingsDelete() {
+    }*/
+    /*fun ingsDelete() {
         RetrofitClient.instance.trashfood(manIngs[index].id)
 
         RetrofitClient.instance.allingredients().enqueue(object: Callback<ResponseIngredients> {
@@ -150,5 +205,5 @@ class ManagerInventoryFragment : Fragment() {
         index = 0
         view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text = manIngs[index].food}
         view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = manIngs[index].amount.toString() }
-    }
+    }*/
 }

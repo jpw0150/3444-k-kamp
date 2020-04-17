@@ -8,35 +8,98 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.WaiterActivity
+import com.example.myapplication.apipackage.ResponseEmployees
+import com.example.myapplication.apipackage.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class WaiterViewScheduleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_waiter_view_schedule, container, false)
         runGraidentAnimation(view)
 
-        /* Initialize Buttons */
         val informationButton = view.findViewById<Button>(R.id.button_get_info_waiter)
         val updateHoursButton = view.findViewById<Button>(R.id.button_update_hours_waiter)
-        val waiter_id = view.findViewById<EditText>(R.id.id_waiter)
 
-        informationButton.setOnClickListener {
-            //TODO: Send get request
-            Toast.makeText((activity as WaiterActivity).applicationContext,
-                "Unable to retrieve information at this time", Toast.LENGTH_SHORT).show()
-        }
 
-        updateHoursButton.setOnClickListener {
-            // TODO: Update chef hours in database
-            Toast.makeText((activity as WaiterActivity).applicationContext,
-                "Unable to update hours at this time", Toast.LENGTH_SHORT).show()
-        }
+            informationButton.setOnClickListener {
+                val id = view.findViewById<EditText>(R.id.id_waiter)?.text.toString().toInt()
+
+                RetrofitClient.instance.getAllEmp()
+                    .enqueue(object : Callback<ResponseEmployees> {
+                        override fun onFailure(call: Call<ResponseEmployees>, t: Throwable) {
+                            Toast.makeText(
+                                activity as WaiterActivity,
+                                "Customer Already Exist",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseEmployees>,
+                            response: Response<ResponseEmployees>
+                        ) {
+                            val empInfo = response.body()?.employees
+                            var id2 = 0
+                            var iterator = 0
+                            var exit = true
+                            while(true) {
+                                if (empInfo != null) {
+                                    if (iterator == empInfo.size) {
+                                        break
+                                    }
+                                }
+                                else{
+                                    break
+                                }
+                                id2 = empInfo.get(iterator).id
+                                if(id === id2 && empInfo.get(iterator).role == "waiter"){
+                                    view.findViewById<TextView>(R.id.waiterHour)
+                                        .apply { text = empInfo.get(iterator).hours.toString()
+                                            visibility = View.VISIBLE }
+                                    view.findViewById<TextView>(R.id.waiterWage)
+                                        .apply {  text = empInfo.get(iterator).wage.toString()
+                                            visibility=View.VISIBLE}
+                                    view.findViewById<TextView>(R.id.waiterTips)
+                                        .apply {  text = empInfo.get(iterator).tips.toString()
+                                            visibility=View.VISIBLE}
+                                    exit = false
+                                }
+                                iterator += 1
+
+                                }
+                            if (exit) {
+                                Toast.makeText(
+                                    activity as WaiterActivity,
+                                    "FUCK OFF",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                        }
+
+
+
+                    })
+
+            }
+
+
+
+            updateHoursButton.setOnClickListener {
+                // TODO: Update chef hours in database
+                Toast.makeText((activity as WaiterActivity).applicationContext,
+                    "Unable to update hours at this time", Toast.LENGTH_SHORT).show()
+            }
+
 
         return view
     }
