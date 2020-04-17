@@ -8,12 +8,14 @@ CREATE TABLE menu (
 );
 
 CREATE TABLE employee (
-	id int NOT NULL AUTO_INCREMENT,
+	empid int NOT NULL,
 	password text NOT NULL,
 	name varchar(50),
 	wage float NOT NULL,
 	role varchar(10) NOT NULL,
 	time float NOT NULL,
+	tips float,
+	compmeals int,
 	CONSTRAINT employee_pk PRIMARY KEY (id)
 );
 
