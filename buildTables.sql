@@ -190,3 +190,33 @@ VALUES(
 	'lemonade',
 	100
 );
+
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	14,
+	'waiting',
+	0,
+	0,
+	0.00
+);
+
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	15,
+	'waiting',
+	1,
+	0,
+	0.00
+);
+
+INSERT INTO storeTables
+(number, status, needHelp, needRefill, orderTotal)
+VALUES(
+	16,
+	'waiting',
+	0,
+	1,
+	0.00
+);
