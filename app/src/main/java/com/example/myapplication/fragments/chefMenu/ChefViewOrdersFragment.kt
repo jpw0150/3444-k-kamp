@@ -15,8 +15,8 @@ class ChefViewOrdersFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_chef_view_orders, container, false)
-        runGraidentAnimation(view)
 
+        runGraidentAnimation(view)
 
 
         return view
@@ -24,6 +24,7 @@ class ChefViewOrdersFragment : Fragment() {
 
     private fun runGraidentAnimation(v: View) {
         val constraintLayout = v.findViewById<ConstraintLayout>(R.id.chef_view_orders)
+
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)

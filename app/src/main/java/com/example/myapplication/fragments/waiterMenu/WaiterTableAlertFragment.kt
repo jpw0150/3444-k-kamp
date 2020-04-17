@@ -32,7 +32,8 @@ import android.widget.Button
 import com.example.myapplication.fragments.MenuPlaceOrderFragment
 import kotlin.math.roundToInt
 
-/*TO DO:
+
+/*TODO:
 *-create for-loop for alerts every time there is a customer who needs help
 *-alerts will come up on waiter "table alerts" as a stack of alerts that need to be completed, then removed after completed
 */
@@ -66,7 +67,8 @@ class WaiterTableAlertFragment : Fragment() {
             override fun onResponse(call: Call<ResponseTables>, response: Response<ResponseTables>) {
 
                 /* Get all current status of all tables */
-               // tableList = response.body()!!.tables
+                //TODO: Implement table table
+                //tableList = response.body()!!.tables
 
                 for (i in 0..tableList.size) {
                     val table = tableList[i]
@@ -105,6 +107,8 @@ class WaiterTableAlertFragment : Fragment() {
                     RetrofitClient.instance.updateTable(table.number, getString(R.string.serviced),
                         needHelp = false,
                         needRefill = false
+                        //TODO
+                        //table.orderTotal
                     ).enqueue(object: Callback<ResponseTable> {
                         override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                             Toast.makeText(

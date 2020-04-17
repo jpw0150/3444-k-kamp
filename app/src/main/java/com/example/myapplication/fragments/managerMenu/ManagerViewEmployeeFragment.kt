@@ -109,7 +109,6 @@ class ManagerViewEmployeeFragment : Fragment() {
                 })
         }
 
-
         removebutton.setOnClickListener{
 
             val id = employee_id.text.toString().toInt()

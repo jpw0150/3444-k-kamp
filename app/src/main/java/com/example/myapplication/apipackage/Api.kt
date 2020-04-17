@@ -16,11 +16,11 @@ interface Api {
     @FormUrlEncoded
     @POST("createOrder")
     fun createOrder(
-        @Field("tableNum") email:String,
+        @Field("tableNum") number:Int,
         @Field("entree") entree: String,
         @Field("side") side: String,
         @Field("drink") drink: String,
-        @Field("orderTotal") orderTotal: Float
+        @Field("orderTotal") orderTotal: Double
     ):Call<ResponseBase>
 
     @FormUrlEncoded
@@ -70,7 +70,6 @@ interface Api {
     fun getOrders(
     ):Call<ResponseOrders>
 
-
     @GET("getAllEmp")
     fun getAllEmp(
     ):Call<ResponseEmployees>
@@ -79,7 +78,7 @@ interface Api {
     @PUT("updateItem/{id}")
     fun updateItem(
         @Path("id") id:Int,
-        @Field("email") name:String,
+        @Field("name") name:String,
         @Field("cost") cost: Float,
         @Field("descrip") descrip: String
     ):Call<ResponseItem>
@@ -123,7 +122,6 @@ interface Api {
     fun clearOrderQueue(
     ):Call<ResponseBase>
 
-
     @DELETE("deleteEmployee/{id}")
     fun deleteEmployee(
         @Path("id") id:Int
@@ -147,11 +145,9 @@ interface Api {
         @Field("password") password: String
     ):Call<ResponseCustomer>
 
-
     @GET("allcustomers")
     fun allcustomers(
     ):Call<ResponseCustomers>
-
 
     @FormUrlEncoded
     @PUT("updatecustomer/{id}")
@@ -187,9 +183,9 @@ interface Api {
     ):Call<ResponseBase>
 
 
+
     @GET("allingredients")
-    fun getAllIngredients(
-    ):Call<ResponseIngredients>
+    fun getAllIngredients():Call<ResponseIngredients>
 
     @FormUrlEncoded
     @PUT("updateIngredient/{id}")

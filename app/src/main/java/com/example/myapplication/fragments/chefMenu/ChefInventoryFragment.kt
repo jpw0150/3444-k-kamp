@@ -23,7 +23,6 @@ import retrofit2.Response
 class ChefInventoryFragment : Fragment() {
     var index = 0
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_chef_inventory, container, false)
@@ -35,13 +34,11 @@ class ChefInventoryFragment : Fragment() {
                     view.findViewById<TextView>(R.id.chefInventoryPosition).apply{ text = "FETCH UNSUCCESSFUL" }
                 }
                 override fun onResponse(call: Call<ResponseIngredients>, response: Response<ResponseIngredients>) {
-
                     val output = response.body()?.ingts
 
                     if (output != null) {
                         view.findViewById<TextView>(R.id.chefInventoryName).text = output.get(index).food
                     }
-
                     if (output != null) {
                         view.findViewById<EditText>(R.id.chefInventoryQuantity).hint = output.get(index).foodnum.toString()
                     }
@@ -64,8 +61,6 @@ class ChefInventoryFragment : Fragment() {
                 }
             })
         }
-
-
 
         return view
     }

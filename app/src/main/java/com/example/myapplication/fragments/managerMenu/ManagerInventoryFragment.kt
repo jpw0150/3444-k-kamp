@@ -26,16 +26,14 @@ import retrofit2.Response
 class ManagerInventoryFragment : Fragment() {
     var index = 0
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_employee_inventory, container, false)
         runGradientAnimation(view)
 
-
-
         view.findViewById<Button>(R.id.managerInventoryFetch).setOnClickListener{
             RetrofitClient.instance.getAllIngredients().enqueue(object: Callback<ResponseIngredients> {
+
                 override fun onFailure(call: Call<ResponseIngredients>, t: Throwable) {
                     view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = "FETCH UNSUCCESSFUL" }
                 }
@@ -64,11 +62,6 @@ class ManagerInventoryFragment : Fragment() {
             })
         }
 
-
-        // view.findViewById<Button>(R.id.managerInventoryAdd).setOnClickListener{ ingsAdd() }
-        //view.findViewById<Button>(R.id.managerInventoryDelete).setOnClickListener{ ingsDelete() }
-        //view.findViewById<TextView>(R.id.managerInventoryPosition).apply{ text = (index+1).toString() + " OF " + manIngs.size.toString() }
-
         return view
     }
 
@@ -79,6 +72,7 @@ class ManagerInventoryFragment : Fragment() {
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
     }
+
     fun ingsBack(chefIngs:List<Ingredient>?) {
         if (index == 0) {
             if (chefIngs != null) {
@@ -161,7 +155,7 @@ class ManagerInventoryFragment : Fragment() {
         }
     }
 
-    /*    fun ingsAdd() {
+/*TODO:    fun ingsAdd() {
         var name = ""
         if (view?.findViewById<EditText>(R.id.managerInventoryName)?.text.isNullOrEmpty()) {name = manIngs[index].food}
         else {

@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-
 import com.example.myapplication.R
 import com.example.myapplication.activities.WaiterActivity
 import com.example.myapplication.apipackage.ResponseEmployees
@@ -19,6 +18,7 @@ import com.example.myapplication.apipackage.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class WaiterViewScheduleFragment : Fragment() {
 
@@ -79,7 +79,7 @@ class WaiterViewScheduleFragment : Fragment() {
                             if (exit) {
                                 Toast.makeText(
                                     activity as WaiterActivity,
-                                    "FUCK OFF",
+                                    "INVALID ENTRY",
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
@@ -99,7 +99,6 @@ class WaiterViewScheduleFragment : Fragment() {
                 Toast.makeText((activity as WaiterActivity).applicationContext,
                     "Unable to update hours at this time", Toast.LENGTH_SHORT).show()
             }
-
 
         return view
     }

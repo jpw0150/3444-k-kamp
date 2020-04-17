@@ -79,7 +79,7 @@ class ChefViewScheduleFragment : Fragment() {
                         if (exit) {
                             Toast.makeText(
                                 activity as ChefActivity,
-                                "FUCK OFF",
+                                "INVALID ENTRY",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -87,7 +87,6 @@ class ChefViewScheduleFragment : Fragment() {
 
 
                 })
-
         }
 
        updateHoursButton.setOnClickListener {

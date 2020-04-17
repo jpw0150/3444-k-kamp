@@ -41,7 +41,7 @@ class ManagerTableStatusFragment : Fragment() {
         /* RetrofitClient.instance.allTables().enqueue(object: Callback<ResponseTables> {
             override fun onFailure(call: Call<ResponseTables>, t: Throwable) {
                 Toast.makeText(
-                    activity as CustomerAccountActivity,
+                    activity as ManagerActivity,
                     t.message,
                     Toast.LENGTH_LONG
                 ).show()

@@ -20,6 +20,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.ChefActivity
 import com.example.myapplication.activities.MainActivity
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseEmployees
 import com.example.myapplication.apipackage.ResponseTables
 import com.example.myapplication.apipackage.RetrofitClient
 import kotlinx.android.synthetic.main.fragment_customer_table_number.*
@@ -41,31 +42,107 @@ class CustomerTableNumberFragment : Fragment() {
         nextButtonTable.setOnClickListener {
             val tableNumber = view.findViewById<EditText>(R.id.table_number).text.toString()
             val tableNum = tableNumber.toInt()
-            (activity as MenuActivity).table.number = tableNumber.toInt()
+            if (tableNum < 1 || tableNum > 20) {
+                Toast.makeText(
+                    activity as MenuActivity,
+                    "Please enter a number between 1 and 20",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                (activity as MenuActivity).table.number = tableNumber.toInt()
+
+                //Waiter IDs
+                /*if (tableNum < 11) {
+                    //(activity as MenuActivity).waiterID = 1
+
+                    RetrofitClient.instance.getAllEmp()
+                        .enqueue(object : Callback<ResponseEmployees> {
+                            override fun onFailure(call: Call<ResponseEmployees>, t: Throwable) {
+                                Toast.makeText(
+                                    activity as MenuActivity,
+                                    t.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            override fun onResponse(
+                                call: Call<ResponseEmployees>,
+                                response: Response<ResponseEmployees>
+                            ) {
+                                var index = 0
+                                while (true) {
+                                    if (response.body()?.employees?.get(index)?.role == "waiter") {
+                                        (activity as MenuActivity).waiterID =
+                                            response.body()?.employees?.get(index)?.id!!
+                                        break
+                                    }
+                                    index += 1
+                                }
+                            }
+                        })
+                } else {
+                    //(activity as MenuActivity).waiterID = 2
+
+                    RetrofitClient.instance.getAllEmp()
+                        .enqueue(object : Callback<ResponseEmployees> {
+                            override fun onFailure(call: Call<ResponseEmployees>, t: Throwable) {
+                                Toast.makeText(
+                                    activity as MenuActivity,
+                                    t.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            override fun onResponse(
+                                call: Call<ResponseEmployees>,
+                                response: Response<ResponseEmployees>
+                            ) {
+                                var index = 0
+                                var second = false
+                                while (true) {
+                                    if (response.body()?.employees?.get(index)?.role == "waiter") second =
+                                        true
+                                    if (response.body()?.employees?.get(index)?.role == "waiter" && second) {
+                                        (activity as MenuActivity).waiterID =
+                                            response.body()?.employees?.get(index)?.id!!
+                                        break
+                                    }
+                                    index += 1
+                                }
+                            }
+                        })
+                }*/
 
 
-            /* Save table status to database */
-            RetrofitClient.instance.updateTable(tableNum, "Ordering",
-                needHelp = false,
-                needRefill = false
-            ).enqueue(object: Callback<ResponseTable> {
-                override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
-                    Toast.makeText(
-                        activity as MenuActivity,
-                        t.message,
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
-                    Toast.makeText(
-                        activity as MenuActivity,
-                        "Assigning you your waiter",
-                        Toast.LENGTH_LONG
-                    ).show()
-                        }
-                    })
+                /* Save table status to database */
+                RetrofitClient.instance.updateTable(
+                    tableNum, "Ordering",
+                    needHelp = false,
+                    needRefill = false
+                ).enqueue(object : Callback<ResponseTable> {
+                    override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                        Toast.makeText(
+                            activity as MenuActivity,
+                            t.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
-            (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
+                    override fun onResponse(
+                        call: Call<ResponseTable>,
+                        response: Response<ResponseTable>
+                    ) {
+                        Toast.makeText(
+                            activity as MenuActivity,
+                            "Assigning you your waiter",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+
+                (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
+            }
         }
 
 

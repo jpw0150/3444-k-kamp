@@ -8,7 +8,6 @@
     android:background="@drawable/gradient_list"
     tools:context=".fragments.managerMenu.ManagerOrderHistoryFragment">
 
-
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"

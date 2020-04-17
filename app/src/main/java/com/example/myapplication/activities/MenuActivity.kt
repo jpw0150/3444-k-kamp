@@ -28,6 +28,7 @@ class MenuActivity : AppCompatActivity() {
 
     /* Store current table information */
     var table = Table(0, "None", false, false)
+    var waiterID = -1
 
     /* Setting up variables that are part of Entree() */
     lateinit var meatType: String
@@ -65,6 +66,11 @@ class MenuActivity : AppCompatActivity() {
     val sideList = arrayListOf<Side>()
     val drinkList = arrayListOf<Drink>()
     val orderList = arrayListOf<Order>()
+
+    /* Order string to be sent to database */
+    var entree_ID_String = ""
+    var side_ID_string = ""
+    var drink_ID_string = ""
 
     /* Constants */
     val MIN_NUM_WINGS = 3

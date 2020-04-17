@@ -106,8 +106,8 @@ class CustomerRegisterFragment : Fragment() {
                     }
 
                 })
-            val intent = Intent(activity, MenuActivity::class.java)
-            activity?.startActivity(intent)
+           /* val intent = Intent(activity, MenuActivity::class.java)
+            activity?.startActivity(intent)*/
         }
         return view
     }
