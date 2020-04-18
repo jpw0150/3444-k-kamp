@@ -426,8 +426,8 @@ VALUES(
 	'Michael Scott',
 	40.0,
 	'manager',
-	16.0
-	0.0
+	16.0,
+	0.0,
 	0
 );
 
@@ -439,8 +439,8 @@ VALUES(
 	'Dwight Schrute',
 	10.0,
 	'waiter',
-	10.0
-	0.0
+	10.0,
+	0.0,
 	0
 );
 
@@ -452,8 +452,8 @@ VALUES(
 	'Jim Halpert',
 	10.0,
 	'waiter',
-	40.0
-	0.0
+	40.0,
+	0.0,
 	0
 );
 
@@ -464,8 +464,8 @@ VALUES(
 	'chilli',
 	'Kevin Malone',
 	20.0,
-	'Employee',
-	40.0
-	0.0
+	'Cheff',
+	40.0,
+	0.0,
 	0
 );
