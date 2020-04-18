@@ -9,10 +9,9 @@
 			$this->con = $db->connect();
 		}
 		
-		public function createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal){
-			$state = $this->con->prepare("INSERT INTO orders (tableNum, entree, side, drink, note, orderTotal) VALUES (?, ?, ?, ?, ?, ?)");
-			
-			$state->bind_param("issssd", $tableNum, $entree, $side, $drink, $note, $orderTotal);
+		public function createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal, $status){
+			$state = $this->con->prepare("INSERT INTO orders (tableNum, entree, side, drink, note, orderTotal, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			$state->bind_param("issssdi", $tableNum, $entree, $side, $drink, $note, $orderTotal, $status);
 			
 			if($state->execute()){
 				return ORDER_CREATE;
@@ -26,7 +25,7 @@
 			include_once dirname(__FILE__) . '/ingredientsOperations.php';
 			$state = $this->con->prepare("SELECT * FROM orders");
 			$state->execute();
-			$state->bind_result($id, $tableNum, $entree, $side, $drink, $note, $orderTotal);			
+			$state->bind_result($id, $tableNum, $entree, $side, $drink, $note, $orderTotal, $status);			
 			$orders = array();
 			$ing = new ingredientsOperations;
 			while($state->fetch()){
@@ -76,6 +75,7 @@
 				$order['drink'] = $drinkData;
 				$order['note'] = $note;
 				$order['orderTotal'] = $orderTotal;
+				$order['status'] = $status;
 				array_push($orders, $order);
 			}
 			return $orders;
@@ -86,7 +86,7 @@
 			$state = $this->con->prepare("SELECT * FROM orders WHERE id = ?");
 			$state->bind_param("i", $id);
 			$state->execute();
-			$state->bind_result($id, $tableNum, $entree, $side, $drink, $note, $orderTotal);
+			$state->bind_result($id, $tableNum, $entree, $side, $drink, $note, $orderTotal, $status);
 			$state->fetch();
 			$order = array();
 			$entreeData = array();
@@ -137,6 +137,7 @@
 			$order['drink'] = $drinkData;
 			$order['note'] = $note;
 			$order['orderTotal'] = $orderTotal;
+			$order['status'] = $status;
 			return $order;
 		}
 		
@@ -149,9 +150,9 @@
 			return false;
 		}
 		
-		public function updateorder($id, $tableNum, $entree, $side, $drink, $note, $orderTotal){
-            $state = $this->con->prepare("UPDATE orders SET tableNum = ?, entree = ?, side = ?, drink = ?, note = ?, orderTotal = ? WHERE id = ?");
-            $state->bind_param("issssdi", $tableNum, $entree, $side, $drink, $note, $orderTotal, $id);
+		public function updateorder($id, $tableNum, $entree, $side, $drink, $note, $orderTotal, $status){
+            $state = $this->con->prepare("UPDATE orders SET tableNum = ?, entree = ?, side = ?, drink = ?, note = ?, orderTotal = ?, status = ? WHERE id = ?");
+            $state->bind_param("issssdii", $tableNum, $entree, $side, $drink, $note, $orderTotal, $status, $id);
             if($state->execute())
                 return true;
             return false; 
