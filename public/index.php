@@ -62,7 +62,7 @@ $app->post('/createMenuItem', function(Request $request, Response $response){
 });
 
 $app->post('/createOrder', function(Request $request, Response $response){
-	if(!haveEmptyParameters(array('tableNum', 'entree', 'side', 'drink', 'note', 'orderTotal'), $request, $response)){
+	if(!haveEmptyParameters(array('tableNum', 'entree', 'side', 'drink', 'note', 'orderTotal', 'status'), $request, $response)){
 		$request_data = $request->getParsedBody();
 		
 		$tableNum = $request_data['tableNum'];
@@ -71,10 +71,11 @@ $app->post('/createOrder', function(Request $request, Response $response){
 		$drink = $request_data['drink'];
 		$note = $request_data['note'];
 		$orderTotal = $request_data['orderTotal'];
+		$status = $request_data['status'];
 		
 		$db = new orderOperations;
 		
-		$result = $db->createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal);
+		$result = $db->createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal, $status);
 		
 		if($result == ORDER_CREATE){
 			$message = array();
@@ -383,7 +384,7 @@ $app->put('/updateItem/{id}', function(Request $request, Response $response, arr
 $app->put('/changeOrder/{id}', function(Request $request, Response $response, array $args){
 	$id = $args['id'];
 
-    if(!haveEmptyParameters(array('tableNum','entree','side', 'drink', 'note', 'orderTotal'), $request, $response)){
+    if(!haveEmptyParameters(array('tableNum','entree','side', 'drink', 'note', 'orderTotal', 'status'), $request, $response)){
 
 		$reqBody = file_get_contents('php://input');
         parse_str($reqBody, $request_data);
@@ -394,10 +395,11 @@ $app->put('/changeOrder/{id}', function(Request $request, Response $response, ar
 		$drink = $request_data['drink'];
 		$note = $request_data['note'];
 		$orderTotal = $request_data['orderTotal'];
+		$status = $request_data['status'];
 
         $db = new orderOperations; 
 
-        if($db->updateOrder($id, $tableNum, $entree, $drink, $side, $note, $orderTotal)){
+        if($db->updateOrder($id, $tableNum, $entree, $drink, $side, $note, $orderTotal, $status)){
             $response_data = array(); 
             $response_data['error'] = false; 
             $response_data['message'] = 'Order Updated Successfully';
