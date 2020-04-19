@@ -9,7 +9,12 @@
 			$this->con = $db->connect();
 		}
 		
-		
+		public function toHistory($id){
+			$state = $this->con->prepare("UPDATE orders SET status = 2  WHERE id = ?");
+			$state->bind_param("i", $id);
+			if($state->execute()) return true;
+			else return false;
+		}
 		
 		public function serve(){
 			$state = $this->con->prepare("SELECT tableNum FROM orders WHERE status = 1");
