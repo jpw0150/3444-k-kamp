@@ -27,14 +27,17 @@ class ManagerMenuFragment : Fragment() {
         val editMenuButton = view.findViewById<Button>(R.id.button_adjust_menu)
         val viewEmployeeButton = view.findViewById<Button>(R.id.button_view_employee)
         val inventoryButton = view.findViewById<Button>(R.id.button_inventory)
+        val surveyButton = view.findViewById<Button>(R.id.button_survey)
 
+
+        /* Navigate user to correct screen */
         applyDiscountButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerApplyDiscountFragment(), "") }
         tableStatusButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerTableStatusFragment(), "") }
         orderHistoryButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerOrderHistoryFragment(), "") }
         editMenuButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerEditMenuFragment(), "") }
         viewEmployeeButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "") }
         inventoryButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerInventoryFragment(), "") }
-
+        surveyButton.setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerSurveyFragment(),"") }
 
 
         return view

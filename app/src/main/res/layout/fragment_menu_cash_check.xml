@@ -14,8 +14,7 @@
         android:layout_width="70dp"
         android:layout_height="49dp"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="68dp"
         android:background="@android:color/black"
         android:text="0%"
         android:textColor="@android:color/white"
@@ -29,19 +28,18 @@
         android:id="@+id/cash_total_price"
         android:layout_width="171dp"
         android:layout_height="67dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="48dp"
         android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cash_fifteen" />
+        app:layout_constraintBottom_toTopOf="@+id/button_cash_checkout"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/cash_order"
-        android:layout_width="75dp"
-        android:layout_height="69dp"
+        android:layout_width="77dp"
+        android:layout_height="56dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="148dp"
         android:text="Order :"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -91,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cash_total"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/cash_fifteen"
@@ -140,35 +138,35 @@
         android:layout_width="75dp"
         android:layout_height="69dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="160dp"
         android:text="Total :"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/cash_total_price"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.411"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cash_fifteen" />
 
     <TextView
         android:id="@+id/cash_order_price"
-        android:layout_width="169dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="168dp"
+        android:layout_width="175dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="148dp"
         android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cash_order"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="119dp"
         android:layout_height="113dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/cash"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -176,8 +174,8 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
         android:text="@string/tip_value"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"

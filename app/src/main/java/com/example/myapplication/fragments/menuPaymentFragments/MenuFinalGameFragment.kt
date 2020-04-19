@@ -68,7 +68,7 @@ class MenuFinalGameFragment : Fragment() {
         val finalButton = view.findViewById<Button>(R.id.final_game_next_button)
 
         finalButton.setOnClickListener {
-            (activity as MenuActivity).replaceFragment(MenuExitFragment(), "")
+            (activity as MenuActivity).replaceFragment(MenuSurveyFragment(), "")
         }
 
         /* Intialialize and set up help and refill button actions */

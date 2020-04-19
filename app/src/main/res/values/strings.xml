@@ -172,4 +172,16 @@
     <string name="value_meal_2">Value Meal #2</string>
     <string name="meal_one_description">Our delicious barbecue wing combo comes with 4 savory boneless barbecue wings with 1 serving of ranch and a lemonade</string>
     <string name="meal_two_description">Get four juicy boneless lemon pepper wings with our savory honey mustard sauce along with a refreshing soft drink!</string>
+    <string name="customer_survey">Customer Survey</string>
+    <string name="rate_service">Please rate our service on a scale of 0 - 10</string>
+    <string name="rate_meal">Please rate our food on a scale of 0 - 10</string>
+    <string name="rate_app">Please rate out application on a scale of 0 - 10</string>
+    <string name="view_customer_surveys">View Customer Surveys</string>
+    <string name="get_all_survey_results">Get all survey results</string>
+    <string name="service_rating">Service Rating:</string>
+    <string name="food_rating">Food Rating:</string>
+    <string name="application_rating">Application Rating:</string>
+    <string name="previous">Previous</string>
+    <string name="n_a">N/A</string>
+    <string name="go_back">Go Back</string>
 </resources>

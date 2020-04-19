@@ -57,9 +57,11 @@ class MenuViewCartFragment : Fragment() {
 
         /* Display "Order Total" title and calculate total  */
         displayTitleText(layout, getString(R.string.order_total))
-        (activity as MenuActivity).orderTotal = (entreePriceTotal + sidePriceTotal + drinkPriceTotal).toString()
+        val orderTotalCalculation = "%.2f".format(entreePriceTotal + sidePriceTotal + drinkPriceTotal).toDouble()
+        (activity as MenuActivity).orderTotal = orderTotalCalculation.toString()
+
         val orderTotal = (activity as MenuActivity).orderTotal
-        displayTitleText(layout, "$$orderTotal")
+        displayTitleText(layout, "$orderTotal")
 
         /* Create Order() with most up to date entree, side, and drink information */
         (activity as MenuActivity).createOrder()

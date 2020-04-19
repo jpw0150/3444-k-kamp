@@ -50,7 +50,7 @@ class ManagerOrderHistoryFragment : Fragment() {
                         response: Response<ResponseOrders>
                     ) {
 
-                        Toast.makeText(activity as ManagerActivity, "NICCEE", Toast.LENGTH_SHORT)
+                        Toast.makeText(activity as ManagerActivity, "Order History received", Toast.LENGTH_SHORT)
                             .show()
 
 
