@@ -16,7 +16,7 @@
 			else return false;
 		}
 		
-				public function chefOrders(){
+		public function chefOrders(){
 			include_once dirname(__FILE__) . '/ingredientsOperations.php';
 			$state = $this->con->prepare("SELECT * FROM orders WHERE status = 0");
 			$state->execute();
