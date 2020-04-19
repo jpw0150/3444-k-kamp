@@ -118,6 +118,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/managerInventoryPosition" />
 
+    <EditText
+        android:id="@+id/managerInventoryId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginEnd="88dp"
+        android:ems="10"
+        android:hint="[ID]"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/managerInventoryPosition" />
+
     <Button
         android:id="@+id/managerInventoryAdd"
         android:layout_width="wrap_content"
@@ -166,4 +181,7 @@
         app:layout_constraintEnd_toStartOf="@+id/managerInventoryText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

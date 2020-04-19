@@ -48,7 +48,7 @@ class ChefInventoryFragment : Fragment() {
 
                     view.findViewById<Button>(R.id.chefInventoryLeave).setOnClickListener{ (activity as ChefActivity).replaceFragment(ChefMenuFragment(), "") }
                     view.findViewById<Button>(R.id.chefInventoryBack).setOnClickListener{ ingsBack(output) }
-                    view.findViewById<Button>(R.id.chefInventoryUpdate).setOnClickListener{ ingsUpdate(output) }
+                    //view.findViewById<Button>(R.id.chefInventoryUpdate).setOnClickListener{ ingsUpdate(output) }
                     view.findViewById<Button>(R.id.chefInventoryNext).setOnClickListener{ ingsForward(output) }
 
 
@@ -109,18 +109,17 @@ class ChefInventoryFragment : Fragment() {
         }
         view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.apply { hint = chefIngs?.get(index)?.foodnum.toString()}
     }
-    fun ingsUpdate(chefIngs:List<Ingredient>?) {
+    /*fun ingsUpdate(chefIngs:List<Ingredient>?) {
         val ingId = chefIngs?.get(index)?.id
         val name = chefIngs?.get(index)?.food
-        var quantity =""
-        if (view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.text.isNullOrEmpty()) {quantity =
-            chefIngs?.get(index)?.foodnum?.toInt()!!.toString()
-        }
+        var quantity = 0
+        view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.hint = chefIngs?.get(index)?.foodnum?.toString()
+
         else {
             quantity =
-                view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.text.toString().toInt().toString()
+                view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.text.toString().toInt()
             chefIngs?.get(index)?.foodnum =
-                view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.text.toString().toInt().toString()
+                view?.findViewById<EditText>(R.id.chefInventoryQuantity)?.text.toString().toInt()
         }
         if (ingId != null) {
             if (name != null) {
@@ -152,5 +151,5 @@ class ChefInventoryFragment : Fragment() {
             }
         }
 
-    }
+    }*/
 }

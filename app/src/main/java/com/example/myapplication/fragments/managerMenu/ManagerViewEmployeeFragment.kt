@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
@@ -111,14 +112,14 @@ class ManagerViewEmployeeFragment : Fragment() {
 
         removebutton.setOnClickListener{
 
-            val id = employee_id.text.toString().toInt()
+            var id = view.findViewById<EditText>(R.id.employee_id).text.toString().toInt()
 
             RetrofitClient.instance.deleteEmployee(id)
                 .enqueue(object : Callback<ResponseEmployee> {
                     override fun onFailure(call: Call<ResponseEmployee>, t: Throwable) {
                         Toast.makeText(
                             activity as ManagerActivity,
-                            t.message,
+                            "FAIL",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -127,18 +128,11 @@ class ManagerViewEmployeeFragment : Fragment() {
                         call: Call<ResponseEmployee>,
                         response: Response<ResponseEmployee>
                     ) {
-                        /*Toast.makeText(
+                        Toast.makeText(
                             activity as ManagerActivity,
-                            response.body()?.message,
+                            "FIRED",
                             Toast.LENGTH_LONG
-                        ).show()*/
-
-                        if(response.isSuccessful){
-                            Toast.makeText(activity as ManagerActivity, "Delete sucessful",Toast.LENGTH_LONG )
-                        }else{
-                            Toast.makeText(activity as ManagerActivity, "Delete UNsucessful",Toast.LENGTH_LONG )
-
-                        }
+                        ).show()
                     }
                 })
         }

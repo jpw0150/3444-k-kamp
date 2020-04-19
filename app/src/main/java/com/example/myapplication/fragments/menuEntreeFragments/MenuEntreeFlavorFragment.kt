@@ -55,26 +55,32 @@ class MenuEntreeFlavorFragment : Fragment() {
         /* Save selected flavor type to order and proceed to step 3 */
         bbq_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Barbecue"
+            (activity as MenuActivity).entreeId+=10
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         lemon_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Lemon Pepper"
+            (activity as MenuActivity).entreeId+=60
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         cajun_button.setOnClickListener {
             (activity as MenuActivity).flavorType = "Cajun"
+            (activity as MenuActivity).entreeId+=30
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         garlic_parm_button.setOnClickListener {
             (activity as MenuActivity).flavorType = "Garlic Parmesan"
+            (activity as MenuActivity).entreeId+=40
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         buffalo_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Buffalo"
+            (activity as MenuActivity).entreeId+=20
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
         hawaiian_button.setOnClickListener{
             (activity as MenuActivity).flavorType = "Hawaiian"
+            (activity as MenuActivity).entreeId+=50
             (activity as MenuActivity).replaceFragment(MenuEntreeQuantityFragment(), "")
         }
 

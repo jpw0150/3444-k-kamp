@@ -10,8 +10,13 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 
 import com.example.myapplication.*
+import com.example.myapplication.apipackage.ResponseEmployee
+import com.example.myapplication.apipackage.RetrofitClient
 import com.example.myapplication.data_structs.Employee
 import com.example.myapplication.database.EmployeeDataMapHelper
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 /* Class logs employees in */
@@ -175,3 +180,4 @@ class EmployeeLoginActivity : AppCompatActivity() {
     }
 
 }
+

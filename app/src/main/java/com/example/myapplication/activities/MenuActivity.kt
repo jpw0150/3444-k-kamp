@@ -27,9 +27,20 @@ class MenuActivity : AppCompatActivity() {
     val activity = this@MenuActivity
 
     /* Store current table information */
-    var table = Table(0, "None", false, false)
+    var table = Table(0, "None", 0 , 0, 0.0)
     var waiterID = -1
 
+    var entreeId = 0
+
+    var idStringEntree = ""
+
+    var idDrinkSe = ""
+
+    var drinkId = 0
+
+    var sideId = 0
+    var sideIdSe = ""
+    var tableNumber = 0
     /* Setting up variables that are part of Entree() */
     lateinit var meatType: String
     lateinit var flavorType: String

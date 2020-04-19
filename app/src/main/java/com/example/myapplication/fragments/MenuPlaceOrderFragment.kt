@@ -16,6 +16,13 @@ import android.widget.Button
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.DefaultResponse
+import com.example.myapplication.apipackage.ResponseOrder
+import com.example.myapplication.apipackage.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 
 class MenuPlaceOrderFragment : Fragment() {
@@ -29,9 +36,63 @@ class MenuPlaceOrderFragment : Fragment() {
         val noButton = view.findViewById<Button>(R.id.button_no)
 
         yesButton.setOnClickListener {
-            Toast.makeText((activity as MenuActivity).applicationContext, "Order placed successfully!", Toast.LENGTH_LONG).show()
-            (activity as MenuActivity).addOrder()
-            (activity as MenuActivity).resetOrder()
+
+            if( (activity as MenuActivity).idStringEntree.isNotEmpty()){
+                (activity as MenuActivity).idStringEntree.dropLast(1)
+            }
+            if( (activity as MenuActivity).sideIdSe.isNotEmpty()){
+                (activity as MenuActivity).sideIdSe.dropLast(1)
+            }
+            if( (activity as MenuActivity).idDrinkSe.isNotEmpty()){
+                (activity as MenuActivity).idDrinkSe.dropLast(1)
+            }
+
+            RetrofitClient.instance.createOrder(
+                (activity as MenuActivity).tableNumber,
+                (activity as MenuActivity).idStringEntree,
+                (activity as MenuActivity).idDrinkSe,
+                (activity as MenuActivity).sideIdSe,
+                "",
+                40.0,
+                0
+
+            ).enqueue(object : Callback<ResponseOrder> {
+                override fun onFailure(call: Call<ResponseOrder>, t: Throwable) {
+                    Toast.makeText(
+                        activity as MenuActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                override fun onResponse(call: Call<ResponseOrder>, response: Response<ResponseOrder>) {
+                    Toast.makeText(
+                    activity as MenuActivity,
+                    "WE DID IT",
+                    Toast.LENGTH_LONG
+                ).show()
+                }
+            })
+
+           // Toast.makeText((activity as MenuActivity).applicationContext, "Order placed successfully!", Toast.LENGTH_LONG).show()
+           // (activity as MenuActivity).addOrder()
+
+            //(activity as MenuActivity).resetOrder()
+
+
+
+            (activity as MenuActivity).idStringEntree = ""
+            (activity as MenuActivity).idDrinkSe = ""
+            (activity as MenuActivity).sideIdSe = ""
+
+
+
+
+
+
+
+
+
             (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
         }
 

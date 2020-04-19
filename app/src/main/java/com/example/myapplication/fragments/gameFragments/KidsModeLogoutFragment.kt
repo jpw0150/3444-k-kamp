@@ -26,7 +26,7 @@ class KidsModeLogoutFragment : Fragment() {
         view.findViewById<Button>(R.id.kidsModeLogoutCancel).setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuGameOptionsFragment(),"") }
         view.findViewById<Button>(R.id.kidsModeLogoutConfirm).setOnClickListener {
             //Exit only allowed with the password previously set or with an employee override using the code, "EMPLOYEE OVERRIDE"
-            if (kidsModePassword == view.findViewById<EditText>(R.id.kidsModeLogoutEntry).text.toString() || view.findViewById<EditText>(R.id.kidsModeLogoutEntry).text.toString() == "EMPLOYEE OVERRIDE") {
+            if (kidsModeLogoutValidate(view.findViewById<EditText>(R.id.kidsModeLogoutEntry).text.toString(), kidsModePassword)) {
                 kidsModePassword = ""
                 (activity as MenuActivity).replaceFragment(MainMenuFragment(),"")
             }
@@ -36,6 +36,11 @@ class KidsModeLogoutFragment : Fragment() {
         }
 
         return view
+    }
+
+    fun kidsModeLogoutValidate(input: String, password: String) : Boolean {
+        if (input == password || input == "EMPLOYEE OVERRIDE") return true
+        else return false
     }
 
     private fun runGraidentAnimation(v: View) {

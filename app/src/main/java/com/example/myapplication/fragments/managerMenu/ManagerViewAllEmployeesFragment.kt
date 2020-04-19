@@ -16,6 +16,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activities.CustomerAccountActivity
 import com.example.myapplication.activities.ManagerActivity
 import com.example.myapplication.apipackage.*
+import kotlinx.android.synthetic.main.fragment_manager_view_all_employees.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,11 +34,16 @@ class ManagerViewAllEmployeesFragment : Fragment() {
         view.findViewById<Button>(R.id.leave_button).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "")}
 
         view.findViewById<Button>(R.id.get_employees_button).setOnClickListener {
-            RetrofitClient.instance.getAllEmp().enqueue(object: Callback<ResponseEmployees> {
+            RetrofitClient.instance.getAllEmp().enqueue(object : Callback<ResponseEmployees> {
                 override fun onFailure(call: Call<ResponseEmployees>, t: Throwable) {
-                    view.findViewById<TextView>(R.id.employee_position).apply{ text = "UNSUCCESSFUL" }
+                    view.findViewById<TextView>(R.id.employee_position)
+                        .apply { text = "UNSUCCESSFUL" }
                 }
-                override fun onResponse(call: Call<ResponseEmployees>, response: Response<ResponseEmployees>) {
+
+                override fun onResponse(
+                    call: Call<ResponseEmployees>,
+                    response: Response<ResponseEmployees>
+                ) {
 
                     val output = response.body()?.employees
 
@@ -47,141 +53,87 @@ class ManagerViewAllEmployeesFragment : Fragment() {
                     }
 
                     if (output != null) {
-                        view.findViewById<EditText>(R.id.employee_name).hint   = output.get(index).name
+                        view.findViewById<EditText>(R.id.employee_name).hint =
+                            output.get(index).name
                     }
                     if (output != null) {
-                        view.findViewById<EditText>(R.id.employee_wage).hint = output.get(index).wage.toString()
+                        view.findViewById<EditText>(R.id.employee_wage).hint =
+                            output.get(index).wage.toString()
                     }
                     if (output != null) {
-                        view.findViewById<EditText>(R.id.employee_role).hint = output.get(index).role
+                        view.findViewById<EditText>(R.id.employee_role).hint =
+                            output.get(index).role
                     }
                     if (output != null) {
-                        view.findViewById<EditText>(R.id.employee_hours).hint = output.get(index).hours.toString()
+                        view.findViewById<EditText>(R.id.employee_hours).hint =
+                            output.get(index).hours.toString()
                     }
                     if (output != null) {
-                        view.findViewById<EditText>(R.id.employee_tips).hint = output.get(index).tips.toString()
+                        view.findViewById<EditText>(R.id.employee_tips).hint =
+                            output.get(index).tips.toString()
                     }
                     if (output != null) {
-                        view.findViewById<EditText>(R.id.employee_compmeals). hint = output.get(index).compmeals.toString()
+                        view.findViewById<EditText>(R.id.employee_compmeals).hint =
+                            output.get(index).compmeals.toString()
                     }
 
-                    view.findViewById<Button>(R.id.leave_button).setOnClickListener{ (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "") }
-                    view.findViewById<Button>(R.id.update_employee).setOnClickListener{ empsUpdate(output) }
-                    view.findViewById<Button>(R.id.previous_button).setOnClickListener{ empsPrevious(output) }
-                    view.findViewById<Button>(R.id.next_button).setOnClickListener{ empsNext(output) }
+                    view.findViewById<Button>(R.id.leave_button).setOnClickListener {
+                        (activity as ManagerActivity).replaceFragment(
+                            ManagerViewEmployeeFragment(),
+                            ""
+                        )
+                    }
+                    view.findViewById<Button>(R.id.previous_button)
+                        .setOnClickListener { empsPrevious(output) }
+                    view.findViewById<Button>(R.id.next_button)
+                        .setOnClickListener { empsNext(output) }
 
                 }
             })
-        }
 
+
+
+            view.findViewById<Button>(R.id.update_employee).setOnClickListener {
+
+                val empID = employee_id.text.toString().toInt()
+                val ename = employee_name.text.toString().trim()
+                val ewage = employee_wage.text.toString().toInt()
+                val erole = employee_role.text.toString().trim()
+                val ehours = employee_hours.text.toString().toInt()
+                val etips = employee_tips.text.toString().toDouble()
+                val ecompmeals = employee_compmeals.text.toString().toInt()
+
+
+                RetrofitClient.instance.updateEmp(empID, ename, ewage, erole, ehours, etips, ecompmeals)
+                .enqueue(object : Callback<ResponseEmployee> {
+                    override fun onFailure(call: Call<ResponseEmployee>, t: Throwable) {
+                        Toast.makeText(
+                            activity as ManagerActivity,
+                            "Customer Already Exist",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseEmployee>,
+                        response: Response<ResponseEmployee>
+                    ) {
+                        Toast.makeText(
+                            activity as ManagerActivity,
+                            "update sucessfull",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                    }
+
+
+                })
+
+            }
+        }
         return view
     }
 
-  fun empsUpdate(employeeList: List<Employee>?) {
-        val empId = employeeList?.get(index)?.id
-      //val empId = 1
-       // var pass = "" //password
-        var ename = "" //name
-        if (view?.findViewById<EditText>(R.id.employee_name)?.hint.isNullOrEmpty()) {
-            if (employeeList != null) {
-                ename = employeeList.get(index).name
-            }
-        }
-        else {
-            ename = view?.findViewById<EditText>(R.id.employee_name)?.hint.toString()
-            if (employeeList != null) {
-                employeeList.get(index).name = view?.findViewById<EditText>(R.id.employee_name)?.hint.toString()
-            }
-        }
-        var ewage = 0 //wage
-        if (view?.findViewById<EditText>(R.id.employee_wage)?.hint.isNullOrEmpty()) {
-            if (employeeList != null) {
-                ewage = employeeList.get(index).wage
-            }
-        }
-        else {
-            ewage = view?.findViewById<EditText>(R.id.employee_wage)?.hint.toString().toInt()
-            if (employeeList != null) {
-                employeeList.get(index).wage = view?.findViewById<EditText>(R.id.employee_wage)?.hint.toString().toInt()
-            }
-        }
-        var erole = "" //role
-        if (view?.findViewById<EditText>(R.id.employee_role)?.hint.isNullOrEmpty()) {
-            if (employeeList != null) {
-                erole = employeeList.get(index).role
-            }
-        }
-        else {
-            erole = view?.findViewById<EditText>(R.id.employee_role)?.hint.toString()
-            if (employeeList != null) {
-                employeeList.get(index).role = view?.findViewById<EditText>(R.id.employee_role)?.hint.toString()
-            }
-        }
-        var ehours = 0 //hours
-        if (view?.findViewById<EditText>(R.id.employee_hours)?.hint.isNullOrEmpty()) {
-            if (employeeList != null) {
-                ehours = employeeList.get(index).hours
-            }
-        }
-        else {
-            ehours = view?.findViewById<EditText>(R.id.employee_hours)?.hint.toString().toInt()
-            if (employeeList != null) {
-                employeeList.get(index).hours = view?.findViewById<EditText>(R.id.employee_hours)?.hint.toString().toInt()
-            }
-        }
-        var etips = 0.0 //tips
-        if (view?.findViewById<EditText>(R.id.employee_tips)?.hint.isNullOrEmpty()) {
-            if (employeeList != null) {
-                etips =
-                    employeeList.get(index).tips.toDouble()
-            }
-        }
-        else {
-            etips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toDouble()
-            if (employeeList != null) {
-                employeeList.get(index).tips = view?.findViewById<EditText>(R.id.employee_tips)?.hint.toString().toDouble()
-            }
-        }
-        var ecompmeals = 0 //compmeals
-        if (view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.isNullOrEmpty()) {
-            if (employeeList != null) {
-                ecompmeals = employeeList.get(index).compmeals
-            }
-        }
-        else {
-            ecompmeals = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
-            employeeList?.get(index)?.compmeals  = view?.findViewById<EditText>(R.id.employee_compmeals)?.hint.toString().toInt()
-        }
-        //new data
-      if (empId != null) {
-          RetrofitClient.instance.updateEmp(empId, ename, ewage, erole, ehours, etips, ecompmeals)
-              .enqueue(object : Callback<ResponseEmployee> {
-                  override fun onFailure(call: Call<ResponseEmployee>, t: Throwable) {
-                      Toast.makeText(
-                          activity as ManagerActivity,
-                          "Customer Already Exist",
-                          Toast.LENGTH_LONG
-                      ).show()
-                  }
-
-                  override fun onResponse(
-                      call: Call<ResponseEmployee>,
-                      response: Response<ResponseEmployee>
-                  ) {
-                      Toast.makeText(
-                          activity as ManagerActivity,
-                          "update sucessfull",
-                          Toast.LENGTH_LONG
-                      ).show()
-
-                  }
-
-
-              })
-
-      }
-
-    }
     fun empsPrevious(employeeList: List<Employee>?) {
         if (index == 0) {
             if (employeeList != null) {

@@ -20,6 +20,7 @@ class MenuEntreeMeatFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu_entree, container, false)
         runGraidentAnimation(view)
 
+        (activity as MenuActivity).entreeId
         /* Initialize meat type buttons */
         val boneless_button = view.findViewById<Button>(R.id.button_boneless)
         val bone_button = view.findViewById<Button>(R.id.button_bone)
@@ -32,17 +33,24 @@ class MenuEntreeMeatFragment : Fragment() {
         /* Save selected meat type to order and proceed to step 2 */
         boneless_button.setOnClickListener{
             (activity as MenuActivity).meatType = "Boneless"
+            (activity as MenuActivity).entreeId+=2
             (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
+
+
         }
 
         bone_button.setOnClickListener{
             (activity as MenuActivity).meatType = "Bone"
+            (activity as MenuActivity).entreeId+=1
             (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
+
         }
 
         tenders_button.setOnClickListener{
             (activity as MenuActivity).meatType = "Tenders"
+            (activity as MenuActivity).entreeId+=3
             (activity as MenuActivity).replaceFragment(MenuEntreeFlavorFragment(), "")
+
         }
 
 

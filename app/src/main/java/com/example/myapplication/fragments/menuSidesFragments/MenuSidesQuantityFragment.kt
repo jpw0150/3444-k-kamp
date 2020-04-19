@@ -39,8 +39,12 @@ class MenuSidesQuantityFragment : Fragment() {
                 ).show()
             } else {
                 (activity as MenuActivity).sideItemQuantity = sideQuantity
+                (activity as MenuActivity).sideIdSe+=sideQuantity*1000
+                (activity as MenuActivity).sideIdSe = (activity as MenuActivity).sideIdSe + (activity as MenuActivity).sideId.toString() + " "
                 (activity as MenuActivity).replaceFragment(MenuSidesNotesFragment(), "")
             }
+
+            (activity as MenuActivity).sideId = 0
         }
 
 

@@ -76,11 +76,11 @@ class ManagerApplyDiscountFragment : Fragment() {
         }
 
         updateTotalButton.setOnClickListener {
-
+        /*
             /* Update new table total to database */
             RetrofitClient.instance.updateTable(table_num, "Serviced",
                 needHelp = false,
-                needRefill = false
+                needRefill = false,orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -97,6 +97,8 @@ class ManagerApplyDiscountFragment : Fragment() {
                     ).show()
                 }
             })
+
+         */
             (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")
         }
         return view

@@ -46,140 +46,79 @@ class WaiterTableAlertFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_waiter_table_alert, container, false)
         runGraidentAnimation(view)
+        RetrofitClient.instance.checkHelp()
+            .enqueue(object: Callback<ResponseNice> {
+                override fun onFailure(call: Call<ResponseNice>, t: Throwable) {
+                    Toast.makeText(activity as WaiterActivity, "Order not ready", Toast.LENGTH_LONG).show()
+                }
+                override fun onResponse(
+                    call: Call<ResponseNice>,
+                    response: Response<ResponseNice>
+                ) {
+                    val output = response.body()?.tables
 
-        /* Initialize layout variable that will be dynamically programmed on */
-        val layout = view.findViewById<LinearLayout>(R.id.waiter_notifications)
+                    //view.findViewById<TextView>(R.id.employee_name).text = output
 
+                    if (output != null) {
+                        var newString="Needs Help: \n"
+                        for(i in (0..output.size-1)){
+                            newString+= output.get(i).toString() + "\n"
 
-        /* First get all the tables */
-        RetrofitClient.instance.allTables().enqueue(object: Callback<ResponseTables> {
-            override fun onFailure(call: Call<ResponseTables>, t: Throwable) {
-                Toast.makeText(
-                    activity as WaiterActivity,
-                    t.message,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-
-            override fun onResponse(call: Call<ResponseTables>, response: Response<ResponseTables>) {
-
-                /* Get all current status of all tables */
-                //TODO: Implement table table
-                //tableList = response.body()!!.tables
-
-                for (i in 0..tableList.size) {
-                    val table = tableList[i]
-                    if (table.needHelp || table.needRefill) {
-                        serviceTableList.add(table)
-                        val textView = TextView((activity as WaiterActivity))
-                        val tableNum = table.number
-                        val tableStatus = table.tableStatus
-
-                        /* Display notification messege */
-                        textView.text = createNotificationDisplay(tableNum, tableStatus)
-                        setTextViewAttributes(textView)
-                        layout.addView(textView)
-                        addLineSeperator(layout)
+                        }
+                        view.findViewById<TextView>(R.id.help).text = newString
                     }
                 }
-            }
-        })
-
-        /* Resolve notifications */
-        if (serviceTableList.size > 0) {
-
-            /* Create Resolve button */
-            val resolveButton = Button(activity as WaiterActivity)
-            resolveButton.text = getString(R.string.resolve_all)
-            resolveButton.setBackgroundColor(Color.BLACK)
-            resolveButton.setTextColor(Color.WHITE)
-            layout.addView(resolveButton)
-
-            /* When pressing resolve button reset all the serviced table values */
-            resolveButton.setOnClickListener {
-                for (i in 0..tableList.size){
-                    val table = tableList[i]
-
-                    /* Save updated table status to database */
-                    RetrofitClient.instance.updateTable(table.number, getString(R.string.serviced),
-                        needHelp = false,
-                        needRefill = false
-                        //TODO
-                        //table.orderTotal
-                    ).enqueue(object: Callback<ResponseTable> {
-                        override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
-                            Toast.makeText(
-                                activity as MenuActivity,
-                                t.message,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                        override fun onResponse(call: Call<ResponseTable>, response: Response<ResponseTable>) {
-                            Toast.makeText(
-                                activity as WaiterActivity,
-                                "Notification not properly resolved",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    })
+            })
+        RetrofitClient.instance.checkRefill()
+            .enqueue(object: Callback<ResponseNice> {
+                override fun onFailure(call: Call<ResponseNice>, t: Throwable) {
+                    Toast.makeText(activity as WaiterActivity, "Order not ready", Toast.LENGTH_LONG).show()
                 }
-            }
-        }
+                override fun onResponse(
+                    call: Call<ResponseNice>,
+                    response: Response<ResponseNice>
+                ) {
+                    val output = response.body()?.tables
 
+                    if (output != null) {
+                        var newString="Needs Refill: \n"
+                        for(i in (0..output.size-1)){
+                            newString+= output.get(i).toString() + "\n"
+
+                        }
+                        view.findViewById<TextView>(R.id.refill).text = newString
+                    }
+                }
+            })
+
+        val clear = view.findViewById<Button>(R.id.clearAll)
+        clear.setOnClickListener{
+
+            val id = view.findViewById<EditText>(R.id.tableIdTocl).text.toString().toInt()
+
+            RetrofitClient.instance.clearHelp(id)
+                .enqueue(object: Callback<ResponseTable> {
+                    override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                        Toast.makeText(activity as WaiterActivity, "Order not ready", Toast.LENGTH_LONG).show()
+                    }
+                    override fun onResponse(
+                        call: Call<ResponseTable>,
+                        response: Response<ResponseTable>
+                    ) {
+                        Toast.makeText(activity as WaiterActivity, "Table Helped", Toast.LENGTH_LONG).show()
+                        (activity as WaiterActivity).replaceFragment(WaiterMenuFragment(), "")
+                    }
+                })
+        }
         return view
     }
 
     private fun runGraidentAnimation(v: View) {
-        val constraintLayout = v.findViewById<ScrollView>(R.id.waiter_view_alerts)
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.waiter_view_alerts)
         val animationDrawable = constraintLayout?.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
     }
 
-    fun createNotificationDisplay(tableNum: Int, tableStatus: String): String {
-        return "Table number $tableNum has send a request \n$tableStatus. \n"
-    }
-
-    /** HELPER METHOD: Method is used to display dynamic text properly */
-    private fun setTextViewAttributes(textView: TextView) {
-        val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-
-        params.setMargins(
-            convertDpToPixel(16),
-            convertDpToPixel(16),
-            0, 0
-        )
-
-        textView.setTextColor(Color.BLACK)
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-        textView.layoutParams = params
-    }
-
-
-    /** Helper method for setTextAttributes() */
-    private fun convertDpToPixel(dp: Int): Int {
-        val metrics = Resources.getSystem().displayMetrics
-        val px = dp * (metrics.densityDpi / 160f)
-        return px.roundToInt()
-    }
-
-    /** HELPER METHOD: Displays line */
-    private fun addLineSeperator(layout:LinearLayout) {
-        val lineLayout = LinearLayout(activity as WaiterActivity)
-        lineLayout.setBackgroundColor(Color.BLACK)
-        val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            2
-        )
-        params.setMargins(0, convertDpToPixel(10), 0, convertDpToPixel(10))
-        lineLayout.layoutParams = params
-        layout.addView(lineLayout)
-    }
-
-
 }
-

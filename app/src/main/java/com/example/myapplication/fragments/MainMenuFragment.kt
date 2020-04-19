@@ -63,8 +63,9 @@ class MainMenuFragment : Fragment() {
 
             /* Save table status to the database  */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
-                needHelp = true,
-                needRefill = false
+                needHelp = 1,
+                needRefill = 0,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -90,8 +91,9 @@ class MainMenuFragment : Fragment() {
 
             /* Save table status to database */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
-                needHelp = false,
-                needRefill = true
+                needHelp = 0 ,
+                needRefill = 1,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(

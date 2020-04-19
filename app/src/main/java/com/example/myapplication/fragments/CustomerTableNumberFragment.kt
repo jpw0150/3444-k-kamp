@@ -40,8 +40,8 @@ class CustomerTableNumberFragment : Fragment() {
         val nextButtonTable = view.findViewById<Button>(R.id.button_next_table_num)
 
         nextButtonTable.setOnClickListener {
-            val tableNumber = view.findViewById<EditText>(R.id.table_number).text.toString()
-            val tableNum = tableNumber.toInt()
+            (activity as MenuActivity).tableNumber = view.findViewById<EditText>(R.id.table_number).text.toString().toInt()
+            val tableNum = (activity as MenuActivity).tableNumber.toInt()
             if (tableNum < 1 || tableNum > 20) {
                 Toast.makeText(
                     activity as MenuActivity,
@@ -50,7 +50,7 @@ class CustomerTableNumberFragment : Fragment() {
                 ).show()
             }
             else {
-                (activity as MenuActivity).table.number = tableNumber.toInt()
+                (activity as MenuActivity).table.number = (activity as MenuActivity).tableNumber
 
                 //Waiter IDs
                 /*if (tableNum < 11) {
@@ -114,12 +114,15 @@ class CustomerTableNumberFragment : Fragment() {
                         })
                 }*/
 
+                /*
+
 
                 /* Save table status to database */
                 RetrofitClient.instance.updateTable(
                     tableNum, "Ordering",
                     needHelp = false,
-                    needRefill = false
+                    needRefill = false,
+                    orderTotal = 0.0
                 ).enqueue(object : Callback<ResponseTable> {
                     override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                         Toast.makeText(
@@ -140,6 +143,8 @@ class CustomerTableNumberFragment : Fragment() {
                         ).show()
                     }
                 })
+
+                 */
 
                 (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
             }

@@ -18,6 +18,7 @@ import com.example.myapplication.activities.CustomerAccountActivity
 import com.example.myapplication.activities.ManagerActivity
 import com.example.myapplication.apipackage.*
 import com.example.myapplication.fragments.chefMenu.ChefMenuFragment
+import kotlinx.android.synthetic.main.fragment_chef_inventory.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +54,7 @@ class ManagerInventoryFragment : Fragment() {
                     view.findViewById<Button>(R.id.managerInventoryLeave).setOnClickListener{ (activity as ManagerActivity).replaceFragment(
                         ManagerMenuFragment(), "") }
                     view.findViewById<Button>(R.id.managerInventoryBack).setOnClickListener{ ingsBack(output) }
-                    view.findViewById<Button>(R.id.managerInventoryUpdate).setOnClickListener{ ingsUpdate(output) }
+                    //view.findViewById<Button>(R.id.managerInventoryUpdate).setOnClickListener{ ingsUpdate(output) }
                     view.findViewById<Button>(R.id.managerInventoryNext).setOnClickListener{ ingsForward(output) }
 
 
@@ -61,6 +62,44 @@ class ManagerInventoryFragment : Fragment() {
                 }
             })
         }
+
+
+        val updateButton = view.findViewById<Button>(R.id.managerInventoryUpdate)
+        updateButton.setOnClickListener{
+
+
+            val ingId = view.findViewById<EditText>(R.id.managerInventoryId).text.toString().toInt()
+            val name = view.findViewById<EditText>(R.id.managerInventoryName).text.toString()
+            val quantity = view.findViewById<EditText>(R.id.managerInventoryQuantity).text.toString().toInt()
+
+
+            RetrofitClient.instance.updateIngredient(ingId, name, quantity)
+                .enqueue(object : Callback<ResponseIngredient> {
+                    override fun onFailure(call: Call<ResponseIngredient>, t: Throwable) {
+                        Toast.makeText(
+                            activity as ManagerActivity,
+                            "Customer Already Exist",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseIngredient>,
+                        response: Response<ResponseIngredient>
+                    ) {
+                        //val output = response.body()?.ingredient
+                        Toast.makeText(
+                            activity as ManagerActivity,
+                            "Update Sucessful",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                    }
+
+
+                })
+        }
+
         view.findViewById<Button>(R.id.managerInventoryLeave).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")}
 
         return view
@@ -110,51 +149,6 @@ class ManagerInventoryFragment : Fragment() {
         view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = chefIngs?.get(index)?.foodnum.toString()}
     }
 
-    fun ingsUpdate(chefIngs:List<Ingredient>?) {
-        val ingId = chefIngs?.get(index)?.id
-        val name = chefIngs?.get(index)?.food
-        var quantity = ""
-        if (view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.isNullOrEmpty()) {
-            quantity =
-                chefIngs?.get(index)?.foodnum?.toInt()!!.toString()
-        } else {
-            quantity =
-                view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.toString().toInt()
-                    .toString()
-            chefIngs?.get(index)?.foodnum =
-                view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.text.toString().toInt()
-                    .toString()
-        }
-        if (ingId != null) {
-            if (name != null) {
-                RetrofitClient.instance.updateIngredient(ingId, name, quantity)
-                    .enqueue(object : Callback<ResponseIngredient> {
-                        override fun onFailure(call: Call<ResponseIngredient>, t: Throwable) {
-                            Toast.makeText(
-                                activity as ManagerActivity,
-                                "Customer Already Exist",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-
-                        override fun onResponse(
-                            call: Call<ResponseIngredient>,
-                            response: Response<ResponseIngredient>
-                        ) {
-                            //val output = response.body()?.ingredient
-                            Toast.makeText(
-                                activity as ManagerActivity,
-                                "Update Sucessful",
-                                Toast.LENGTH_LONG
-                            ).show()
-
-                        }
-
-
-                    })
-            }
-        }
-    }
 
 /*TODO:    fun ingsAdd() {
         var name = ""

@@ -59,9 +59,11 @@ class MenuKidsNoteFragment : Fragment() {
             //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
 
             /* Save table status to the database  */
+            /*
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
                 needHelp = true,
-                needRefill = false
+                needRefill = false,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -78,6 +80,8 @@ class MenuKidsNoteFragment : Fragment() {
                     ).show()
                 }
             })
+
+             */
         }
 
 
@@ -85,10 +89,12 @@ class MenuKidsNoteFragment : Fragment() {
         refillButtonNote.setOnClickListener{
             //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
 
+            /*
             /* Save table status to database */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
                 needHelp = false,
-                needRefill = true
+                needRefill = true,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -105,6 +111,8 @@ class MenuKidsNoteFragment : Fragment() {
                     ).show()
                 }
             })
+
+             */
         }
 
         return view

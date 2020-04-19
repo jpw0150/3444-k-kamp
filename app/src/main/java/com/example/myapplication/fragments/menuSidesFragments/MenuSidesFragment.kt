@@ -41,16 +41,19 @@ class MenuSidesFragment : Fragment() {
         /* Listeners to store side and direct to proceeding fragment */
         friesButton.setOnClickListener {
             (activity as MenuActivity).sideItem = getString(R.string.cajun_fries)
+            (activity as MenuActivity).sideId = 401
             (activity as MenuActivity).replaceFragment(MenuSidesQuantityFragment(), "")
         }
 
         cornButton.setOnClickListener {
             (activity as MenuActivity).sideItem = getString(R.string.fried_corn)
+            (activity as MenuActivity).sideId = 403
             (activity as MenuActivity).replaceFragment(MenuSidesQuantityFragment(), "")
         }
 
         veggieSticksButton.setOnClickListener {
             (activity as MenuActivity).sideItem = getString(R.string.veggie_sticks)
+            (activity as MenuActivity).sideId = 402
             (activity as MenuActivity).replaceFragment(MenuSidesQuantityFragment(), "")
         }
 

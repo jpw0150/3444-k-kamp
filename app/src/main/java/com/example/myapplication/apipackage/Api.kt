@@ -16,12 +16,14 @@ interface Api {
     @FormUrlEncoded
     @POST("createOrder")
     fun createOrder(
-        @Field("tableNum") number:Int,
+        @Field("tableNum") tableNum:Int,
         @Field("entree") entree: String,
         @Field("side") side: String,
         @Field("drink") drink: String,
-        @Field("orderTotal") orderTotal: Double
-    ):Call<ResponseBase>
+        @Field("note")note:String,
+        @Field("orderTotal") orderTotal: Double,
+        @Field("status")status:Int
+    ):Call<ResponseOrder>
 
     @FormUrlEncoded
     @POST("createEmp")
@@ -41,17 +43,11 @@ interface Api {
     fun userLogin(
         @Field("id") id:Int,
         @Field("password") password: String
-    ):Call<ResponseBase>
+    ):Call<ResponseEmployee>
 
     @FormUrlEncoded
     @GET("getItem/{id}")
     fun getItem(
-        @Path("id") id:Int
-    ):Call<ResponseBase>
-
-    @FormUrlEncoded
-    @GET("createOrder/{id}")
-    fun getOrder(
         @Path("id") id:Int
     ):Call<ResponseBase>
 
@@ -65,9 +61,9 @@ interface Api {
     fun getItems(
     ):Call<ResponseItems>
 
-    @FormUrlEncoded
+
     @GET("getOrders")
-    fun getOrders(
+    fun allorders(
     ):Call<ResponseOrders>
 
     @GET("getAllEmp")
@@ -140,7 +136,7 @@ interface Api {
 
     @FormUrlEncoded
     @POST("customerlogin")
-    fun customerlogin(
+    fun customerLogin(
         @Field("phone") phone:String,
         @Field("password") password: String
     ):Call<ResponseCustomer>
@@ -191,8 +187,8 @@ interface Api {
     @PUT("updateIngredient/{id}")
     fun updateIngredient(
         @Path("id") id:Int,
-        @Field("name") name:String,
-        @Field("foodnum") foodnum:String
+        @Field("food") food:String,
+        @Field("foodnum") foodnum:Int
     ):Call<ResponseIngredient>
 
     @FormUrlEncoded
@@ -205,9 +201,10 @@ interface Api {
     @POST("createTable")
     fun createTable(
         @Field("number") number:Int,
-        @Field("tableStatus") tableStatus:String,
+        @Field("status") tableStatus:String,
         @Field("needHelp") needHelp:Boolean,
-        @Field("needRefill") needRefill:Boolean
+        @Field("needRefill") needRefill:Boolean,
+        @Field("orderTotal")orderTotal:Double
     ):Call<ResponseBase>
 
     @GET("allTables")
@@ -224,9 +221,10 @@ interface Api {
     @PUT("updateTable/{number}")
     fun updateTable(
         @Path("number") number:Int,
-        @Field("tableStatus") tableStatus:String,
-        @Field("needHelp") needHelp:Boolean,
-        @Field("needRefill") needRefill:Boolean
+        @Field("status") tableStatus:String,
+        @Field("needHelp") needHelp:Int,
+        @Field("needRefill") needRefill:Int,
+        @Field("orderTotal")orderTotal:Double
     ):Call<ResponseTable>
 
     @FormUrlEncoded
@@ -234,4 +232,36 @@ interface Api {
     fun deleteTable(
         @Path("id") id:Int
     ):Call<ResponseBase>
+
+    @GET("service")
+    fun serve(
+    ):Call<ResponseNice>
+
+
+    @PUT("orderDone/{id}")
+    fun finish(
+        @Path("id")id:Int
+    ):Call<ResponseOrder>
+
+    @PUT("toHistory/{id}")
+    fun toHistory(
+        @Path("id")id:Int
+    ):Call<ResponseOrder>
+
+    @GET("getOrdersManager")
+    fun getOrdersManager(
+    ):Call<ResponseOrders>
+
+    @GET("checktableshelp")
+    fun checkHelp(
+    ):Call<ResponseNice>
+
+    @GET("checktablesrefill")
+    fun checkRefill(
+    ):Call<ResponseNice>
+
+    @PUT("toClear/{id}")
+    fun clearHelp(
+        @Path("id")id:Int
+    ):Call<ResponseTable>
 }

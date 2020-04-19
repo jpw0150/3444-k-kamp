@@ -27,7 +27,7 @@ class CustomerAccountActivity : AppCompatActivity() {
         transaction.replace(R.id.customer_acct_fragment_container, CustomerAcctSelectFragment())
         transaction.commit()
 
-        generateCustomers()
+        //generateCustomers()
 
     }
 

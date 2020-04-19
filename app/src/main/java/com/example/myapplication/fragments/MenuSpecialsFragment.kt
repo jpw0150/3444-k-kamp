@@ -39,11 +39,12 @@ class MenuSpecialsFragment : Fragment() {
         /* Send help notification to the waiter */
         helpButtonSpecials.setOnClickListener{
             //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
-
+            /*
             /* Save table status to the database  */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
                 needHelp = true,
-                needRefill = false
+                needRefill = false,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -60,15 +61,18 @@ class MenuSpecialsFragment : Fragment() {
                     ).show()
                 }
             })
+
+             */
         }
         /* Send refill notification to the waiter */
         refillButtonSpecials.setOnClickListener{
             //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
-
+/*
             /* Save table status to database */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
                 needHelp = false,
-                needRefill = true
+                needRefill = true,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -85,6 +89,8 @@ class MenuSpecialsFragment : Fragment() {
                     ).show()
                 }
             })
+
+ */
         }
 
         /* Sunday Special */
@@ -119,7 +125,7 @@ class MenuSpecialsFragment : Fragment() {
         /* Wednesday Special */
         if (currentDay == getString(R.string.wednesday)) {
             view.findViewById<TextView>(R.id.text_specials_msg).text =
-                getString(R.string.thursday_deal)
+                getString(R.string.wednesday_deal)
             redeemButton.visibility = View.VISIBLE
             redeemButton.setOnClickListener {
                 Toast.makeText(

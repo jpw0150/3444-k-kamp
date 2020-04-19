@@ -85,11 +85,13 @@ class MenuCashCheckFragment : Fragment() {
 
         /* Initialize payButton and setOnClickListener() */
         cashCheckoutButton.setOnClickListener {
+            /*
             Toast.makeText((activity as MenuActivity).applicationContext, "A waiter is coming to collect bill", Toast.LENGTH_LONG).show()
             /* TODO Send an alarm to a waiter to collect a bill */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
                 needHelp = true,
-                needRefill = false
+                needRefill = false,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -106,6 +108,8 @@ class MenuCashCheckFragment : Fragment() {
                     ).show()
                 }
             })
+
+             */
 
             //If the user did not manually enter an amount, use the Hint to take the total.
             val finalCost =
@@ -146,11 +150,12 @@ class MenuCashCheckFragment : Fragment() {
         /* Send help notification to the waiter */
         helpButtonMain.setOnClickListener{
             //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
-
+/*
             /* Save table status to the database  */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
                 needHelp = true,
-                needRefill = false
+                needRefill = false,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -167,17 +172,20 @@ class MenuCashCheckFragment : Fragment() {
                     ).show()
                 }
             })
+
+ */
         }
 
 
         /* Send refill notification to the waiter */
         refillButtonMain.setOnClickListener{
             //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
-
+/*
             /* Save table status to database */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
                 needHelp = false,
-                needRefill = true
+                needRefill = true,
+                orderTotal = 0.0
             ).enqueue(object: Callback<ResponseTable> {
                 override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
                     Toast.makeText(
@@ -194,6 +202,8 @@ class MenuCashCheckFragment : Fragment() {
                     ).show()
                 }
             })
+
+ */
         }
 
         return view

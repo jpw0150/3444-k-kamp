@@ -41,7 +41,6 @@ class MenuDrinksQuantityFragment : Fragment() {
         /* Store the quantity and proceed to next fragment */
         nextButton.setOnClickListener {
             val drinkQuantity = view.findViewById<EditText>(R.id.drink_quantity).text.toString().toInt()
-
             /* Verify that at least one drink quantity has been entered */
             if (drinkQuantity < (activity as MenuActivity).MIN_NUM_DRINKS) {
                 Toast.makeText(
@@ -50,8 +49,12 @@ class MenuDrinksQuantityFragment : Fragment() {
                 /* Store quantity */
             } else {
                 (activity as MenuActivity).drinkItemQuantity = drinkQuantity
+                (activity as MenuActivity).idDrinkSe+=drinkQuantity*1000
+                (activity as MenuActivity).idDrinkSe = (activity as MenuActivity).idDrinkSe + (activity as MenuActivity).drinkId.toString() + " "
                 (activity as MenuActivity).replaceFragment(MenuDrinksNotesFragment(), "")
             }
+
+            (activity as MenuActivity).drinkId = 0
         }
 
         /* Initialize help and refill buttons */

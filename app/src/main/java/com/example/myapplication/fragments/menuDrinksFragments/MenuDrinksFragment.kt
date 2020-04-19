@@ -46,21 +46,25 @@ class MenuDrinksFragment : Fragment() {
         /* Listeners to store side and direct to proceeding fragment */
         lemonadeButton.setOnClickListener {
             (activity as MenuActivity).drinkItem = getString(R.string.lemonade)
+            (activity as MenuActivity).drinkId = 503
             (activity as MenuActivity).replaceFragment(MenuDrinksQuantityFragment(), "")
         }
 
         sodaButton.setOnClickListener {
             (activity as MenuActivity).drinkItem = getString(R.string.soft_drink)
+            (activity as MenuActivity).drinkId = 501
             (activity as MenuActivity).replaceFragment(MenuDrinksQuantityFragment(), "")
         }
 
         teaButton.setOnClickListener {
             (activity as MenuActivity).drinkItem = getString(R.string.sweet_tea)
+            (activity as MenuActivity).drinkId = 502
             (activity as MenuActivity).replaceFragment(MenuDrinksQuantityFragment(), "")
         }
 
         waterButton.setOnClickListener {
             (activity as MenuActivity).drinkItem = getString(R.string.water)
+            (activity as MenuActivity).drinkId = 504
             (activity as MenuActivity).replaceFragment(MenuDrinksQuantityFragment(), "")
         }
 
