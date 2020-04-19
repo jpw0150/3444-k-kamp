@@ -9,6 +9,8 @@
 			$this->con = $db->connect();
 		}
 		
+		
+		
 		public function serve(){
 			$state = $this->con->prepare("SELECT tableNum FROM orders WHERE status = 1");
 			$state->execute();
@@ -18,6 +20,13 @@
 				array_push($tables, $tableNum);
 			}
 			return $tables;
+		}
+		
+		public function finish($id){
+			$state = $this->con->prepare("UPDATE orders SET status = 1  WHERE id = ?");
+			$state->bind_param("i", $id);
+			if($state->execute()) return true;
+			else return false;
 		}
 		
 		public function createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal, $status){
