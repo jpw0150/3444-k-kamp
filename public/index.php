@@ -35,6 +35,24 @@ $app->get('/service', function(Request $request, Response $response){
 
 });
 
+$app->put('/orderDone/{id}', function(Request $request, Response $response, array $args){
+	$id = $args['id'];
+	$db = new orderOperations;
+	if($db->finish($id)){
+		$return_list['error'] = false;
+		$return_list['message'] = 'order finished';
+		$response->getBody()->write(json_encode($return_list));
+		return $response->withHeader('Content-type', 'application/json')->withStatus(201);
+	}
+	else{
+		$return_list['error'] = true;
+		$return_list['message'] = 'ooof... something went wrong';
+		$response->getBody()->write(json_encode($return_list));
+		return $response->withHeader('Content-type', 'application/json')->withStatus(422);
+	}
+	
+});
+
 $app->post('/createMenuItem', function(Request $request, Response $response){
 	if(!haveEmptyParameters(array('id', 'name', 'cost', 'descrip'), $request, $response)){
 		$request_data = $request->getParsedBody();
