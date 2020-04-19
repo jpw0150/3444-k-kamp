@@ -10,14 +10,14 @@
 		}
 		
 		public function serve(){
-			$state = $this->con->prepare("SELECT tableNum FROM order WHERE status = 1")
+			$state = $this->con->prepare("SELECT tableNum FROM orders WHERE status = 1");
 			$state->execute();
 			$state->bind_result($tableNum);
 			$tables = array();
 			while($state->fetch()){
 				array_push($tables, $tableNum);
 			}
-			return $tables
+			return $tables;
 		}
 		
 		public function createOrder($tableNum, $entree, $side, $drink, $note, $orderTotal, $status){
