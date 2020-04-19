@@ -71,6 +71,7 @@ class MenuActivity : AppCompatActivity() {
     /* Set up Order() that stores list of entrees, sides, and drinks */
     lateinit var order: Order
     lateinit var orderTotal: String
+    var orderNotes = ""
 
     /* Setting up arrays to store all the entrees, sides, and drinks in a session */
     val entreeList = arrayListOf<Entree>()
@@ -78,10 +79,6 @@ class MenuActivity : AppCompatActivity() {
     val drinkList = arrayListOf<Drink>()
     val orderList = arrayListOf<Order>()
 
-    /* Order string to be sent to database */
-    var entree_ID_String = ""
-    var side_ID_string = ""
-    var drink_ID_string = ""
 
     /* Constants */
     val MIN_NUM_WINGS = 3

@@ -52,8 +52,8 @@ class MenuPlaceOrderFragment : Fragment() {
                 (activity as MenuActivity).idStringEntree,
                 (activity as MenuActivity).idDrinkSe,
                 (activity as MenuActivity).sideIdSe,
-                "",
-                40.0,
+                (activity as MenuActivity).orderNotes,
+                (activity as MenuActivity).orderTotal.toDouble(),
                 0
 
             ).enqueue(object : Callback<ResponseOrder> {
@@ -68,35 +68,26 @@ class MenuPlaceOrderFragment : Fragment() {
                 override fun onResponse(call: Call<ResponseOrder>, response: Response<ResponseOrder>) {
                     Toast.makeText(
                     activity as MenuActivity,
-                    "WE DID IT",
+                    "Order placed sucessfully!",
                     Toast.LENGTH_LONG
                 ).show()
                 }
             })
 
-           // Toast.makeText((activity as MenuActivity).applicationContext, "Order placed successfully!", Toast.LENGTH_LONG).show()
-           // (activity as MenuActivity).addOrder()
+           (activity as MenuActivity).addOrder()
+            (activity as MenuActivity).resetOrder()
 
-            //(activity as MenuActivity).resetOrder()
-
-
-
+            /* Reset order strings */
             (activity as MenuActivity).idStringEntree = ""
             (activity as MenuActivity).idDrinkSe = ""
             (activity as MenuActivity).sideIdSe = ""
-
-
-
-
-
-
-
 
 
             (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
         }
 
         noButton.setOnClickListener {
+            Toast.makeText((activity as MenuActivity).applicationContext, "Please continue your selection", Toast.LENGTH_SHORT).show()
             (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
         }
 

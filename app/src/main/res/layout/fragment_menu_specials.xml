@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/menu_specials"
     android:background="@drawable/gradient_list"
-    tools:context=".fragments.MenuSpecialsFragment">
+    tools:context=".fragments.menuSpecials.MenuSpecialsFragment">
 
     <ImageButton
         android:id="@+id/button_help_image_specials"
@@ -94,16 +94,27 @@
         android:layout_width="318dp"
         android:layout_height="52dp"
         android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
         android:layout_marginEnd="43dp"
-        android:layout_marginRight="43dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="23dp"
         android:background="@android:color/black"
         android:text="@string/redeem"
         android:visibility="invisible"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_five_dollar_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/button_five_dollar_menu"
+        android:layout_width="318dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="104dp"
+        android:background="@android:color/black"
+        android:text="@string/show_me_the_5_menu"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -113,6 +113,8 @@ class MenuViewCartFragment : Fragment() {
         val entreeAdditionalNote = entree.note.toString()
         val entreePrice = entree.price.toString()
 
+        (activity as MenuActivity).orderNotes = (activity as MenuActivity).orderNotes + entreeAdditionalNote + " "
+
         if (entreeMeatType == "Boneless" || entreeMeatType == "Bone"){
             return("$entreeQuantity $entreeFlavor $entreeMeatType Wings with $entreeSauceQuantity" +
                     " $entreeSauceType serving(s). \nAdditional notes: $entreeAdditionalNote \nPrice: $$entreePrice")
@@ -166,6 +168,8 @@ class MenuViewCartFragment : Fragment() {
         val sideNote = side.note.toString()
         val sidePrice = side.price.toString()
 
+        (activity as MenuActivity).orderNotes = (activity as MenuActivity).orderNotes + sideNote + " "
+
         return ("$sideQuantity serving(s) of $sideItem \nAdditional note: $sideNote \nPrice: $$sidePrice")
 
     }
@@ -204,6 +208,8 @@ class MenuViewCartFragment : Fragment() {
         val drinkQuantity = drink.quantity.toString()
         val drinkNote = drink.note.toString()
         val drinkPrice = drink.price.toString()
+
+        (activity as MenuActivity).orderNotes = (activity as MenuActivity).orderNotes + drinkNote + " "
 
         return ("$drinkQuantity serving(s) of $drinkItem \nAdditional note: $drinkNote \nPrice: $$drinkPrice")
 

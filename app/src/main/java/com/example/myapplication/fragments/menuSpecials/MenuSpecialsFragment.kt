@@ -1,4 +1,4 @@
-package com.example.myapplication.fragments
+package com.example.myapplication.fragments.menuSpecials
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -14,14 +14,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
 import com.example.myapplication.activities.MenuActivity
-import com.example.myapplication.apipackage.ResponseTable
-import com.example.myapplication.apipackage.RetrofitClient
+import com.example.myapplication.fragments.MainMenuFragment
 import com.example.myapplication.fragments.menuDrinksFragments.MenuDrinksFragment
 import com.example.myapplication.fragments.menuEntreeFragments.MenuEntreeMeatFragment
 import com.example.myapplication.fragments.menuKids.MenuKidsMealsFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MenuSpecialsFragment : Fragment() {
@@ -38,7 +34,7 @@ class MenuSpecialsFragment : Fragment() {
         val refillButtonSpecials = view.findViewById<ImageButton>(R.id.button_refill_image_specials)
         /* Send help notification to the waiter */
         helpButtonSpecials.setOnClickListener{
-            //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
+            Toast.makeText((activity as MenuActivity).applicationContext, "A waiter will help you shortly", Toast.LENGTH_LONG).show()
             /*
             /* Save table status to the database  */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Help",
@@ -66,7 +62,7 @@ class MenuSpecialsFragment : Fragment() {
         }
         /* Send refill notification to the waiter */
         refillButtonSpecials.setOnClickListener{
-            //Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
+            Toast.makeText((activity as MenuActivity).applicationContext, "A waiter refill your drink shortly", Toast.LENGTH_LONG).show()
 /*
             /* Save table status to database */
             RetrofitClient.instance.updateTable((activity as MenuActivity).table.number, "Needs Refill",
@@ -157,6 +153,12 @@ class MenuSpecialsFragment : Fragment() {
                     "A waiter will come serve your shortly", Toast.LENGTH_SHORT).show()
                 (activity as MenuActivity).replaceFragment(MainMenuFragment(), "")
             }
+        }
+
+        /* Navigate user to $5 menu */
+        val fiveMenuButton = view.findViewById<Button>(R.id.button_five_dollar_menu)
+        fiveMenuButton.setOnClickListener {
+            (activity as MenuActivity).replaceFragment(MenuFiveDollarFragment(), "")
         }
 
         return view
