@@ -24,6 +24,16 @@ $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
 	]
 ]));
 */
+
+$app->get('/service', fuction(Request $request, Response $response){
+	$db = new orderOperations;
+	$return_list = array();
+	$return_list['error'] = false;
+	$return_list[''] = $db->$service();
+	$response->getBody()->write(json_encode($return_list));
+	return $response->withHeader('Content-type', 'application/json')->withStatus(200);
+
+}
 $app->post('/createMenuItem', function(Request $request, Response $response){
 	if(!haveEmptyParameters(array('id', 'name', 'cost', 'descrip'), $request, $response)){
 		$request_data = $request->getParsedBody();
