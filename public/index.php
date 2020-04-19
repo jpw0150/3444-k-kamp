@@ -35,6 +35,19 @@ $app->get('/service', function(Request $request, Response $response){
 
 });
 
+$app->get('/chefOrders', function(Request $request, Response $response){
+	$db = new orderOperations;
+	$return_array = $db->chefOrders();
+	
+	$message = array();
+	$message['error'] = false;
+	$message['orders'] = $return_array;
+	
+	$response->getBody()->write(json_encode($message));
+	
+	return $response->withHeader('Content-type', 'application/json')->withStatus(200);	
+});
+
 $app->put('/orderDone/{id}', function(Request $request, Response $response, array $args){
 	$id = $args['id'];
 	$db = new orderOperations;
