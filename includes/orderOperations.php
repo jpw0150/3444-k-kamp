@@ -22,15 +22,15 @@
 		}
 		
 		public function allorders(){
-			include_once dirname(__FILE__) . '/ingredientsOperations.php';
+			//include_once dirname(__FILE__) . '/ingredientsOperations.php';
 			$state = $this->con->prepare("SELECT * FROM orders");
 			$state->execute();
 			$state->bind_result($id, $tableNum, $entree, $side, $drink, $note, $orderTotal, $status);			
 			$orders = array();
-			$ing = new ingredientsOperations;
+			//$ing = new ingredientsOperations;
 			while($state->fetch()){
 			$order = array();
-			$entreeData = array();
+			/*$entreeData = array();
 			$sideData = array();
 			$drinkData = array();
 			foreach(explode(' ', $entree) as $i){
@@ -67,12 +67,12 @@
 				$thisDrink['item'] = $drink['food'];
 				$thisDrink['quantity'] = $drink['amount'];
 				array_push($drinkData, $thisDrink);
-			}
+			}*/
 				$order['id'] = $id;
 				$order['tableNum'] = $tableNum;
-				$order['entree'] = $entreeData;
-				$order['side'] = $sideData;
-				$order['drink'] = $drinkData;
+				$order['entree'] = $entree;
+				$order['side'] = $side;
+				$order['drink'] = $drink;
 				$order['note'] = $note;
 				$order['orderTotal'] = $orderTotal;
 				$order['status'] = $status;
@@ -82,14 +82,14 @@
 		}
 		
 		public function findOrder($id){
-			include_once dirname(__FILE__) . '/ingredientsOperations.php';
+			//include_once dirname(__FILE__) . '/ingredientsOperations.php';
 			$state = $this->con->prepare("SELECT * FROM orders WHERE id = ?");
 			$state->bind_param("i", $id);
 			$state->execute();
 			$state->bind_result($id, $tableNum, $entree, $side, $drink, $note, $orderTotal, $status);
 			$state->fetch();
 			$order = array();
-			$entreeData = array();
+			/*$entreeData = array();
 			$sideData = array();
 			$drinkData = array();
 			$ing = new ingredientsOperations;
@@ -128,13 +128,13 @@
 				$thisDrink['item'] = $drink['food'];
 				$thisDrink['quantity'] = $drink['amount'];
 				array_push($drinkData, $thisDrink);
-			}
+			}*/
 			
 			$order['id'] = $id;
 			$order['tableNum'] = $tableNum;
-			$order['entree'] = $entreeData;
-			$order['side'] = $sideData;
-			$order['drink'] = $drinkData;
+			$order['entree'] = $entree;
+			$order['side'] = $side;
+			$order['drink'] = $drink;
 			$order['note'] = $note;
 			$order['orderTotal'] = $orderTotal;
 			$order['status'] = $status;
