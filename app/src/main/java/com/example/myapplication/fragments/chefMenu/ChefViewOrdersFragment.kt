@@ -49,68 +49,54 @@ class ChefViewOrdersFragment : Fragment() {
                         call: Call<ResponseOrders>,
                         response: Response<ResponseOrders>
                     ) {
+                        val output = response.body()?.orders
 
-                        Toast.makeText(activity as ChefActivity,"NICCEE", Toast.LENGTH_SHORT).show()
+                        if (output != null) {
+                            view.findViewById<TextView>(R.id.chefOrderID).text =
+                                output.get(index).id.toString()
+                            idD=output.get(index).id.toString().toInt()
 
+                            view.findViewById<TextView>(R.id.chefOrderTable).text =
+                                output.get(index).tableNum.toString()
 
-                          val output = response.body()?.orders
+                            var outputString = ""
+                            for(indez in 0..(output.get(index).entree.size-1)) {
+                                outputString +=   output.get(index).entree.get(indez).quantity.toString() + " " +
+                                        output.get(index).entree.get(indez).meatType + " " +
+                                        output.get(index).entree.get(indez).flavor + " " +
+                                        output.get(index).entree.get(indez).sauceType +"\n"
+                            }
+                            indez=0
+                            view.findViewById<TextView>(R.id.chefOrderEntree).text = outputString
 
-                          if (output != null) {
-                              view.findViewById<TextView>(R.id.chefOrderID).text =
-                                  output.get(index).id.toString()
-                              idD=output.get(index).id.toString().toInt()
-                          }
+                            outputString = ""
+                            for(indez in 0..(output.get(index).entree.size-1)) {
+                                outputString += output.get(index).side.get(indez).quantity.toString() + " "+
+                                        output.get(index).side.get(indez).item+"\n"
+                            }
+                            indez=0
+                            view.findViewById<TextView>(R.id.chefOrderSides).text = outputString
 
-                          if (output != null) {
-                              view.findViewById<TextView>(R.id.chefOrderTable).text =
-                                  output.get(index).tableNum.toString()
-                          }
-                          if (output != null) {
-                              var outputString = ""
-                              for(indez in 0..(output.get(index).entree.size-1)) {
+                            outputString = ""
+                            for(indez in 0..(output.get(index).entree.size-1)) {
+                                outputString+= output.get(index).drink.get(indez).quantity.toString() + " " +
+                                        output.get(index).drink.get(indez).item+"\n"
+                            }
+                            indez=0
+                            view.findViewById<TextView>(R.id.chefOrderDrinks).text = outputString
 
-                               outputString +=   output.get(index).entree.get(indez).quantity.toString() + " " +
-                                          output.get(index).entree.get(indez).meatType + " " +
-                                          output.get(index).entree.get(indez).flavor + " " +
-                                          output.get(index).entree.get(indez).sauceType +"\n"
-                              }
-                              indez=0
-                              view.findViewById<TextView>(R.id.chefOrderEntree).text = outputString
+                            view.findViewById<TextView>(R.id.chefOrderNotes).text =
+                                output.get(index).note
 
+                            view.findViewById<TextView>(R.id.chefOrderTotal).text =
+                                output.get(index).orderTotal.toString()
 
-                          }
-                          if (output != null) {
-                              var outputString = ""
-                              for(indez in 0..(output.get(index).entree.size-1)) {
-                                 outputString += output.get(index).side.get(indez).quantity.toString() + " "+
-                                          output.get(index).side.get(indez).item+"\n"
-                              }
-                              indez=0
-                              view.findViewById<TextView>(R.id.chefOrderSides).text = outputString
-
-                          }
-                          if (output != null) {
-                              var outputString = ""
-                              for(indez in 0..(output.get(index).entree.size-1)) {
-                                 outputString+= output.get(index).drink.get(indez).quantity.toString() + " " +
-                                          output.get(index).drink.get(indez).item+"\n"
-                              }
-                              indez=0
-                              view.findViewById<TextView>(R.id.chefOrderDrinks).text = outputString
-
-                          }
-                          if (output != null) {
-                              view.findViewById<TextView>(R.id.chefOrderNotes).text =
-                                  output.get(index).note
-                          }
-                          if (output != null) {
-                              view.findViewById<TextView>(R.id.chefOrderTotal).text =
-                                  output.get(index).orderTotal.toString()
-                          }
-                          if (output != null) {
-                              view.findViewById<EditText>(R.id.chefOrderStatus).hint =
-                                  output.get(index).status.toString()
-                          }
+                            view.findViewById<EditText>(R.id.chefOrderStatus).hint =
+                                output.get(index).status.toString()
+                        }
+                        else {
+                            view.findViewById<TextView>(R.id.chefOrderID).text = "NO DATA"
+                        }
 
                         view.findViewById<Button>(R.id.chefOrderNext)
                             .setOnClickListener { orderPrevious(output) }
@@ -152,109 +138,109 @@ class ChefViewOrdersFragment : Fragment() {
 
 
    fun orderPrevious(orderList:List<Order>?) {
-        if (index == 0 ) {
-            if (orderList != null) {
-                index = orderList.size - 1
-            }
-        }
-        else{
-            index -= 1
-        }
-
-
-
-
-        view?.findViewById<TextView>(R.id.chefOrderID)?.apply { text = orderList?.get(index)?.id.toString()}
-        view?.findViewById<TextView>(R.id.chefOrderTable)?.apply { text = orderList?.get(index)?.tableNum.toString()}
-
-       var outputString =""
        if (orderList != null) {
-           for(indez in 0..(orderList.get(index).entree.size-1)){
-               outputString+=
-                   orderList?.get(index).entree.get(indez).quantity.toString()+ " " +
-                           orderList?.get(index).entree.get(indez).meatType+ " " +
-                           orderList?.get(index).entree.get(indez).flavor+ " " +
-                           orderList?.get(index).entree.get(indez).sauceType+"\n"
+           if (index == 0) {
+               index = orderList.size - 1
+           } else {
+               index -= 1
            }
-       }
-       indez=0
-       view?.findViewById<TextView>(R.id.chefOrderEntree)?.apply { text = outputString}
 
-       outputString=""
-       if (orderList != null) {
-           for(indez in 0..(orderList.get(index).entree.size-1)){
-               outputString += orderList.get(index).side.get(indez).quantity.toString() + " "+
-                       orderList.get(index).side.get(indez).item+"\n"
+           view?.findViewById<TextView>(R.id.chefOrderID)
+               ?.apply { text = orderList?.get(index)?.id.toString() }
+           view?.findViewById<TextView>(R.id.chefOrderTable)
+               ?.apply { text = orderList?.get(index)?.tableNum.toString() }
+
+           var outputString = ""
+
+           for (indez in 0..(orderList.get(index).entree.size - 1)) {
+               outputString +=
+                   orderList?.get(index).entree.get(indez).quantity.toString() + " " +
+                           orderList?.get(index).entree.get(indez).meatType + " " +
+                           orderList?.get(index).entree.get(indez).flavor + " " +
+                           orderList?.get(index).entree.get(indez).sauceType + "\n"
            }
-       }
-       indez=0
-       view?.findViewById<TextView>(R.id.chefOrderSides)?.apply { text = outputString }
 
-        outputString=""
-       if (orderList != null) {
-           for(indez in 0..(orderList.get(index).entree.size-1)){
-               outputString+= orderList.get(index).drink.get(indez).quantity.toString() + " " +
-                       orderList.get(index).drink.get(indez).item+"\n"
+           indez = 0
+           view?.findViewById<TextView>(R.id.chefOrderEntree)?.apply { text = outputString }
+
+           outputString = ""
+
+           for (indez in 0..(orderList.get(index).entree.size - 1)) {
+               outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
+                       orderList.get(index).side.get(indez).item + "\n"
            }
+
+           indez = 0
+           view?.findViewById<TextView>(R.id.chefOrderSides)?.apply { text = outputString }
+
+           outputString = ""
+
+           for (indez in 0..(orderList.get(index).entree.size - 1)) {
+               outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
+                       orderList.get(index).drink.get(indez).item + "\n"
+           }
+
+           indez = 0
+           view?.findViewById<TextView>(R.id.chefOrderDrinks)?.apply { text = outputString }
+           view?.findViewById<TextView>(R.id.chefOrderNotes)
+               ?.apply { text = orderList?.get(index)?.note }
+           view?.findViewById<TextView>(R.id.chefOrderTotal)
+               ?.apply { text = orderList?.get(index)?.orderTotal.toString() }
+           view?.findViewById<EditText>(R.id.chefOrderStatus)
+               ?.apply { hint = orderList?.get(index)?.status.toString() }
+
        }
-       indez=0
-        view?.findViewById<TextView>(R.id.chefOrderDrinks)?.apply { text = outputString}
-        view?.findViewById<TextView>(R.id.chefOrderNotes)?.apply { text = orderList?.get(index)?.note}
-        view?.findViewById<TextView>(R.id.chefOrderTotal)?.apply { text = orderList?.get(index)?.orderTotal.toString()}
-       view?.findViewById<EditText>(R.id.chefOrderStatus)?.apply { hint = orderList?.get(index)?.status.toString()}
-
-
    }
     fun orderNext(orderList: List<Order>?) {
-        if (orderList != null ) {
-            if (index == orderList.size-1) {
+        if (orderList != null) {
+            if (index == orderList.size - 1) {
                 index = 0
+            } else {
+                index += 1
             }
-        }
-        else{
-            index += 1
-        }
 
+            view?.findViewById<TextView>(R.id.chefOrderID)
+                ?.apply { text = orderList.get(index).id.toString() }
+            view?.findViewById<TextView>(R.id.chefOrderTable)
+                ?.apply { text = orderList.get(index).tableNum.toString() }
 
+            var outputString = ""
 
-        view?.findViewById<TextView>(R.id.chefOrderID)?.apply { text = orderList?.get(index)?.id.toString()}
-        view?.findViewById<TextView>(R.id.chefOrderTable)?.apply { text = orderList?.get(index)?.tableNum.toString()}
-
-        var outputString =""
-        if (orderList != null) {
-            for(indez in 0..(orderList.get(index).entree.size-1)){
-                outputString+=
-                    orderList?.get(index).entree.get(indez).quantity.toString()+ " " +
-                            orderList?.get(index).entree.get(indez).meatType+ " " +
-                            orderList?.get(index).entree.get(indez).flavor+ " " +
-                            orderList?.get(index).entree.get(indez).sauceType+"\n"
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString +=
+                    orderList.get(index).entree.get(indez).quantity.toString() + " " +
+                            orderList.get(index).entree.get(indez).meatType + " " +
+                            orderList.get(index).entree.get(indez).flavor + " " +
+                            orderList.get(index).entree.get(indez).sauceType + "\n"
             }
-        }
-        indez=0
-        view?.findViewById<TextView>(R.id.chefOrderEntree)?.apply { text = outputString}
 
-        outputString=""
-        if (orderList != null) {
-            for(indez in 0..(orderList.get(index).entree.size-1)){
-                outputString += orderList.get(index).side.get(indez).quantity.toString() + " "+
-                        orderList.get(index).side.get(indez).item+"\n"
-            }
-        }
-        indez=0
-        view?.findViewById<TextView>(R.id.chefOrderSides)?.apply { text = outputString }
+            indez = 0
+            view?.findViewById<TextView>(R.id.chefOrderEntree)?.apply { text = outputString }
 
-        outputString=""
-        if (orderList != null) {
-            for(indez in 0..(orderList.get(index).entree.size-1)){
-                outputString+= orderList.get(index).drink.get(indez).quantity.toString() + " " +
-                        orderList.get(index).drink.get(indez).item+"\n"
+            outputString = ""
+
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
+                        orderList.get(index).side.get(indez).item + "\n"
             }
+            indez = 0
+            view?.findViewById<TextView>(R.id.chefOrderSides)?.apply { text = outputString }
+
+            outputString = ""
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
+                        orderList.get(index).drink.get(indez).item + "\n"
+            }
+
+            indez = 0
+            view?.findViewById<TextView>(R.id.chefOrderDrinks)?.apply { text = outputString }
+            view?.findViewById<TextView>(R.id.chefOrderNotes)
+                ?.apply { text = orderList.get(index).note }
+            view?.findViewById<TextView>(R.id.chefOrderTotal)
+                ?.apply { text = orderList.get(index).orderTotal.toString() }
+            view?.findViewById<EditText>(R.id.chefOrderStatus)
+                ?.apply { hint = orderList.get(index).status.toString() }
         }
-        indez=0
-        view?.findViewById<TextView>(R.id.chefOrderDrinks)?.apply { text = outputString}
-        view?.findViewById<TextView>(R.id.chefOrderNotes)?.apply { text = orderList?.get(index)?.note}
-        view?.findViewById<TextView>(R.id.chefOrderTotal)?.apply { text = orderList?.get(index)?.orderTotal.toString()}
-        view?.findViewById<EditText>(R.id.chefOrderStatus)?.apply { hint = orderList?.get(index)?.status.toString()}
 
     }
 

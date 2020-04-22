@@ -197,6 +197,18 @@ interface Api {
         @Path("id") id:Int
     )
 
+    //TODO: Implement
+    @GET("allSurveys")
+    fun allsurveys():Call<ResponseSurveys>
+
+    @FormUrlEncoded
+    @POST("createSurvey")
+    fun createSurvey(
+        @Field("firstq") firstq: Int,
+        @Field("secondq") secondq: Int,
+        @Field("thirdq") thirdq: Int
+    ):Call<ResponseSurvey>
+
     @FormUrlEncoded
     @POST("createTable")
     fun createTable(

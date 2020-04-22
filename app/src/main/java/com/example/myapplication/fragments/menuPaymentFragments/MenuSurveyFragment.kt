@@ -13,7 +13,14 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
+import com.example.myapplication.activities.ManagerActivity
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseEmployee
+import com.example.myapplication.apipackage.ResponseSurvey
+import com.example.myapplication.apipackage.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MenuSurveyFragment : Fragment() {
@@ -25,16 +32,40 @@ class MenuSurveyFragment : Fragment() {
         runGraidentAnimation(view)
 
         /* Initialize responses */
-        val responseOne = view.findViewById<EditText>(R.id.question_1).text
-        val responseTwo = view.findViewById<EditText>(R.id.question_2).text
-        val responseThree = view.findViewById<EditText>(R.id.question_3).text
+        val responseOne = view.findViewById<EditText>(R.id.question_1).text.toString().toInt()
+        val responseTwo = view.findViewById<EditText>(R.id.question_2).text.toString().toInt()
+        val responseThree = view.findViewById<EditText>(R.id.question_3).text.toString().toInt()
 
         /* TODO: SEND THESE RESPONSES TO THE DATABASE */
-
 
         /* Go the final fragment */
         val nextButton = view.findViewById<Button>(R.id.survey_next_button)
         nextButton.setOnClickListener {
+            RetrofitClient.instance.createSurvey(
+                responseOne,
+                responseTwo,
+                responseThree
+            )
+                .enqueue(object : Callback<ResponseSurvey> {
+                    override fun onFailure(call: Call<ResponseSurvey>, t: Throwable) {
+                        Toast.makeText(
+                            activity as MenuActivity,
+                            t.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    override fun onResponse(
+                        call: Call<ResponseSurvey>,
+                        response: Response<ResponseSurvey>
+                    ) {
+                        Toast.makeText(
+                            activity as MenuActivity,
+                            response.body()?.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+
             Toast.makeText(
                 (activity as MenuActivity).applicationContext,
                 "Survey has been sucessfully submitted!",

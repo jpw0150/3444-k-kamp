@@ -59,13 +59,10 @@ class ManagerOrderHistoryFragment : Fragment() {
                         if (output != null) {
                             view.findViewById<EditText>(R.id.managerOrderHistID).hint =
                                 output.get(index).id.toString()
-                        }
 
-                        if (output != null) {
                             view.findViewById<EditText>(R.id.managerOrderHistTable).hint =
                                 output.get(index).tableNum.toString()
-                        }
-                        if (output != null) {
+
                             var outputString = ""
                             for (indez in 0..(output.get(index).entree.size - 1)) {
 
@@ -77,10 +74,7 @@ class ManagerOrderHistoryFragment : Fragment() {
                             indez = 0
                             view.findViewById<EditText>(R.id.managerOrderHistEntree).hint = outputString
 
-
-                        }
-                        if (output != null) {
-                            var outputString = ""
+                            outputString = ""
                             for (indez in 0..(output.get(index).entree.size - 1)) {
                                 outputString += output.get(index).side.get(indez).quantity.toString() + " " +
                                         output.get(index).side.get(indez).item + "\n"
@@ -88,9 +82,7 @@ class ManagerOrderHistoryFragment : Fragment() {
                             indez = 0
                             view.findViewById<EditText>(R.id.managerOrderHistSide).hint = outputString
 
-                        }
-                        if (output != null) {
-                            var outputString = ""
+                            outputString = ""
                             for (indez in 0..(output.get(index).entree.size - 1)) {
                                 outputString += output.get(index).drink.get(indez).quantity.toString() + " " +
                                         output.get(index).drink.get(indez).item + "\n"
@@ -98,19 +90,16 @@ class ManagerOrderHistoryFragment : Fragment() {
                             indez = 0
                             view.findViewById<EditText>(R.id.managerOrderHistDrink).hint = outputString
 
-                        }
-                        if (output != null) {
                             view.findViewById<EditText>(R.id.managerOrderHistNote).hint =
                                 output.get(index).note
-                        }
-                        if (output != null) {
+
                             view.findViewById<EditText>(R.id.managerOrderHistTotal).hint =
                                 output.get(index).orderTotal.toString()
-                        }
-                        if (output != null) {
+
                             view.findViewById<EditText>(R.id.managerOrderHistStatus).hint =
                                 output.get(index).status.toString()
                         }
+                        else { view.findViewById<EditText>(R.id.managerOrderHistID).hint = "NO DATA"}
 
                         view.findViewById<Button>(R.id.manOrdHistPrev)
                             .setOnClickListener { orderPrevious(output) }
@@ -126,117 +115,154 @@ class ManagerOrderHistoryFragment : Fragment() {
 
 
     fun orderPrevious(orderList: List<Order>?) {
-        if (index == 0) {
-            if (orderList != null) {
+        if (orderList != null) {
+            if (index == 0) {
                 index = orderList.size - 1
+            } else {
+                index -= 1
             }
-        } else {
-            index -= 1
-        }
 
+            view?.findViewById<EditText>(R.id.managerOrderHistID)
+                ?.apply {
+                    hint = orderList.get(index).id.toString()
+                    text.clear()
+                }
+            view?.findViewById<EditText>(R.id.managerOrderHistTable)
+                ?.apply {
+                    hint = orderList.get(index).tableNum.toString()
+                    text.clear()
+                }
 
-
-
-        view?.findViewById<EditText>(R.id.managerOrderHistID)
-            ?.apply { hint = orderList?.get(index)?.id.toString() }
-        view?.findViewById<EditText>(R.id.managerOrderHistTable)
-            ?.apply { hint = orderList?.get(index)?.tableNum.toString() }
-
-        var outputString = ""
-        if (orderList != null) {
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                outputString +=
-                    orderList?.get(index).entree.get(indez).quantity.toString() + " " +
-                            orderList?.get(index).entree.get(indez).meatType + " " +
-                            orderList?.get(index).entree.get(indez).flavor + " " +
-                            orderList?.get(index).entree.get(indez).sauceType + "\n"
+            var outputString = ""
+                for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                    outputString +=
+                        orderList.get(index).entree.get(indez).quantity.toString() + " " +
+                                orderList.get(index).entree.get(indez).meatType + " " +
+                                orderList.get(index).entree.get(indez).flavor + " " +
+                                orderList.get(index).entree.get(indez).sauceType + "\n"
+                }
+            indez = 0
+            view?.findViewById<EditText>(R.id.managerOrderHistEntree)?.apply {
+                hint = outputString
+                text.clear()
             }
-        }
-        indez = 0
-        view?.findViewById<EditText>(R.id.managerOrderHistEntree)?.apply { hint = outputString }
 
-        outputString = ""
-        if (orderList != null) {
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
-                        orderList.get(index).side.get(indez).item + "\n"
+            outputString = ""
+                for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                    outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
+                            orderList.get(index).side.get(indez).item + "\n"
+                }
+            indez = 0
+            view?.findViewById<EditText>(R.id.managerOrderHistSide)?.apply {
+                hint = outputString
+                text.clear()
             }
-        }
-        indez = 0
-        view?.findViewById<EditText>(R.id.managerOrderHistSide)?.apply { hint = outputString }
 
-        outputString = ""
-        if (orderList != null) {
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
-                        orderList.get(index).drink.get(indez).item + "\n"
+            outputString = ""
+
+                for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                    outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
+                            orderList.get(index).drink.get(indez).item + "\n"
+                }
+
+            indez = 0
+            view?.findViewById<EditText>(R.id.managerOrderHistDrink)?.apply {
+                hint = outputString
+                text.clear()
             }
+            view?.findViewById<EditText>(R.id.managerOrderHistNote)
+                ?.apply {
+                    hint = orderList.get(index).note
+                    text.clear()
+                }
+            view?.findViewById<EditText>(R.id.managerOrderHistTotal)
+                ?.apply {
+                    hint = orderList.get(index).orderTotal.toString()
+                    text.clear()
+                }
+            view?.findViewById<EditText>(R.id.managerOrderHistStatus)
+                ?.apply {
+                    hint = orderList.get(index).status.toString()
+                    text.clear()
+                }
+
         }
-        indez = 0
-        view?.findViewById<EditText>(R.id.managerOrderHistDrink)?.apply { hint = outputString }
-        view?.findViewById<EditText>(R.id.managerOrderHistNote)
-            ?.apply { hint = orderList?.get(index)?.note }
-        view?.findViewById<EditText>(R.id.managerOrderHistTotal)
-            ?.apply { hint = orderList?.get(index)?.orderTotal.toString() }
-        view?.findViewById<EditText>(R.id.managerOrderHistStatus)
-            ?.apply { hint = orderList?.get(index)?.status.toString() }
-
-
     }
 
     fun orderNext(orderList: List<Order>?) {
         if (orderList != null) {
             if (index == orderList.size - 1) {
                 index = 0
+            } else {
+                index += 1
             }
-        } else {
-            index += 1
-        }
 
 
-        view?.findViewById<EditText>(R.id.managerOrderHistID)
-            ?.apply { hint = orderList?.get(index)?.id.toString() }
-        view?.findViewById<EditText>(R.id.managerOrderHistTable)
-            ?.apply { hint = orderList?.get(index)?.tableNum.toString() }
+            view?.findViewById<EditText>(R.id.managerOrderHistID)
+                ?.apply {
+                    hint = orderList.get(index).id.toString()
+                    text.clear()
+                }
+            view?.findViewById<EditText>(R.id.managerOrderHistTable)
+                ?.apply {
+                    hint = orderList.get(index).tableNum.toString()
+                    text.clear()
+                }
 
-        var outputString = ""
-        if (orderList != null) {
+            var outputString = ""
             for (indez in 0..(orderList.get(index).entree.size - 1)) {
                 outputString +=
-                    orderList?.get(index).entree.get(indez).quantity.toString() + " " +
-                            orderList?.get(index).entree.get(indez).meatType + " " +
-                            orderList?.get(index).entree.get(indez).flavor + " " +
-                            orderList?.get(index).entree.get(indez).sauceType + "\n"
+                    orderList.get(index).entree.get(indez).quantity.toString() + " " +
+                            orderList.get(index).entree.get(indez).meatType + " " +
+                            orderList.get(index).entree.get(indez).flavor + " " +
+                            orderList.get(index).entree.get(indez).sauceType + "\n"
             }
-        }
-        indez = 0
-        view?.findViewById<EditText>(R.id.managerOrderHistEntree)?.apply { hint = outputString }
 
-        outputString = ""
-        if (orderList != null) {
+            indez = 0
+            view?.findViewById<EditText>(R.id.managerOrderHistEntree)?.apply {
+                hint = outputString
+                text.clear()
+            }
+
+            outputString = ""
             for (indez in 0..(orderList.get(index).entree.size - 1)) {
                 outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
                         orderList.get(index).side.get(indez).item + "\n"
             }
-        }
-        indez = 0
-        view?.findViewById<EditText>(R.id.managerOrderHistSide)?.apply { hint = outputString }
 
-        outputString = ""
-        if (orderList != null) {
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
-                        orderList.get(index).drink.get(indez).item + "\n"
+            indez = 0
+            view?.findViewById<EditText>(R.id.managerOrderHistSide)?.apply {
+                hint = outputString
+                text.clear()
             }
+
+            outputString = ""
+                for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                    outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
+                            orderList.get(index).drink.get(indez).item + "\n"
+                }
+
+            indez = 0
+            view?.findViewById<EditText>(R.id.managerOrderHistDrink)?.apply {
+                hint = outputString
+                text.clear()
+            }
+            view?.findViewById<EditText>(R.id.managerOrderHistNote)
+                ?.apply {
+                    hint = orderList.get(index).note
+                    text.clear()
+                }
+            view?.findViewById<EditText>(R.id.managerOrderHistTotal)
+                ?.apply {
+                    hint = orderList.get(index).orderTotal.toString()
+                    text.clear()
+                }
+            view?.findViewById<EditText>(R.id.managerOrderHistStatus)
+                ?.apply {
+                    hint = orderList.get(index).status.toString()
+                    text.clear()
+                }
         }
-        indez = 0
-        view?.findViewById<EditText>(R.id.managerOrderHistDrink)?.apply { hint = outputString }
-        view?.findViewById<EditText>(R.id.managerOrderHistNote)
-            ?.apply { hint = orderList?.get(index)?.note }
-        view?.findViewById<EditText>(R.id.managerOrderHistTotal)
-            ?.apply { hint = orderList?.get(index)?.orderTotal.toString() }
-        view?.findViewById<EditText>(R.id.managerOrderHistStatus)
-            ?.apply { hint = orderList?.get(index)?.status.toString() }
 
     }
         private fun runGraidentAnimation(v: View) {
