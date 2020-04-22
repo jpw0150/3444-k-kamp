@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_entree_flavor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/menu_entree_flavor"
     android:background="@drawable/gradient_list"
     tools:context=".fragments.menuEntreeFragments.MenuEntreeFlavorFragment">
 
@@ -40,8 +40,8 @@
         android:layout_marginLeft="49dp"
         android:layout_marginTop="12dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
         android:background="@null"
+        android:scaleType="fitCenter"
         android:src="@drawable/barbecue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -210,6 +210,74 @@
         android:src="@drawable/refill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/text_Lemon_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Our most popular flavor!"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_lemon" />
+
+    <TextView
+        android:id="@+id/text_Garlic_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Our most popular flavor!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_garlic_parm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_garlic_parm_image"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text_Hawaiian_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Our most popular flavor!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_hawaiian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_hawaiian_image" />
+
+    <TextView
+        android:id="@+id/text_Barbecue_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Our most popular flavor!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_bbq"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_bbq_image"
+        app:layout_constraintVertical_bias="0.88" />
+
+    <TextView
+        android:id="@+id/text_Cajun_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Our most popular flavor!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_cajun"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_cajun_image"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text_Buffalo_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Our most popular flavor!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_buffalo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_buffalo_image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

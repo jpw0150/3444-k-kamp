@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/me_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/me_1"
     android:background="@drawable/gradient_list"
     tools:context=".fragments.menuEntreeFragments.MenuEntreeMeatFragment">
 
@@ -31,8 +31,7 @@
         android:layout_marginTop="52dp"
         android:src="@drawable/bonesless_wing"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step_1"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/step_1" />
 
     <ImageView
         android:id="@+id/bone_wing"
@@ -204,6 +203,42 @@
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contains_wheat_bone" />
+
+    <TextView
+        android:id="@+id/text_Boneless_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Our most popular option!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_boneless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boneless_icon"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text_Bone_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Our most popular option!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/button_bone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bone_wing"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text_Tender_Popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Our most popular option!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tenders"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tenders"
+        app:layout_constraintVertical_bias="0.13999999" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,12 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
+import com.example.myapplication.activities.ChefActivity
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseOrders
+import com.example.myapplication.apipackage.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /** This class is step 1 in ordering a drink
  * in which the customer selects a drink option and
@@ -23,6 +27,58 @@ class MenuDrinksFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu_drinks, container, false)
         runGraidentAnimation(view)
+
+        //TODO: Check that this works.
+        var drinkCounts = mutableListOf(0,0,0,0)
+        RetrofitClient.instance.allorders()
+            .enqueue(object : Callback<ResponseOrders> {
+                override fun onFailure(call: Call<ResponseOrders>, t: Throwable) {
+                    Toast.makeText(activity as MenuActivity,"Error retrieving order popularity", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseOrders>,
+                    response: Response<ResponseOrders>
+                ) {
+                    val output = response.body()?.orders
+
+                    if (output != null) {
+                        for (i in 0..(output.size-1)) {
+                            for (j in 0..(output.get(i).drink.size-1)) {
+                                when (output.get(i).drink[j].item) {
+                                    "Lemonade" -> {
+                                        drinkCounts[0] += output.get(i).drink[j].quantity
+                                    }
+                                    "Soft Drink" -> {
+                                        drinkCounts[1] += output.get(i).drink[j].quantity
+                                    }
+                                    "Sweet Tea" -> {
+                                        drinkCounts[2] += output.get(i).drink[j].quantity
+                                    }
+                                    "Water" -> {
+                                        drinkCounts[3] += output.get(i).drink[j].quantity
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            })
+        if (drinkCounts[3] > drinkCounts[2] && drinkCounts[3] > drinkCounts[1] && drinkCounts[3] > drinkCounts[0]) {
+            view.findViewById<TextView>(R.id.text_Water_Popular).apply { visibility = View.VISIBLE }
+        }
+        else if(drinkCounts[2] > drinkCounts[3] && drinkCounts[2] > drinkCounts[1] && drinkCounts[2] > drinkCounts[0]) {
+            view.findViewById<TextView>(R.id.text_Tea_Popular).apply { visibility = View.VISIBLE }
+        }
+        else if(drinkCounts[1] > drinkCounts[3] && drinkCounts[1] > drinkCounts[2] && drinkCounts[1] > drinkCounts[0]) {
+            view.findViewById<TextView>(R.id.text_Soda_Popular).apply { visibility = View.VISIBLE }
+        }
+        else {
+            view.findViewById<TextView>(R.id.text_Lemon_Popular).apply { visibility = View.VISIBLE }
+        }
 
         /* Initialize icon info buttons */
         val lemonadeInfoButton = view.findViewById<ImageButton>(R.id.button_lemonade_image)

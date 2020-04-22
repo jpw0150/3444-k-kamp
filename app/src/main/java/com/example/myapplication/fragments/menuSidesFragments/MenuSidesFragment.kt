@@ -9,10 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
+import com.example.myapplication.activities.ChefActivity
 import com.example.myapplication.activities.MenuActivity
+import com.example.myapplication.apipackage.ResponseOrders
+import com.example.myapplication.apipackage.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /** This class shows the customer all the available sides, lets the customer view side descriptions, and select a side. */
 class MenuSidesFragment : Fragment() {
@@ -21,6 +28,52 @@ class MenuSidesFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu_sides, container, false)
         runGraidentAnimation(view)
+
+        //TODO: Verify that this works
+        var sideCounts = mutableListOf(0,0,0)
+        RetrofitClient.instance.allorders()
+            .enqueue(object : Callback<ResponseOrders> {
+                override fun onFailure(call: Call<ResponseOrders>, t: Throwable) {
+                    Toast.makeText(activity as MenuActivity,"Error retrieving order popularity", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseOrders>,
+                    response: Response<ResponseOrders>
+                ) {
+                    val output = response.body()?.orders
+
+                    if (output != null) {
+                        for (i in 0..(output.size-1)) {
+                            for (j in 0..(output.get(i).side.size-1)) {
+                                when (output.get(i).side[j].item) {
+                                    "Cajun Fries" -> {
+                                        sideCounts[0] += output.get(i).side[j].quantity
+                                    }
+                                    "Fried Corn" -> {
+                                        sideCounts[1] += output.get(i).side[j].quantity
+                                    }
+                                    "Veggie Sticks" -> {
+                                        sideCounts[2] += output.get(i).side[j].quantity
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            })
+        if(sideCounts[2] > sideCounts[1] && sideCounts[2] > sideCounts[0]) {
+            view.findViewById<TextView>(R.id.text_Veggie_Popular).apply { visibility = View.VISIBLE }
+        }
+        else if(sideCounts[1] > sideCounts[2] && sideCounts[1] > sideCounts[0]) {
+            view.findViewById<TextView>(R.id.text_Corn_Popular).apply { visibility = View.VISIBLE }
+        }
+        else {
+            view.findViewById<TextView>(R.id.text_Fries_Popular).apply { visibility = View.VISIBLE }
+        }
 
         /* Initialize icon info buttons */
         val friesInfoButton = view.findViewById<ImageButton>(R.id.button_fries_image)

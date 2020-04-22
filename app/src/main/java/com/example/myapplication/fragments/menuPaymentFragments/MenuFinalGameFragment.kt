@@ -42,7 +42,7 @@ class MenuFinalGameFragment : Fragment() {
 
         finalRunButton.setOnClickListener {
             if(count == 0){
-                randomInt = (0..5).random()
+                randomInt = (1..5).random()
                 val randomNumGame = view.findViewById<EditText>(R.id.Random_input).text.toString().toInt()
                 val ourRandomNum = view.findViewById<TextView>(R.id.textView12)
                 ourRandomNum.setTextColor(Color.BLACK)

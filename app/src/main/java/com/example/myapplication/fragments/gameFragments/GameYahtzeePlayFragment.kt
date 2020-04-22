@@ -159,7 +159,7 @@ class GameYahtzeePlayFragment : Fragment() {
         if (!playerTwo) {
             playerTwo = true
 
-            //TODO: SCORE TALLYING LOGIC
+            //Score tallying logic.
             for (i in (0..4)) {
                 when (activeDice[i]) {
                     0 -> {
@@ -361,7 +361,7 @@ class GameYahtzeePlayFragment : Fragment() {
         else {
             playerTwo = false
 
-            //TODO: SCORE TALLYING LOGIC
+            //Score tallying logic.
             for (i in (0..4)) {
                 when (activeDice[i]) {
                     0 -> {

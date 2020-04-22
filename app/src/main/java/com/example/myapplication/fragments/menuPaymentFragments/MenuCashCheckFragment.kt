@@ -123,8 +123,9 @@ class MenuCashCheckFragment : Fragment() {
                         call: Call<ResponseEmployee>,
                         response: Response<ResponseEmployee>
                     ) {
-                        waiter = response.body()?.employee!!
-                        RetrofitClient.instance.updateEmp(waiter.id, waiter.name, waiter.wage, waiter.role, waiter.hours, waiter.tips+tip, waiter.compmeals)
+                        if (response.body() != null) {waiter = response.body()?.employee!!
+                            RetrofitClient.instance.updateEmp(waiter.id, waiter.name, waiter.wage, waiter.role, waiter.hours, waiter.tips+tip, waiter.compmeals)
+                        }
                     }
                 })
 

@@ -49,7 +49,6 @@ class MainMenuFragment : Fragment() {
 
         /* Set up button actions to go to respective page */
 
-        // TODO: set up all these screens
         entreeButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuEntreeMeatFragment(),"") }
         sidesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuSidesFragment(),"") }
         drinksButton.setOnClickListener{(activity as MenuActivity).replaceFragment(MenuDrinksFragment(),"") }

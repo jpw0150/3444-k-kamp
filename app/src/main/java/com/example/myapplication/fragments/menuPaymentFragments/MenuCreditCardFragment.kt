@@ -42,7 +42,7 @@ class MenuCreditCardFragment : Fragment() {
         val newTotal = view.findViewById<TextView>(R.id.card_total)
         newTotal.setTextColor(Color.BLACK)
         newTotal.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-        newTotal.text = "$$total"
+        newTotal.text = "$total"
 
         /* Initialize payButton and setOnClickListener() */
         val payButton = view.findViewById<Button>(R.id.button_pay)
@@ -67,8 +67,10 @@ class MenuCreditCardFragment : Fragment() {
                             call: Call<ResponseEmployee>,
                             response: Response<ResponseEmployee>
                         ) {
-                            waiter = response.body()?.employee!!
-                            RetrofitClient.instance.updateEmp(waiter.id, waiter.name, waiter.wage, waiter.role, waiter.hours, waiter.tips+tip, waiter.compmeals)
+                            if (response.body() != null) {
+                                waiter = response.body()?.employee!!
+                                RetrofitClient.instance.updateEmp(waiter.id, waiter.name, waiter.wage, waiter.role, waiter.hours, waiter.tips+tip, waiter.compmeals)
+                            }
                         }
                     })
 
@@ -105,12 +107,12 @@ class MenuCreditCardFragment : Fragment() {
                         }
                     })
 
-                    //TODO: Ensure this fits with customer-side login scripts.
-                    if ((activity as CustomerAccountActivity).currentCustomer != null) {
-                        (activity as MenuActivity).replaceFragment(MenuAddRewardsFragment(), "")
-                    } else {
+                    //TODO: Yeah this kinda just explodes because we're not able to access CustomerAccountActivity from here.
+                    //if ((activity as CustomerAccountActivity).currentCustomer != null) {
+                    //    (activity as MenuActivity).replaceFragment(MenuAddRewardsFragment(), "")
+                    //} else {
                         (activity as MenuActivity).replaceFragment(MenuFinalGameFragment(), "")
-                    }
+                    //}
                 }
             }
         }
