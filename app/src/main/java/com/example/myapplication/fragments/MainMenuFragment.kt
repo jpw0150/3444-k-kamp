@@ -20,6 +20,7 @@ import com.example.myapplication.fragments.menuPaymentFragments.MenuPaymentMetho
 import com.example.myapplication.fragments.menuSidesFragments.MenuSidesFragment
 import com.example.myapplication.fragments.gameFragments.KidsModeLoginFragment
 import com.example.myapplication.fragments.menuKids.MenuKidsMealsFragment
+import com.example.myapplication.fragments.menuSpecials.MenuFiveDollarFragment
 import com.example.myapplication.fragments.menuSpecials.MenuSpecialsFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,6 +57,8 @@ class MainMenuFragment : Fragment() {
             MenuSpecialsFragment(),"") }
         gamesButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(KidsModeLoginFragment(),"") }
         kidsMenuButton.setOnClickListener{ (activity as MenuActivity).replaceFragment(MenuKidsMealsFragment(),"") }
+        view.findViewById<Button>(R.id.value_Meal_Button).setOnClickListener{ (activity as MenuActivity).replaceFragment(
+            MenuFiveDollarFragment(), "")}
 
 
         /* Send help notification to the waiter */

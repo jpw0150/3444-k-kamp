@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_menu"
     android:background="@drawable/gradient_list"
     tools:context=".fragments.MainMenuFragment">
 
@@ -225,6 +225,19 @@
         android:src="@drawable/payment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_help_image_main_menu" />
+
+    <Button
+        android:id="@+id/value_Meal_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        android:background="@android:color/darker_gray"
+        android:text="Value Meals"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button_cart_main_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

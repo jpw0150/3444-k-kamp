@@ -114,39 +114,37 @@ class ManagerInventoryFragment : Fragment() {
     }
 
     fun ingsBack(chefIngs:List<Ingredient>?) {
-        if (index == 0) {
-            if (chefIngs != null) {
-                index = chefIngs.size - 1
-            }
-        }
-        else index -= 1
+        if (chefIngs != null) {
+            if (index == 0) {
+                    index = chefIngs.size - 1
+            } else index -= 1
 
-        view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply{
-            if (chefIngs != null) {
-                text = (index+1).toString() + " OF " + chefIngs.size.toString()
+            view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply {
+                text = (index + 1).toString() + " OF " + chefIngs.size.toString()
             }
+            view?.findViewById<TextView>(R.id.managerInventoryName)?.apply {
+                text = chefIngs.get(index).food
+            }
+            view?.findViewById<EditText>(R.id.managerInventoryQuantity)
+                ?.apply { hint = chefIngs.get(index).foodnum.toString() }
         }
-        view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text =
-            chefIngs?.get(index)?.food
-        }
-        view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = chefIngs?.get(index)?.foodnum.toString()}
     }
 
     fun ingsForward(chefIngs:List<Ingredient>?) {
         if (chefIngs != null) {
             if (index == chefIngs.size - 1) index = 0
             else index += 1
-        }
 
-        view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply{
-            if (chefIngs != null) {
-                text = (index+1).toString() + " OF " + chefIngs.size.toString()
+
+            view?.findViewById<TextView>(R.id.managerInventoryPosition)?.apply {
+                text = (index + 1).toString() + " OF " + chefIngs.size.toString()
             }
+            view?.findViewById<TextView>(R.id.managerInventoryName)?.apply {
+                text = chefIngs.get(index).food
+            }
+            view?.findViewById<EditText>(R.id.managerInventoryQuantity)
+                ?.apply { hint = chefIngs.get(index).foodnum.toString() }
         }
-        view?.findViewById<TextView>(R.id.managerInventoryName)?.apply { text =
-            chefIngs?.get(index)?.food
-        }
-        view?.findViewById<EditText>(R.id.managerInventoryQuantity)?.apply { hint = chefIngs?.get(index)?.foodnum.toString()}
     }
 
 
