@@ -199,10 +199,10 @@ interface Api {
 
     //TODO: Implement
     @GET("allSurveys")
-    fun allsurveys():Call<ResponseSurveys>
+    fun allSurveys():Call<ResponseSurveys>
 
     @FormUrlEncoded
-    @POST("createSurvey")
+    @POST("createsurvey")
     fun createSurvey(
         @Field("firstq") firstq: Int,
         @Field("secondq") secondq: Int,

@@ -32,15 +32,16 @@ class MenuSurveyFragment : Fragment() {
         runGraidentAnimation(view)
 
         /* Initialize responses */
-        val responseOne = view.findViewById<EditText>(R.id.question_1).text.toString().toInt()
-        val responseTwo = view.findViewById<EditText>(R.id.question_2).text.toString().toInt()
-        val responseThree = view.findViewById<EditText>(R.id.question_3).text.toString().toInt()
+
 
         /* TODO: SEND THESE RESPONSES TO THE DATABASE */
 
         /* Go the final fragment */
         val nextButton = view.findViewById<Button>(R.id.survey_next_button)
         nextButton.setOnClickListener {
+            val responseOne = view.findViewById<EditText>(R.id.question_1).text.toString().toInt()
+            val responseTwo = view.findViewById<EditText>(R.id.question_2).text.toString().toInt()
+            val responseThree = view.findViewById<EditText>(R.id.question_3).text.toString().toInt()
             RetrofitClient.instance.createSurvey(
                 responseOne,
                 responseTwo,

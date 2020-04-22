@@ -37,7 +37,7 @@ class ManagerSurveyFragment : Fragment() {
             // TODO display first index responses
 
 
-            RetrofitClient.instance.allsurveys()
+            RetrofitClient.instance.allSurveys()
                 .enqueue(object : Callback<ResponseSurveys> {
                     override fun onFailure(call: Call<ResponseSurveys>, t: Throwable) {
                         Toast.makeText(activity as ManagerActivity,"Failure", Toast.LENGTH_SHORT).show()
