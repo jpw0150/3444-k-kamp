@@ -53,25 +53,38 @@ class WaiterKitchenAlertFragment : Fragment() {
             })
 
         val clear = view.findViewById<Button>(R.id.clearAll)
-        clear.setOnClickListener{
-
-            val id = view.findViewById<EditText>(R.id.tableIdTocl).text.toString().toInt()
-
-            RetrofitClient.instance.toHistory(id)
-                .enqueue(object: Callback<ResponseOrder> {
-                    override fun onFailure(call: Call<ResponseOrder>, t: Throwable) {
-                        Toast.makeText(activity as WaiterActivity, "Order not ready", Toast.LENGTH_LONG).show()
-                    }
-                    override fun onResponse(
-                        call: Call<ResponseOrder>,
-                        response: Response<ResponseOrder>
-                    ) {
-                        Toast.makeText(activity as WaiterActivity, "Table Cleared", Toast.LENGTH_LONG).show()
-                        (activity as WaiterActivity).replaceFragment(WaiterMenuFragment(), "")
-                    }
-                })
+        clear.setOnClickListener {
+            if (view.findViewById<EditText>(R.id.tableIdTocl).text.toString().isEmpty()) {
+                Toast.makeText(activity as WaiterActivity, "Please enter an ID.", Toast.LENGTH_LONG).show()
+            } else {
+                val id = view.findViewById<EditText>(R.id.tableIdTocl).text.toString().toInt()
 
 
+                RetrofitClient.instance.toHistory(id)
+                    .enqueue(object : Callback<ResponseOrder> {
+                        override fun onFailure(call: Call<ResponseOrder>, t: Throwable) {
+                            Toast.makeText(
+                                activity as WaiterActivity,
+                                "Order not ready",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseOrder>,
+                            response: Response<ResponseOrder>
+                        ) {
+                            Toast.makeText(
+                                activity as WaiterActivity,
+                                "Table Cleared",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            (activity as WaiterActivity).replaceFragment(WaiterMenuFragment(), "")
+                        }
+                    })
+
+
+            }
         }
         return view
     }

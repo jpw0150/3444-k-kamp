@@ -50,29 +50,22 @@ class ManagerViewAllEmployeesFragment : Fragment() {
                     if (output != null) {
                         view.findViewById<EditText>(R.id.employee_id).hint =
                             output.get(index).id.toString()
-                    }
 
-                    if (output != null) {
                         view.findViewById<EditText>(R.id.employee_name).hint =
                             output.get(index).name
-                    }
-                    if (output != null) {
+
                         view.findViewById<EditText>(R.id.employee_wage).hint =
                             output.get(index).wage.toString()
-                    }
-                    if (output != null) {
+
                         view.findViewById<EditText>(R.id.employee_role).hint =
                             output.get(index).role
-                    }
-                    if (output != null) {
+
                         view.findViewById<EditText>(R.id.employee_hours).hint =
                             output.get(index).hours.toString()
-                    }
-                    if (output != null) {
+
                         view.findViewById<EditText>(R.id.employee_tips).hint =
                             output.get(index).tips.toString()
-                    }
-                    if (output != null) {
+
                         view.findViewById<EditText>(R.id.employee_compmeals).hint =
                             output.get(index).compmeals.toString()
                     }
@@ -95,14 +88,27 @@ class ManagerViewAllEmployeesFragment : Fragment() {
 
             view.findViewById<Button>(R.id.update_employee).setOnClickListener {
 
-                val empID = employee_id.text.toString().toInt()
-                val ename = employee_name.text.toString().trim()
-                val ewage = employee_wage.text.toString().toInt()
-                val erole = employee_role.text.toString().trim()
-                val ehours = employee_hours.text.toString().toInt()
-                val etips = employee_tips.text.toString().toDouble()
-                val ecompmeals = employee_compmeals.text.toString().toInt()
-
+                var empID = 0
+                if (employee_id.text.isNullOrEmpty()) { empID = employee_id.hint.toString().toInt()}
+                else empID = employee_id.text.toString().toInt()
+                var ename = ""
+                if (employee_name.text.isNullOrEmpty()) {ename = employee_name.hint.toString().trim()}
+                else ename = employee_name.text.toString().trim()
+                var ewage = 0
+                if (employee_wage.text.isNullOrEmpty()) {ewage = employee_wage.hint.toString().toInt()}
+                else ewage = employee_wage.text.toString().toInt()
+                var erole = ""
+                if (employee_role.text.isNullOrEmpty()) {erole = employee_role.hint.toString().trim()}
+                else erole = employee_role.text.toString().trim()
+                var ehours = 0
+                if (employee_hours.text.isNullOrEmpty()) {ehours = employee_hours.hint.toString().toInt()}
+                else ehours = employee_hours.text.toString().toInt()
+                var etips = 0.0
+                if (employee_tips.text.isNullOrEmpty()) {etips = employee_tips.hint.toString().toDouble()}
+                else etips = employee_tips.text.toString().toDouble()
+                var ecompmeals = 0
+                if (employee_compmeals.text.isNullOrEmpty()) {ecompmeals = employee_compmeals.hint.toString().toInt()}
+                else ecompmeals = employee_compmeals.text.toString().toInt()
 
                 RetrofitClient.instance.updateEmp(empID, ename, ewage, erole, ehours, etips, ecompmeals)
                 .enqueue(object : Callback<ResponseEmployee> {
@@ -144,21 +150,27 @@ class ManagerViewAllEmployeesFragment : Fragment() {
 
 
 
-      view?.findViewById<TextView>(R.id.employee_position)?.apply{
+      view?.findViewById<EditText>(R.id.employee_position)?.apply{
             if (employeeList != null) {
                 hint = (index+1).toString() + " OF " + employeeList.size.toString()
             }
+          text.clear()
         }
 
-      view?.findViewById<TextView>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()}
-        view?.findViewById<TextView>(R.id.employee_name)?.apply { hint = employeeList?.get(index)?.name}
-        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint =
-            employeeList?.get(index)?.wage.toString()
-        }
-        view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = employeeList?.get(index)?.role }
-        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = employeeList?.get(index)?.hours.toString()}
-        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = employeeList?.get(index)?.tips.toString()}
-        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = employeeList?.get(index)?.compmeals.toString() }
+      view?.findViewById<EditText>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_name)?.apply { hint = employeeList?.get(index)?.name
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint = employeeList?.get(index)?.wage.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_role)?.apply { hint = employeeList?.get(index)?.role
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = employeeList?.get(index)?.hours.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = employeeList?.get(index)?.tips.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = employeeList?.get(index)?.compmeals.toString()
+            text.clear()}
     }
     fun empsNext(employeeList: List<Employee>?) {
         if (employeeList != null) {
@@ -166,21 +178,27 @@ class ManagerViewAllEmployeesFragment : Fragment() {
             else index += 1
         }
 
-        view?.findViewById<TextView>(R.id.employee_position)?.apply{
+        view?.findViewById<EditText>(R.id.employee_position)?.apply{
             if (employeeList != null) {
                 hint = (index+1).toString() + " OF " + employeeList.size.toString()
             }
+            text.clear()
         }
 
-        view?.findViewById<TextView>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()}
-        view?.findViewById<TextView>(R.id.employee_name)?.apply { hint = employeeList?.get(index)?.name}
-        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint =
-            employeeList?.get(index)?.wage.toString()
-        }
-        view?.findViewById<TextView>(R.id.employee_role)?.apply { hint = employeeList?.get(index)?.role }
-        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = employeeList?.get(index)?.hours.toString()}
-        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = employeeList?.get(index)?.tips.toString()}
-        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = employeeList?.get(index)?.compmeals.toString() }
+        view?.findViewById<EditText>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_name)?.apply { hint = employeeList?.get(index)?.name
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_wage)?.apply { hint = employeeList?.get(index)?.wage.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_role)?.apply { hint = employeeList?.get(index)?.role
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_hours)?.apply { hint = employeeList?.get(index)?.hours.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_tips)?.apply { hint = employeeList?.get(index)?.tips.toString()
+            text.clear()}
+        view?.findViewById<EditText>(R.id.employee_compmeals)?.apply { hint = employeeList?.get(index)?.compmeals.toString()
+            text.clear()}
     }
 
     private fun runGraidentAnimation(v: View) {
