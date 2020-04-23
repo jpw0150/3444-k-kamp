@@ -59,23 +59,19 @@ class MenuEntreeMeatFragment : Fragment() {
                         }
 
                     }
-
+                    if(meatCounts[2] >= meatCounts[1] && meatCounts[2] >= meatCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Tender_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if(meatCounts[1] >= meatCounts[2] && meatCounts[1] >= meatCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Bone_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else {
+                        view.findViewById<TextView>(R.id.text_Boneless_Popular).apply { visibility = View.VISIBLE }
+                    }
                 }
 
             })
-        val store = 1
 
-        if(meatCounts[2] > meatCounts[1] && meatCounts[2] > meatCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Tender_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if(meatCounts[1] > meatCounts[2] && meatCounts[1] > meatCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Bone_Popular).apply { visibility = View.VISIBLE }
-        }
-        else {
-            view.findViewById<TextView>(R.id.text_Boneless_Popular).apply { visibility = View.VISIBLE }
-        }
-
-        (activity as MenuActivity).entreeId
         /* Initialize meat type buttons */
         val boneless_button = view.findViewById<Button>(R.id.button_boneless)
         val bone_button = view.findViewById<Button>(R.id.button_bone)

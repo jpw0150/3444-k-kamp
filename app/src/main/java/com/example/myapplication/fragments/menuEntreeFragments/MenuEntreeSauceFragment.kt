@@ -55,9 +55,7 @@ class MenuEntreeSauceFragment : Fragment() {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
                                 if (output.get(i).entree[j].sauceType == "ranch") {
-                                    //sauceCounts[3] += 1
-                                    //Toast.makeText(activity as MenuActivity, (sauceCounts[3] + 1).toString(), Toast.LENGTH_LONG).show()
-                                    sauceCounts[3] = sauceCounts[3] + 1
+                                    sauceCounts[3] += 1
                                 }
                                 else if (output.get(i).entree[j].sauceType == "blue cheese") {
                                     sauceCounts[2] += 1
@@ -71,13 +69,13 @@ class MenuEntreeSauceFragment : Fragment() {
                         }
 
                     }
-                    if (sauceCounts[3] > sauceCounts[2] && sauceCounts[3] > sauceCounts[1] && sauceCounts[3] > sauceCounts[0]) {
+                    if (sauceCounts[3] >= sauceCounts[2] && sauceCounts[3] >= sauceCounts[1] && sauceCounts[3] >= sauceCounts[0]) {
                         view.findViewById<TextView>(R.id.text_ranch_popular).apply { visibility = View.VISIBLE }
                     }
-                    else if (sauceCounts[2] > sauceCounts[3] && sauceCounts[2] > sauceCounts[1] && sauceCounts[2] > sauceCounts[0]) {
+                    else if (sauceCounts[2] >= sauceCounts[3] && sauceCounts[2] >= sauceCounts[1] && sauceCounts[2] >= sauceCounts[0]) {
                         view.findViewById<TextView>(R.id.text_cheese_popular).apply { visibility = View.VISIBLE }
                     }
-                    else if (sauceCounts[1] > sauceCounts[3] && sauceCounts[1] > sauceCounts[2] && sauceCounts[1] > sauceCounts[0]) {
+                    else if (sauceCounts[1] >= sauceCounts[3] && sauceCounts[1] >= sauceCounts[2] && sauceCounts[1] >= sauceCounts[0]) {
                         view.findViewById<TextView>(R.id.text_mustard_popular).apply { visibility = View.VISIBLE }
                     }
                     else {
@@ -87,8 +85,6 @@ class MenuEntreeSauceFragment : Fragment() {
                 }
 
             })
-        //Toast.makeText(activity as MenuActivity, "$sauceCounts", Toast.LENGTH_LONG).show()
-
 
         /* Initialize sauce option buttons */
         val ranchButton = view.findViewById<Button>(R.id.button_ranch)

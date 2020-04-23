@@ -61,19 +61,19 @@ class MenuSidesFragment : Fragment() {
                         }
 
                     }
-
+                    if(sideCounts[2] >= sideCounts[1] && sideCounts[2] >= sideCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Veggie_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if(sideCounts[1] >= sideCounts[2] && sideCounts[1] >= sideCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Corn_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else {
+                        view.findViewById<TextView>(R.id.text_Fries_Popular).apply { visibility = View.VISIBLE }
+                    }
                 }
 
             })
-        if(sideCounts[2] > sideCounts[1] && sideCounts[2] > sideCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Veggie_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if(sideCounts[1] > sideCounts[2] && sideCounts[1] > sideCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Corn_Popular).apply { visibility = View.VISIBLE }
-        }
-        else {
-            view.findViewById<TextView>(R.id.text_Fries_Popular).apply { visibility = View.VISIBLE }
-        }
+
 
         /* Initialize icon info buttons */
         val friesInfoButton = view.findViewById<ImageButton>(R.id.button_fries_image)

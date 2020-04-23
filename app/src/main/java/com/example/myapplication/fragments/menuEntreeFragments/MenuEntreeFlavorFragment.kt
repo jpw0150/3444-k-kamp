@@ -71,28 +71,27 @@ class MenuEntreeFlavorFragment : Fragment() {
                         }
 
                     }
-
+                    if (flavorCounts[5] >= flavorCounts[4] && flavorCounts[5] >= flavorCounts[3] && flavorCounts[5] >= flavorCounts[2] && flavorCounts[5] >= flavorCounts[1] && flavorCounts[5] >= flavorCounts[0]){
+                        view.findViewById<TextView>(R.id.text_Hawaiian_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if (flavorCounts[4] >= flavorCounts[5] && flavorCounts[4] >= flavorCounts[3] && flavorCounts[4] >= flavorCounts[2] && flavorCounts[4] >= flavorCounts[1] && flavorCounts[4] >= flavorCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Buffalo_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if (flavorCounts[3] >= flavorCounts[4] && flavorCounts[3] >= flavorCounts[5] && flavorCounts[3] >= flavorCounts[2] && flavorCounts[3] >= flavorCounts[1] && flavorCounts[3] >= flavorCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Garlic_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if (flavorCounts[2] >= flavorCounts[4] && flavorCounts[2] >= flavorCounts[3] && flavorCounts[2] >= flavorCounts[5] && flavorCounts[2] >= flavorCounts[1] && flavorCounts[2] >= flavorCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Cajun_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if (flavorCounts[1] >= flavorCounts[4] && flavorCounts[1] >= flavorCounts[3] && flavorCounts[1] >= flavorCounts[2] && flavorCounts[1] >= flavorCounts[5] && flavorCounts[1] >= flavorCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Lemon_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else {
+                        view.findViewById<TextView>(R.id.text_Barbecue_Popular).apply { visibility = View.VISIBLE }
+                    }
                 }
 
             })
-        if (flavorCounts[5] > flavorCounts[4] && flavorCounts[5] > flavorCounts[3] && flavorCounts[5] > flavorCounts[2] && flavorCounts[5] > flavorCounts[1] && flavorCounts[5] > flavorCounts[0]){
-            view.findViewById<TextView>(R.id.text_Hawaiian_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if (flavorCounts[4] > flavorCounts[5] && flavorCounts[4] > flavorCounts[3] && flavorCounts[4] > flavorCounts[2] && flavorCounts[4] > flavorCounts[1] && flavorCounts[4] > flavorCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Buffalo_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if (flavorCounts[3] > flavorCounts[4] && flavorCounts[3] > flavorCounts[5] && flavorCounts[3] > flavorCounts[2] && flavorCounts[3] > flavorCounts[1] && flavorCounts[3] > flavorCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Garlic_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if (flavorCounts[2] > flavorCounts[4] && flavorCounts[2] > flavorCounts[3] && flavorCounts[2] > flavorCounts[5] && flavorCounts[2] > flavorCounts[1] && flavorCounts[2] > flavorCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Cajun_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if (flavorCounts[1] > flavorCounts[4] && flavorCounts[1] > flavorCounts[3] && flavorCounts[1] > flavorCounts[2] && flavorCounts[1] > flavorCounts[5] && flavorCounts[1] > flavorCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Lemon_Popular).apply { visibility = View.VISIBLE }
-        }
-        else {
-            view.findViewById<TextView>(R.id.text_Barbecue_Popular).apply { visibility = View.VISIBLE }
-        }
 
         /* Initialize icons that will lead to additional information about the flavor */
         val bbq_info_button = view.findViewById<ImageButton>(R.id.button_bbq_image)

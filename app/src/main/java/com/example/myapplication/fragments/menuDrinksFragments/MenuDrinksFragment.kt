@@ -63,22 +63,22 @@ class MenuDrinksFragment : Fragment() {
                         }
 
                     }
-
+                    if (drinkCounts[3] >= drinkCounts[2] && drinkCounts[3] >= drinkCounts[1] && drinkCounts[3] >= drinkCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Water_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if(drinkCounts[2] >= drinkCounts[3] && drinkCounts[2] >= drinkCounts[1] && drinkCounts[2] >= drinkCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Tea_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if(drinkCounts[1] >= drinkCounts[3] && drinkCounts[1] >= drinkCounts[2] && drinkCounts[1] >= drinkCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_Soda_Popular).apply { visibility = View.VISIBLE }
+                    }
+                    else {
+                        view.findViewById<TextView>(R.id.text_Lemonade_Popular).apply { visibility = View.VISIBLE }
+                    }
                 }
 
             })
-        if (drinkCounts[3] > drinkCounts[2] && drinkCounts[3] > drinkCounts[1] && drinkCounts[3] > drinkCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Water_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if(drinkCounts[2] > drinkCounts[3] && drinkCounts[2] > drinkCounts[1] && drinkCounts[2] > drinkCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Tea_Popular).apply { visibility = View.VISIBLE }
-        }
-        else if(drinkCounts[1] > drinkCounts[3] && drinkCounts[1] > drinkCounts[2] && drinkCounts[1] > drinkCounts[0]) {
-            view.findViewById<TextView>(R.id.text_Soda_Popular).apply { visibility = View.VISIBLE }
-        }
-        else {
-            view.findViewById<TextView>(R.id.text_Lemonade_Popular).apply { visibility = View.VISIBLE }
-        }
+
 
         /* Initialize icon info buttons */
         val lemonadeInfoButton = view.findViewById<ImageButton>(R.id.button_lemonade_image)
