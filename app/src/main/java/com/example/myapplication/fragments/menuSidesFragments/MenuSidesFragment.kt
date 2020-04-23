@@ -47,13 +47,13 @@ class MenuSidesFragment : Fragment() {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).side.size-1)) {
                                 when (output.get(i).side[j].item) {
-                                    "Cajun Fries" -> {
+                                    "cajun fries" -> {
                                         sideCounts[0] += output.get(i).side[j].quantity
                                     }
-                                    "Fried Corn" -> {
+                                    "fried corn" -> {
                                         sideCounts[1] += output.get(i).side[j].quantity
                                     }
-                                    "Veggie Sticks" -> {
+                                    "veggie sticks" -> {
                                         sideCounts[2] += output.get(i).side[j].quantity
                                     }
                                 }

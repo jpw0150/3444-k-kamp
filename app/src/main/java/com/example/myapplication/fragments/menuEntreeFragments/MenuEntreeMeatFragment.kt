@@ -45,13 +45,13 @@ class MenuEntreeMeatFragment : Fragment() {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
                                 when (output.get(i).entree[j].meatType) {
-                                    "Boneless" -> {
+                                    "boneless" -> {
                                         meatCounts[0] += 1
                                     }
-                                    "Bone" -> {
+                                    "bone" -> {
                                         meatCounts[1] += 1
                                     }
-                                    "Tenders" -> {
+                                    "tenders" -> {
                                         meatCounts[2] += 1
                                     }
                                 }
@@ -63,7 +63,6 @@ class MenuEntreeMeatFragment : Fragment() {
                 }
 
             })
-        Toast.makeText(activity as MenuActivity,"$meatCounts", Toast.LENGTH_LONG).show()
         if(meatCounts[2] > meatCounts[1] && meatCounts[2] > meatCounts[0]) {
             view.findViewById<TextView>(R.id.text_Tender_Popular).apply { visibility = View.VISIBLE }
         }

@@ -46,16 +46,16 @@ class MenuDrinksFragment : Fragment() {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).drink.size-1)) {
                                 when (output.get(i).drink[j].item) {
-                                    "Lemonade" -> {
+                                    "lemonade" -> {
                                         drinkCounts[0] += output.get(i).drink[j].quantity
                                     }
-                                    "Soft Drink" -> {
+                                    "soft drink" -> {
                                         drinkCounts[1] += output.get(i).drink[j].quantity
                                     }
-                                    "Sweet Tea" -> {
+                                    "sweet tea" -> {
                                         drinkCounts[2] += output.get(i).drink[j].quantity
                                     }
-                                    "Water" -> {
+                                    "water" -> {
                                         drinkCounts[3] += output.get(i).drink[j].quantity
                                     }
                                 }

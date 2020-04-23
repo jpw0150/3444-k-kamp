@@ -48,22 +48,22 @@ class MenuEntreeFlavorFragment : Fragment() {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
                                 when (output.get(i).entree[j].flavor) {
-                                    "Barbecue" -> {
+                                    "barbecue" -> {
                                         flavorCounts[0] += 1
                                     }
-                                    "Lemon Pepper" -> {
+                                    "lemon pepper" -> {
                                         flavorCounts[1] += 1
                                     }
-                                    "Cajun" -> {
+                                    "cajun" -> {
                                         flavorCounts[2] += 1
                                     }
-                                    "Garlic Parmesan" -> {
+                                    "garlic parmesan" -> {
                                         flavorCounts[3] += 1
                                     }
-                                    "Buffalo" -> {
+                                    "buffalo" -> {
                                         flavorCounts[4] += 1
                                     }
-                                    "Hawaiian" -> {
+                                    "hawaiian" -> {
                                         flavorCounts[5] += 1
                                     }
                                 }

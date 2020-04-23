@@ -49,16 +49,16 @@ class MenuEntreeSauceFragment : Fragment() {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
                                 when (output.get(i).entree[j].sauceType) {
-                                    "Ranch" -> {
+                                    "ranch" -> {
                                         sauceCounts[0] += 1
                                     }
-                                    "Bleu Cheese" -> {
+                                    "bleu cheese" -> {
                                         sauceCounts[1] += 1
                                     }
-                                    "Honey Mustard" -> {
+                                    "honey mustard" -> {
                                         sauceCounts[2] += 1
                                     }
-                                    "None" -> {
+                                    else -> {
                                         sauceCounts[3] += 1
                                     }
                                 }
