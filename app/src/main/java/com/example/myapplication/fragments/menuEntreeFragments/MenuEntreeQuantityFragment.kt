@@ -54,11 +54,11 @@ class MenuEntreeQuantityFragment : Fragment() {
                     view.findViewById<EditText>(R.id.wing_quantity).text.toString().toInt()
                 var idQuantity = wing_quantity*1000
                 (activity as MenuActivity).entreeId+=idQuantity
-                (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree +(activity as MenuActivity).entreeId.toString() + " "
+               // (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree +(activity as MenuActivity).entreeId.toString() + " "
                 (activity as MenuActivity).replaceFragment(MenuEntreeSauceFragment(), "")
             }
 
-            (activity as MenuActivity).entreeId = 0
+            //(activity as MenuActivity).entreeId = 0
         }
 
         /* Listeners to address Help and Refill requests */

@@ -24,15 +24,16 @@ import retrofit2.Response
 /** This fragment class is Step 34in the ordering process in which the customer enters
  * the sauce wanted
  */
+//var sauceCounts = mutableListOf(0,0,0,0)
 class MenuEntreeSauceFragment : Fragment() {
-
+    var sauceCounts = mutableListOf(0,0,0,0)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu_entree_sauce, container, false)
         runGraidentAnimation(view)
 
         //TODO: Verify that this works.
-        var sauceCounts = mutableListOf(0,0,0,0)
+
         RetrofitClient.instance.allorders()
             .enqueue(object : Callback<ResponseOrders> {
                 override fun onFailure(call: Call<ResponseOrders>, t: Throwable) {
@@ -44,44 +45,50 @@ class MenuEntreeSauceFragment : Fragment() {
                     response: Response<ResponseOrders>
                 ) {
                     val output = response.body()?.orders
+                    view.findViewById<TextView>(R.id.text_no_sauce_popular).apply {
+                        if (output != null) {
+                            text = output.get(0).entree[0].toString()
+                        }
+                    }
 
                     if (output != null) {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
-                                when (output.get(i).entree[j].sauceType) {
-                                    "ranch" -> {
-                                        sauceCounts[0] += 1
-                                    }
-                                    "bleu cheese" -> {
-                                        sauceCounts[1] += 1
-                                    }
-                                    "honey mustard" -> {
-                                        sauceCounts[2] += 1
-                                    }
-                                    else -> {
-                                        sauceCounts[3] += 1
-                                    }
+                                if (output.get(i).entree[j].sauceType == "ranch") {
+                                    //sauceCounts[3] += 1
+                                    //Toast.makeText(activity as MenuActivity, (sauceCounts[3] + 1).toString(), Toast.LENGTH_LONG).show()
+                                    sauceCounts[3] = sauceCounts[3] + 1
                                 }
+                                else if (output.get(i).entree[j].sauceType == "blue cheese") {
+                                    sauceCounts[2] += 1
+                                }
+                                else if (output.get(i).entree[j].sauceType == "honey mustard") {
+                                    sauceCounts[1] += 1
+                                }
+                                else sauceCounts[0] +=1
+
                             }
                         }
 
+                    }
+                    if (sauceCounts[3] > sauceCounts[2] && sauceCounts[3] > sauceCounts[1] && sauceCounts[3] > sauceCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_ranch_popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if (sauceCounts[2] > sauceCounts[3] && sauceCounts[2] > sauceCounts[1] && sauceCounts[2] > sauceCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_cheese_popular).apply { visibility = View.VISIBLE }
+                    }
+                    else if (sauceCounts[1] > sauceCounts[3] && sauceCounts[1] > sauceCounts[2] && sauceCounts[1] > sauceCounts[0]) {
+                        view.findViewById<TextView>(R.id.text_mustard_popular).apply { visibility = View.VISIBLE }
+                    }
+                    else {
+                        view.findViewById<TextView>(R.id.text_no_sauce_popular).apply { visibility = View.VISIBLE }
                     }
 
                 }
 
             })
-        if (sauceCounts[3] > sauceCounts[2] && sauceCounts[3] > sauceCounts[1] && sauceCounts[3] > sauceCounts[0]) {
-            view.findViewById<TextView>(R.id.text_ranch_popular).apply { visibility = View.VISIBLE }
-        }
-        if (sauceCounts[2] > sauceCounts[3] && sauceCounts[2] > sauceCounts[1] && sauceCounts[2] > sauceCounts[0]) {
-            view.findViewById<TextView>(R.id.text_cheese_popular).apply { visibility = View.VISIBLE }
-        }
-        else if (sauceCounts[1] > sauceCounts[3] && sauceCounts[1] > sauceCounts[2] && sauceCounts[1] > sauceCounts[0]) {
-            view.findViewById<TextView>(R.id.text_mustard_popular).apply { visibility = View.VISIBLE }
-        }
-        else {
-            view.findViewById<TextView>(R.id.text_no_sauce_popular).apply { visibility = View.VISIBLE }
-        }
+        //Toast.makeText(activity as MenuActivity, "$sauceCounts", Toast.LENGTH_LONG).show()
+
 
         /* Initialize sauce option buttons */
         val ranchButton = view.findViewById<Button>(R.id.button_ranch)
@@ -97,24 +104,32 @@ class MenuEntreeSauceFragment : Fragment() {
         ranchButton.setOnClickListener{
             (activity as MenuActivity).sauceType = getString(R.string.ranch)
             (activity as MenuActivity).entreeId+=100
+            (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree +(activity as MenuActivity).entreeId.toString() + " "
+            (activity as MenuActivity).entreeId = 0
             (activity as MenuActivity).replaceFragment(MenuEntreeSauceQuantityFragment(), "")
         }
 
         bleuCheeseButton.setOnClickListener {
             (activity as MenuActivity).sauceType = getString(R.string.bleu_cheese)
             (activity as MenuActivity).entreeId+=200
+            (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree +(activity as MenuActivity).entreeId.toString() + " "
+            (activity as MenuActivity).entreeId = 0
             (activity as MenuActivity).replaceFragment(MenuEntreeSauceQuantityFragment(), "")
         }
 
         honeyMustardButton.setOnClickListener{
             (activity as MenuActivity).sauceType = getString(R.string.honey_mustard)
             (activity as MenuActivity).entreeId+=300
+            (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree +(activity as MenuActivity).entreeId.toString() + " "
+            (activity as MenuActivity).entreeId = 0
             (activity as MenuActivity).replaceFragment(MenuEntreeSauceQuantityFragment(), "")
         }
 
         noSauceButton.setOnClickListener{
             (activity as MenuActivity).sauceType = getString(R.string.none)
             (activity as MenuActivity).entreeId+=400
+            (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree +(activity as MenuActivity).entreeId.toString() + " "
+            (activity as MenuActivity).entreeId = 0
             (activity as MenuActivity).replaceFragment(MenuEntreeNoteFragment(), "")
         }
 

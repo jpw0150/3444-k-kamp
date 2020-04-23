@@ -29,7 +29,7 @@ class MenuEntreeMeatFragment : Fragment() {
 
         //TODO: Verify that this works.
         var meatCounts = mutableListOf(0,0,0)
-        RetrofitClient.instance.allorders()
+       RetrofitClient.instance.allorders()
             .enqueue(object : Callback<ResponseOrders> {
                 override fun onFailure(call: Call<ResponseOrders>, t: Throwable) {
                     Toast.makeText(activity as MenuActivity,"Error retrieving order popularity", Toast.LENGTH_SHORT).show()
@@ -63,6 +63,8 @@ class MenuEntreeMeatFragment : Fragment() {
                 }
 
             })
+        val store = 1
+
         if(meatCounts[2] > meatCounts[1] && meatCounts[2] > meatCounts[0]) {
             view.findViewById<TextView>(R.id.text_Tender_Popular).apply { visibility = View.VISIBLE }
         }
