@@ -44,17 +44,9 @@ class MenuEntreeMeatFragment : Fragment() {
                     if (output != null) {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
-                                when (output.get(i).entree[j].meatType) {
-                                    "boneless" -> {
-                                        meatCounts[0] += 1
-                                    }
-                                    "bone" -> {
-                                        meatCounts[1] += 1
-                                    }
-                                    "tenders" -> {
-                                        meatCounts[2] += 1
-                                    }
-                                }
+                                if (output.get(i).entree[j].meatType == "boneless") meatCounts[0] += 1
+                                else if (output.get(i).entree[j].meatType == "bone") meatCounts[1] += 1
+                                else meatCounts[2] += 1
                             }
                         }
 

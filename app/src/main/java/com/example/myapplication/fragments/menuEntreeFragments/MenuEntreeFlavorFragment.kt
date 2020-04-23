@@ -47,26 +47,12 @@ class MenuEntreeFlavorFragment : Fragment() {
                     if (output != null) {
                         for (i in 0..(output.size-1)) {
                             for (j in 0..(output.get(i).entree.size-1)) {
-                                when (output.get(i).entree[j].flavor) {
-                                    "barbecue" -> {
-                                        flavorCounts[0] += 1
-                                    }
-                                    "lemon pepper" -> {
-                                        flavorCounts[1] += 1
-                                    }
-                                    "cajun" -> {
-                                        flavorCounts[2] += 1
-                                    }
-                                    "garlic parmesan" -> {
-                                        flavorCounts[3] += 1
-                                    }
-                                    "buffalo" -> {
-                                        flavorCounts[4] += 1
-                                    }
-                                    "hawaiian" -> {
-                                        flavorCounts[5] += 1
-                                    }
-                                }
+                                if (output.get(i).entree[j].flavor == "barbecue") flavorCounts[0] += 1
+                                else if (output.get(i).entree[j].flavor == "lemon pepper") flavorCounts[1] += 1
+                                else if (output.get(i).entree[j].flavor == "cajun") flavorCounts[2] += 1
+                                else if (output.get(i).entree[j].flavor == "garlic parmesan") flavorCounts[3] += 1
+                                else if (output.get(i).entree[j].flavor == "buffalo") flavorCounts[4] += 1
+                                else flavorCounts[5] += 1
                             }
                         }
 
