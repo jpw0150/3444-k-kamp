@@ -77,7 +77,7 @@ class MenuDrinksFragment : Fragment() {
             view.findViewById<TextView>(R.id.text_Soda_Popular).apply { visibility = View.VISIBLE }
         }
         else {
-            view.findViewById<TextView>(R.id.text_Lemon_Popular).apply { visibility = View.VISIBLE }
+            view.findViewById<TextView>(R.id.text_Lemonade_Popular).apply { visibility = View.VISIBLE }
         }
 
         /* Initialize icon info buttons */

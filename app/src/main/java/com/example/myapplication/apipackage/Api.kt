@@ -261,7 +261,7 @@ interface Api {
     ):Call<ResponseOrder>
 
     @GET("getOrdersManager")
-    fun getOrdersManager(
+    fun allOrdersManager(
     ):Call<ResponseOrders>
 
     @GET("checktableshelp")

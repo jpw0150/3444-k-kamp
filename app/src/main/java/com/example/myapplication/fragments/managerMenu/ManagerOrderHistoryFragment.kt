@@ -38,20 +38,17 @@ class ManagerOrderHistoryFragment : Fragment() {
         val getManOrder = view.findViewById<Button>(R.id.manOrdHistGetAll)
 
         getManOrder.setOnClickListener {
-            RetrofitClient.instance.getOrdersManager()
+            RetrofitClient.instance.allOrdersManager()
                 .enqueue(object : Callback<ResponseOrders> {
                     override fun onFailure(call: Call<ResponseOrders>, t: Throwable) {
                         Toast.makeText(activity as ManagerActivity, "Failure", Toast.LENGTH_SHORT)
                             .show()
                     }
 
-                    override fun onResponse(
-                        call: Call<ResponseOrders>,
-                        response: Response<ResponseOrders>
-                    ) {
+                    override fun onResponse(call: Call<ResponseOrders>, response: Response<ResponseOrders>) {
 
-                        Toast.makeText(activity as ManagerActivity, "Order History received", Toast.LENGTH_SHORT)
-                            .show()
+                        /* Toast.makeText(activity as ManagerActivity, "Order History received", Toast.LENGTH_SHORT)
+                             .show()*/
 
 
                         val output = response.body()?.orders
@@ -134,13 +131,13 @@ class ManagerOrderHistoryFragment : Fragment() {
                 }
 
             var outputString = ""
-                for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                    outputString +=
-                        orderList.get(index).entree.get(indez).quantity.toString() + " " +
-                                orderList.get(index).entree.get(indez).meatType + " " +
-                                orderList.get(index).entree.get(indez).flavor + " " +
-                                orderList.get(index).entree.get(indez).sauceType + "\n"
-                }
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString +=
+                    orderList.get(index).entree.get(indez).quantity.toString() + " " +
+                            orderList.get(index).entree.get(indez).meatType + " " +
+                            orderList.get(index).entree.get(indez).flavor + " " +
+                            orderList.get(index).entree.get(indez).sauceType + "\n"
+            }
             indez = 0
             view?.findViewById<EditText>(R.id.managerOrderHistEntree)?.apply {
                 hint = outputString
@@ -148,10 +145,10 @@ class ManagerOrderHistoryFragment : Fragment() {
             }
 
             outputString = ""
-                for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                    outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
-                            orderList.get(index).side.get(indez).item + "\n"
-                }
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
+                        orderList.get(index).side.get(indez).item + "\n"
+            }
             indez = 0
             view?.findViewById<EditText>(R.id.managerOrderHistSide)?.apply {
                 hint = outputString
@@ -160,10 +157,10 @@ class ManagerOrderHistoryFragment : Fragment() {
 
             outputString = ""
 
-                for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                    outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
-                            orderList.get(index).drink.get(indez).item + "\n"
-                }
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
+                        orderList.get(index).drink.get(indez).item + "\n"
+            }
 
             indez = 0
             view?.findViewById<EditText>(R.id.managerOrderHistDrink)?.apply {
@@ -237,10 +234,10 @@ class ManagerOrderHistoryFragment : Fragment() {
             }
 
             outputString = ""
-                for (indez in 0..(orderList.get(index).entree.size - 1)) {
-                    outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
-                            orderList.get(index).drink.get(indez).item + "\n"
-                }
+            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+                outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
+                        orderList.get(index).drink.get(indez).item + "\n"
+            }
 
             indez = 0
             view?.findViewById<EditText>(R.id.managerOrderHistDrink)?.apply {
@@ -265,14 +262,14 @@ class ManagerOrderHistoryFragment : Fragment() {
         }
 
     }
-        private fun runGraidentAnimation(v: View) {
-            val constraintLayout = v.findViewById<ConstraintLayout>(R.id.manager_view_orders)
+    private fun runGraidentAnimation(v: View) {
+        val constraintLayout = v.findViewById<ConstraintLayout>(R.id.manager_view_orders)
 
-            val animationDrawable = constraintLayout?.background as AnimationDrawable
-            animationDrawable.setEnterFadeDuration(2000)
-            animationDrawable.setExitFadeDuration(4000)
-            animationDrawable.start()
-        }
+        val animationDrawable = constraintLayout?.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+    }
 
 
 }

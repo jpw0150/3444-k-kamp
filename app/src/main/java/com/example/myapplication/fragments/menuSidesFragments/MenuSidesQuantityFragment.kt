@@ -30,7 +30,7 @@ class MenuSidesQuantityFragment : Fragment() {
         /* Store the quantity and proceed to next fragment */
 
         nextButton.setOnClickListener {
-            val sideQuantity = view.findViewById<EditText>(R.id.side_quantity).text.toString().toInt()
+            var sideQuantity = view.findViewById<EditText>(R.id.side_quantity).text.toString().toInt()
             if (sideQuantity < (activity as MenuActivity).MIN_NUM_SIDES) {
                 Toast.makeText(
                     (activity as MenuActivity).applicationContext,
@@ -39,7 +39,8 @@ class MenuSidesQuantityFragment : Fragment() {
                 ).show()
             } else {
                 (activity as MenuActivity).sideItemQuantity = sideQuantity
-                (activity as MenuActivity).sideIdSe+=sideQuantity*1000
+                sideQuantity*=1000
+                (activity as MenuActivity).sideId+=sideQuantity
                 (activity as MenuActivity).sideIdSe = (activity as MenuActivity).sideIdSe + (activity as MenuActivity).sideId.toString() + " "
                 (activity as MenuActivity).replaceFragment(MenuSidesNotesFragment(), "")
             }

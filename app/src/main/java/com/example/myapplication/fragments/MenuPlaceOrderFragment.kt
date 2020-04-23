@@ -38,20 +38,32 @@ class MenuPlaceOrderFragment : Fragment() {
         yesButton.setOnClickListener {
 
             if( (activity as MenuActivity).idStringEntree.isNotEmpty()){
-                (activity as MenuActivity).idStringEntree.dropLast(1)
+                (activity as MenuActivity).idStringEntree = (activity as MenuActivity).idStringEntree.dropLast(1)
+            }else{
+                (activity as MenuActivity).idStringEntree = "605"
             }
             if( (activity as MenuActivity).sideIdSe.isNotEmpty()){
-                (activity as MenuActivity).sideIdSe.dropLast(1)
+                (activity as MenuActivity).sideIdSe = (activity as MenuActivity).sideIdSe.dropLast(1)
+            }else{
+                (activity as MenuActivity).sideIdSe ="405"
             }
             if( (activity as MenuActivity).idDrinkSe.isNotEmpty()){
-                (activity as MenuActivity).idDrinkSe.dropLast(1)
+                (activity as MenuActivity).idDrinkSe = (activity as MenuActivity).idDrinkSe.dropLast(1)
+            }else{
+                (activity as MenuActivity).idDrinkSe = "505"
+            }
+            if( (activity as MenuActivity).orderNotes.isNotEmpty()){
+                (activity as MenuActivity).orderNotes = (activity as MenuActivity).orderNotes.dropLast(1)
+            }else{
+                (activity as MenuActivity).orderNotes = "705"
             }
 
             RetrofitClient.instance.createOrder(
                 (activity as MenuActivity).tableNumber,
                 (activity as MenuActivity).idStringEntree,
-                (activity as MenuActivity).idDrinkSe,
                 (activity as MenuActivity).sideIdSe,
+                (activity as MenuActivity).idDrinkSe,
+                //(activity as MenuActivity).sideIdSe,
                 (activity as MenuActivity).orderNotes,
                 (activity as MenuActivity).orderTotal.toDouble(),
                 0
