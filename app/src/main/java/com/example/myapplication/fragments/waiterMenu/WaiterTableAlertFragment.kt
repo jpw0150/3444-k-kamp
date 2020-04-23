@@ -87,23 +87,38 @@ class WaiterTableAlertFragment : Fragment() {
             })
 
         val clear = view.findViewById<Button>(R.id.clearAll)
-        clear.setOnClickListener{
+        clear.setOnClickListener {
 
-            val id = view.findViewById<EditText>(R.id.tableIdTocl).text.toString().toInt()
+            if (view.findViewById<EditText>(R.id.tableIdTocl).text.toString().isEmpty()) {
+                Toast.makeText(activity as WaiterActivity, "Please enter an ID.", Toast.LENGTH_LONG)
+                    .show()
+            } else {
+                val id = view.findViewById<EditText>(R.id.tableIdTocl).text.toString().toInt()
 
-            RetrofitClient.instance.clearHelp(id)
-                .enqueue(object: Callback<ResponseTable> {
-                    override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
-                        Toast.makeText(activity as WaiterActivity, "Order not ready", Toast.LENGTH_LONG).show()
-                    }
-                    override fun onResponse(
-                        call: Call<ResponseTable>,
-                        response: Response<ResponseTable>
-                    ) {
-                        Toast.makeText(activity as WaiterActivity, "Table Helped", Toast.LENGTH_LONG).show()
-                        (activity as WaiterActivity).replaceFragment(WaiterMenuFragment(), "")
-                    }
-                })
+
+                RetrofitClient.instance.clearHelp(id)
+                    .enqueue(object : Callback<ResponseTable> {
+                        override fun onFailure(call: Call<ResponseTable>, t: Throwable) {
+                            Toast.makeText(
+                                activity as WaiterActivity,
+                                "Order not ready",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseTable>,
+                            response: Response<ResponseTable>
+                        ) {
+                            Toast.makeText(
+                                activity as WaiterActivity,
+                                "Table Helped",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            (activity as WaiterActivity).replaceFragment(WaiterMenuFragment(), "")
+                        }
+                    })
+            }
         }
         return view
     }

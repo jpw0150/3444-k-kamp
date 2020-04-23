@@ -150,11 +150,11 @@ class ManagerViewAllEmployeesFragment : Fragment() {
 
 
 
-      view?.findViewById<EditText>(R.id.employee_position)?.apply{
+      view?.findViewById<TextView>(R.id.employee_position)?.apply{
             if (employeeList != null) {
-                hint = (index+1).toString() + " OF " + employeeList.size.toString()
+                text = (index+1).toString() + " OF " + employeeList.size.toString()
             }
-          text.clear()
+        
         }
 
       view?.findViewById<EditText>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()
@@ -178,11 +178,10 @@ class ManagerViewAllEmployeesFragment : Fragment() {
             else index += 1
         }
 
-        view?.findViewById<EditText>(R.id.employee_position)?.apply{
+        view?.findViewById<TextView>(R.id.employee_position)?.apply{
             if (employeeList != null) {
-                hint = (index+1).toString() + " OF " + employeeList.size.toString()
+                text = (index+1).toString() + " OF " + employeeList.size.toString()
             }
-            text.clear()
         }
 
         view?.findViewById<EditText>(R.id.employee_id)?.apply { hint = employeeList?.get(index)?.id.toString()
