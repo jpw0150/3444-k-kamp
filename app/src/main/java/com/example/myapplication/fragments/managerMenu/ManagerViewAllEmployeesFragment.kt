@@ -33,7 +33,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
 
         view.findViewById<Button>(R.id.leave_button).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "")}
 
-        view.findViewById<Button>(R.id.get_employees_button).setOnClickListener {
+        //view.findViewById<Button>(R.id.get_employees_button).setOnClickListener {
             RetrofitClient.instance.getAllEmp().enqueue(object : Callback<ResponseEmployees> {
                 override fun onFailure(call: Call<ResponseEmployees>, t: Throwable) {
                     view.findViewById<TextView>(R.id.employee_position)
@@ -136,7 +136,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
                 })
 
             }
-        }
+        //}
         return view
     }
 
