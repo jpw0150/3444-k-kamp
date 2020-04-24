@@ -30,8 +30,8 @@ class ManagerViewAllEmployeesFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_manager_view_all_employees, container, false)
         runGraidentAnimation(view)
-
-        view.findViewById<Button>(R.id.leave_button).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerViewEmployeeFragment(), "")}
+        val inde2 = 0
+        view.findViewById<Button>(R.id.leave_button).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")}
 
         //view.findViewById<Button>(R.id.get_employees_button).setOnClickListener {
             RetrofitClient.instance.getAllEmp().enqueue(object : Callback<ResponseEmployees> {
@@ -70,12 +70,12 @@ class ManagerViewAllEmployeesFragment : Fragment() {
                             output.get(index).compmeals.toString()
                     }
 
-                    view.findViewById<Button>(R.id.leave_button).setOnClickListener {
+                    /*view.findViewById<Button>(R.id.leave_button).setOnClickListener {
                         (activity as ManagerActivity).replaceFragment(
                             ManagerViewEmployeeFragment(),
                             ""
                         )
-                    }
+                    }*/
                     view.findViewById<Button>(R.id.previous_button)
                         .setOnClickListener { empsPrevious(output) }
                     view.findViewById<Button>(R.id.next_button)
@@ -136,7 +136,7 @@ class ManagerViewAllEmployeesFragment : Fragment() {
                 })
 
             }
-        //}
+        //view.findViewById<Button>(R.id.leave_button).setOnClickListener { (activity as ManagerActivity).replaceFragment(ManagerMenuFragment(), "")}
         return view
     }
 

@@ -146,18 +146,18 @@ class ChefViewOrdersFragment : Fragment() {
            }
 
            view?.findViewById<TextView>(R.id.chefOrderID)
-               ?.apply { text = orderList?.get(index)?.id.toString() }
+               ?.apply { text = orderList.get(index).id.toString() }
            view?.findViewById<TextView>(R.id.chefOrderTable)
-               ?.apply { text = orderList?.get(index)?.tableNum.toString() }
+               ?.apply { text = orderList.get(index).tableNum.toString() }
 
            var outputString = ""
 
            for (indez in 0..(orderList.get(index).entree.size - 1)) {
                outputString +=
-                   orderList?.get(index).entree.get(indez).quantity.toString() + " " +
-                           orderList?.get(index).entree.get(indez).meatType + " " +
-                           orderList?.get(index).entree.get(indez).flavor + " " +
-                           orderList?.get(index).entree.get(indez).sauceType + "\n"
+                   orderList.get(index).entree.get(indez).quantity.toString() + " " +
+                           orderList.get(index).entree.get(indez).meatType + " " +
+                           orderList.get(index).entree.get(indez).flavor + " " +
+                           orderList.get(index).entree.get(indez).sauceType + "\n"
            }
 
            indez = 0
@@ -165,7 +165,7 @@ class ChefViewOrdersFragment : Fragment() {
 
            outputString = ""
 
-           for (indez in 0..(orderList.get(index).entree.size - 1)) {
+           for (indez in 0..(orderList.get(index).side.size - 1)) {
                outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
                        orderList.get(index).side.get(indez).item + "\n"
            }
@@ -175,7 +175,7 @@ class ChefViewOrdersFragment : Fragment() {
 
            outputString = ""
 
-           for (indez in 0..(orderList.get(index).entree.size - 1)) {
+           for (indez in 0..(orderList.get(index).drink.size - 1)) {
                outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
                        orderList.get(index).drink.get(indez).item + "\n"
            }
@@ -183,11 +183,11 @@ class ChefViewOrdersFragment : Fragment() {
            indez = 0
            view?.findViewById<TextView>(R.id.chefOrderDrinks)?.apply { text = outputString }
            view?.findViewById<TextView>(R.id.chefOrderNotes)
-               ?.apply { text = orderList?.get(index)?.note }
+               ?.apply { text = orderList.get(index).note }
            view?.findViewById<TextView>(R.id.chefOrderTotal)
-               ?.apply { text = orderList?.get(index)?.orderTotal.toString() }
+               ?.apply { text = orderList.get(index).orderTotal.toString() }
            view?.findViewById<EditText>(R.id.chefOrderStatus)
-               ?.apply { hint = orderList?.get(index)?.status.toString() }
+               ?.apply { hint = orderList.get(index).status.toString() }
 
        }
    }
@@ -219,7 +219,7 @@ class ChefViewOrdersFragment : Fragment() {
 
             outputString = ""
 
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+            for (indez in 0..(orderList.get(index).side.size - 1)) {
                 outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
                         orderList.get(index).side.get(indez).item + "\n"
             }
@@ -227,7 +227,7 @@ class ChefViewOrdersFragment : Fragment() {
             view?.findViewById<TextView>(R.id.chefOrderSides)?.apply { text = outputString }
 
             outputString = ""
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+            for (indez in 0..(orderList.get(index).drink.size - 1)) {
                 outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
                         orderList.get(index).drink.get(indez).item + "\n"
             }

@@ -145,7 +145,7 @@ class ManagerOrderHistoryFragment : Fragment() {
             }
 
             outputString = ""
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+            for (indez in 0..(orderList.get(index).side.size - 1)) {
                 outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
                         orderList.get(index).side.get(indez).item + "\n"
             }
@@ -157,7 +157,7 @@ class ManagerOrderHistoryFragment : Fragment() {
 
             outputString = ""
 
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+            for (indez in 0..(orderList.get(index).drink.size - 1)) {
                 outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
                         orderList.get(index).drink.get(indez).item + "\n"
             }
@@ -222,7 +222,7 @@ class ManagerOrderHistoryFragment : Fragment() {
             }
 
             outputString = ""
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+            for (indez in 0..(orderList.get(index).side.size - 1)) {
                 outputString += orderList.get(index).side.get(indez).quantity.toString() + " " +
                         orderList.get(index).side.get(indez).item + "\n"
             }
@@ -234,7 +234,7 @@ class ManagerOrderHistoryFragment : Fragment() {
             }
 
             outputString = ""
-            for (indez in 0..(orderList.get(index).entree.size - 1)) {
+            for (indez in 0..(orderList.get(index).drink.size - 1)) {
                 outputString += orderList.get(index).drink.get(indez).quantity.toString() + " " +
                         orderList.get(index).drink.get(indez).item + "\n"
             }

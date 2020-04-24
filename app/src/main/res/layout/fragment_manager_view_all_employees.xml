@@ -270,25 +270,11 @@
 
 
     <Button
-        android:id="@+id/get_employees_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        android:text="Get Employees"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.847" />
-
-    <Button
         android:id="@+id/update_employee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="140dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="92dp"
         android:background="@android:color/black"
         android:text="Update Employee"
         android:textColor="@android:color/white"

@@ -13,9 +13,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import com.example.myapplication.R
-import com.example.myapplication.activities.ManagerActivity
 import com.example.myapplication.activities.MenuActivity
-import com.example.myapplication.apipackage.ResponseEmployee
 import com.example.myapplication.apipackage.ResponseSurvey
 import com.example.myapplication.apipackage.RetrofitClient
 import retrofit2.Call
@@ -40,8 +38,8 @@ class MenuSurveyFragment : Fragment() {
         val nextButton = view.findViewById<Button>(R.id.survey_next_button)
         nextButton.setOnClickListener {
             val responseOne = view.findViewById<EditText>(R.id.question_1).text.toString().toInt()
-            val responseTwo = view.findViewById<EditText>(R.id.question_2).text.toString().toInt()
-            val responseThree = view.findViewById<EditText>(R.id.question_3).text.toString().toInt()
+            val responseTwo = view.findViewById<EditText>(R.id.question_3).text.toString().toInt()
+            val responseThree = view.findViewById<EditText>(R.id.question_2).text.toString().toInt()
             RetrofitClient.instance.createSurvey(
                 responseOne,
                 responseTwo,
